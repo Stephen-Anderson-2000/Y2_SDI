@@ -255,6 +255,7 @@ namespace SDIMaster {
 			this->button1->TabIndex = 3;
 			this->button1->Text = L"Import Image";
 			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &MainWindow::button1_Click);
 			// 
 			// label1
 			// 
@@ -502,6 +503,7 @@ namespace SDIMaster {
 			this->imageDisplay->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
+			this->imageDisplay->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
 			this->imageDisplay->Location = System::Drawing::Point(3, 3);
 			this->imageDisplay->Name = L"imageDisplay";
 			this->imageDisplay->Size = System::Drawing::Size(781, 687);
@@ -542,24 +544,33 @@ namespace SDIMaster {
 #pragma endregion
 		
 
-	private: System::String ^loadImage() {
+
+	private: System::String^ loadImage() {
 		System::String^ imagePath = "";
-		using (OpenFileDialog openFileDialog = new OpenFileDialog())
+		OpenFileDialog^ openFileDialog = gcnew OpenFileDialog;
 		{
-			openFileDialog.InitialDirectory = "c:\\";
-			openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
-			openFileDialog.FilterIndex = 2;
-			openFileDialog.RestoreDirectory = true;
+			openFileDialog->InitialDirectory = "c:\\";
+			openFileDialog->Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+			openFileDialog->FilterIndex = 2;
+			openFileDialog->RestoreDirectory = true;
+			if (openFileDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+			{
+				//Get the path of specified file
+				imagePath = openFileDialog->FileName;
+
+			}
+			return imagePath;
 		}
-		return imagePath;
 	}
 
 	private: System::Void MainWindow_Load(System::Object^ sender, System::EventArgs^ e) {
-		System::String ^tempString = "treez.jpg";
-		Bitmap ^epicFile;
-		epicFile = gcnew Bitmap(tempString);
-		std::string fileName = "treez.jpg";
-		imageDisplay->Load(tempString);
+		
+	}
+	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+		System::String^ tempString = loadImage();
+		Bitmap^ backgroundImage;
+		backgroundImage = gcnew Bitmap(tempString);
+		imageDisplay->BackgroundImage = backgroundImage;
 	}
 };
 }

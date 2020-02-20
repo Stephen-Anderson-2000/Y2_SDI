@@ -542,6 +542,18 @@ namespace SDIMaster {
 #pragma endregion
 		
 
+	private: System::String ^loadImage() {
+		System::String^ imagePath = "";
+		using (OpenFileDialog openFileDialog = new OpenFileDialog())
+		{
+			openFileDialog.InitialDirectory = "c:\\";
+			openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+			openFileDialog.FilterIndex = 2;
+			openFileDialog.RestoreDirectory = true;
+		}
+		return imagePath;
+	}
+
 	private: System::Void MainWindow_Load(System::Object^ sender, System::EventArgs^ e) {
 		System::String ^tempString = "treez.jpg";
 		Bitmap ^epicFile;

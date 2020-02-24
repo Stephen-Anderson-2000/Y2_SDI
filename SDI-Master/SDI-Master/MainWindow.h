@@ -89,6 +89,9 @@ namespace SDIMaster {
 	private: System::Windows::Forms::Label^ label3;
 	private: System::Windows::Forms::TextBox^ textBox3;
 	private: System::Windows::Forms::ListBox^ listBox3;
+	private: System::Windows::Forms::TableLayoutPanel^ tableLayoutPanel1;
+	private: System::Windows::Forms::TableLayoutPanel^ tableLayoutPanel2;
+	private: System::Windows::Forms::TableLayoutPanel^ tableLayoutPanel3;
 
 
 
@@ -127,6 +130,7 @@ namespace SDIMaster {
 		{
 			this->splitContainer1 = (gcnew System::Windows::Forms::SplitContainer());
 			this->splitContainer2 = (gcnew System::Windows::Forms::SplitContainer());
+			this->tableLayoutPanel2 = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
@@ -135,6 +139,7 @@ namespace SDIMaster {
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->listBox1 = (gcnew System::Windows::Forms::ListBox());
 			this->splitContainer3 = (gcnew System::Windows::Forms::SplitContainer());
+			this->tableLayoutPanel1 = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->button7 = (gcnew System::Windows::Forms::Button());
@@ -143,6 +148,7 @@ namespace SDIMaster {
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->listBox2 = (gcnew System::Windows::Forms::ListBox());
+			this->tableLayoutPanel3 = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->groupBox3 = (gcnew System::Windows::Forms::GroupBox());
 			this->button8 = (gcnew System::Windows::Forms::Button());
 			this->button9 = (gcnew System::Windows::Forms::Button());
@@ -161,12 +167,15 @@ namespace SDIMaster {
 			this->splitContainer2->Panel1->SuspendLayout();
 			this->splitContainer2->Panel2->SuspendLayout();
 			this->splitContainer2->SuspendLayout();
+			this->tableLayoutPanel2->SuspendLayout();
 			this->groupBox1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->splitContainer3))->BeginInit();
 			this->splitContainer3->Panel1->SuspendLayout();
 			this->splitContainer3->Panel2->SuspendLayout();
 			this->splitContainer3->SuspendLayout();
+			this->tableLayoutPanel1->SuspendLayout();
 			this->groupBox2->SuspendLayout();
+			this->tableLayoutPanel3->SuspendLayout();
 			this->groupBox3->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imageDisplay))->BeginInit();
 			this->SuspendLayout();
@@ -198,7 +207,7 @@ namespace SDIMaster {
 			// 
 			// splitContainer2.Panel1
 			// 
-			this->splitContainer2->Panel1->Controls->Add(this->groupBox1);
+			this->splitContainer2->Panel1->Controls->Add(this->tableLayoutPanel2);
 			// 
 			// splitContainer2.Panel2
 			// 
@@ -206,6 +215,23 @@ namespace SDIMaster {
 			this->splitContainer2->Size = System::Drawing::Size(412, 869);
 			this->splitContainer2->SplitterDistance = 226;
 			this->splitContainer2->TabIndex = 0;
+			// 
+			// tableLayoutPanel2
+			// 
+			this->tableLayoutPanel2->ColumnCount = 1;
+			this->tableLayoutPanel2->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
+				50)));
+			this->tableLayoutPanel2->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
+				50)));
+			this->tableLayoutPanel2->Controls->Add(this->groupBox1, 0, 0);
+			this->tableLayoutPanel2->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->tableLayoutPanel2->Location = System::Drawing::Point(0, 0);
+			this->tableLayoutPanel2->Name = L"tableLayoutPanel2";
+			this->tableLayoutPanel2->RowCount = 1;
+			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
+			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
+			this->tableLayoutPanel2->Size = System::Drawing::Size(412, 226);
+			this->tableLayoutPanel2->TabIndex = 8;
 			// 
 			// groupBox1
 			// 
@@ -216,9 +242,9 @@ namespace SDIMaster {
 			this->groupBox1->Controls->Add(this->textBox1);
 			this->groupBox1->Controls->Add(this->listBox1);
 			this->groupBox1->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->groupBox1->Location = System::Drawing::Point(0, 0);
+			this->groupBox1->Location = System::Drawing::Point(3, 3);
 			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Size = System::Drawing::Size(412, 226);
+			this->groupBox1->Size = System::Drawing::Size(406, 220);
 			this->groupBox1->TabIndex = 0;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Images";
@@ -227,9 +253,9 @@ namespace SDIMaster {
 			// 
 			this->button3->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->button3->Location = System::Drawing::Point(6, 177);
+			this->button3->Location = System::Drawing::Point(6, 171);
 			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(400, 32);
+			this->button3->Size = System::Drawing::Size(394, 32);
 			this->button3->TabIndex = 5;
 			this->button3->Text = L"Remove Image";
 			this->button3->UseVisualStyleBackColor = true;
@@ -238,7 +264,7 @@ namespace SDIMaster {
 			// 
 			this->button2->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
 			this->button2->AutoSize = true;
-			this->button2->Location = System::Drawing::Point(238, 129);
+			this->button2->Location = System::Drawing::Point(232, 123);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(168, 32);
 			this->button2->TabIndex = 4;
@@ -249,7 +275,7 @@ namespace SDIMaster {
 			// 
 			this->button1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
 			this->button1->AutoSize = true;
-			this->button1->Location = System::Drawing::Point(7, 130);
+			this->button1->Location = System::Drawing::Point(7, 124);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(154, 32);
 			this->button1->TabIndex = 3;
@@ -272,7 +298,7 @@ namespace SDIMaster {
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->textBox1->Location = System::Drawing::Point(76, 28);
 			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(329, 26);
+			this->textBox1->Size = System::Drawing::Size(323, 26);
 			this->textBox1->TabIndex = 1;
 			// 
 			// listBox1
@@ -284,7 +310,7 @@ namespace SDIMaster {
 			this->listBox1->ItemHeight = 20;
 			this->listBox1->Location = System::Drawing::Point(6, 67);
 			this->listBox1->Name = L"listBox1";
-			this->listBox1->Size = System::Drawing::Size(399, 44);
+			this->listBox1->Size = System::Drawing::Size(393, 24);
 			this->listBox1->TabIndex = 0;
 			// 
 			// splitContainer3
@@ -296,14 +322,30 @@ namespace SDIMaster {
 			// 
 			// splitContainer3.Panel1
 			// 
-			this->splitContainer3->Panel1->Controls->Add(this->groupBox2);
+			this->splitContainer3->Panel1->Controls->Add(this->tableLayoutPanel1);
 			// 
 			// splitContainer3.Panel2
 			// 
-			this->splitContainer3->Panel2->Controls->Add(this->groupBox3);
+			this->splitContainer3->Panel2->Controls->Add(this->tableLayoutPanel3);
 			this->splitContainer3->Size = System::Drawing::Size(412, 639);
 			this->splitContainer3->SplitterDistance = 302;
 			this->splitContainer3->TabIndex = 0;
+			// 
+			// tableLayoutPanel1
+			// 
+			this->tableLayoutPanel1->AutoSizeMode = System::Windows::Forms::AutoSizeMode::GrowAndShrink;
+			this->tableLayoutPanel1->ColumnCount = 1;
+			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
+				100)));
+			this->tableLayoutPanel1->Controls->Add(this->groupBox2, 0, 0);
+			this->tableLayoutPanel1->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->tableLayoutPanel1->Location = System::Drawing::Point(0, 0);
+			this->tableLayoutPanel1->Name = L"tableLayoutPanel1";
+			this->tableLayoutPanel1->RowCount = 1;
+			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
+			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 302)));
+			this->tableLayoutPanel1->Size = System::Drawing::Size(412, 302);
+			this->tableLayoutPanel1->TabIndex = 8;
 			// 
 			// groupBox2
 			// 
@@ -315,9 +357,9 @@ namespace SDIMaster {
 			this->groupBox2->Controls->Add(this->textBox2);
 			this->groupBox2->Controls->Add(this->listBox2);
 			this->groupBox2->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->groupBox2->Location = System::Drawing::Point(0, 0);
+			this->groupBox2->Location = System::Drawing::Point(3, 3);
 			this->groupBox2->Name = L"groupBox2";
-			this->groupBox2->Size = System::Drawing::Size(412, 302);
+			this->groupBox2->Size = System::Drawing::Size(406, 296);
 			this->groupBox2->TabIndex = 6;
 			this->groupBox2->TabStop = false;
 			this->groupBox2->Text = L"Labels";
@@ -326,7 +368,7 @@ namespace SDIMaster {
 			// 
 			this->button4->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
 			this->button4->AutoSize = true;
-			this->button4->Location = System::Drawing::Point(237, 254);
+			this->button4->Location = System::Drawing::Point(231, 248);
 			this->button4->Name = L"button4";
 			this->button4->Size = System::Drawing::Size(168, 32);
 			this->button4->TabIndex = 6;
@@ -337,7 +379,7 @@ namespace SDIMaster {
 			// 
 			this->button7->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
 			this->button7->AutoSize = true;
-			this->button7->Location = System::Drawing::Point(6, 255);
+			this->button7->Location = System::Drawing::Point(6, 249);
 			this->button7->Name = L"button7";
 			this->button7->Size = System::Drawing::Size(154, 32);
 			this->button7->TabIndex = 5;
@@ -348,7 +390,7 @@ namespace SDIMaster {
 			// 
 			this->button5->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
 			this->button5->AutoSize = true;
-			this->button5->Location = System::Drawing::Point(238, 205);
+			this->button5->Location = System::Drawing::Point(232, 199);
 			this->button5->Name = L"button5";
 			this->button5->Size = System::Drawing::Size(168, 32);
 			this->button5->TabIndex = 4;
@@ -359,7 +401,7 @@ namespace SDIMaster {
 			// 
 			this->button6->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
 			this->button6->AutoSize = true;
-			this->button6->Location = System::Drawing::Point(7, 206);
+			this->button6->Location = System::Drawing::Point(7, 200);
 			this->button6->Name = L"button6";
 			this->button6->Size = System::Drawing::Size(154, 32);
 			this->button6->TabIndex = 3;
@@ -381,7 +423,7 @@ namespace SDIMaster {
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->textBox2->Location = System::Drawing::Point(76, 28);
 			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(332, 26);
+			this->textBox2->Size = System::Drawing::Size(326, 26);
 			this->textBox2->TabIndex = 1;
 			// 
 			// listBox2
@@ -393,8 +435,25 @@ namespace SDIMaster {
 			this->listBox2->ItemHeight = 20;
 			this->listBox2->Location = System::Drawing::Point(6, 67);
 			this->listBox2->Name = L"listBox2";
-			this->listBox2->Size = System::Drawing::Size(402, 104);
+			this->listBox2->Size = System::Drawing::Size(396, 84);
 			this->listBox2->TabIndex = 0;
+			// 
+			// tableLayoutPanel3
+			// 
+			this->tableLayoutPanel3->ColumnCount = 1;
+			this->tableLayoutPanel3->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
+				50)));
+			this->tableLayoutPanel3->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
+				50)));
+			this->tableLayoutPanel3->Controls->Add(this->groupBox3, 0, 0);
+			this->tableLayoutPanel3->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->tableLayoutPanel3->Location = System::Drawing::Point(0, 0);
+			this->tableLayoutPanel3->Name = L"tableLayoutPanel3";
+			this->tableLayoutPanel3->RowCount = 1;
+			this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
+			this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
+			this->tableLayoutPanel3->Size = System::Drawing::Size(412, 333);
+			this->tableLayoutPanel3->TabIndex = 9;
 			// 
 			// groupBox3
 			// 
@@ -406,9 +465,9 @@ namespace SDIMaster {
 			this->groupBox3->Controls->Add(this->textBox3);
 			this->groupBox3->Controls->Add(this->listBox3);
 			this->groupBox3->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->groupBox3->Location = System::Drawing::Point(0, 0);
+			this->groupBox3->Location = System::Drawing::Point(3, 3);
 			this->groupBox3->Name = L"groupBox3";
-			this->groupBox3->Size = System::Drawing::Size(412, 333);
+			this->groupBox3->Size = System::Drawing::Size(406, 327);
 			this->groupBox3->TabIndex = 7;
 			this->groupBox3->TabStop = false;
 			this->groupBox3->Text = L"Labels";
@@ -417,7 +476,7 @@ namespace SDIMaster {
 			// 
 			this->button8->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
 			this->button8->AutoSize = true;
-			this->button8->Location = System::Drawing::Point(237, 285);
+			this->button8->Location = System::Drawing::Point(231, 279);
 			this->button8->Name = L"button8";
 			this->button8->Size = System::Drawing::Size(168, 32);
 			this->button8->TabIndex = 6;
@@ -428,7 +487,7 @@ namespace SDIMaster {
 			// 
 			this->button9->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
 			this->button9->AutoSize = true;
-			this->button9->Location = System::Drawing::Point(6, 286);
+			this->button9->Location = System::Drawing::Point(6, 280);
 			this->button9->Name = L"button9";
 			this->button9->Size = System::Drawing::Size(154, 32);
 			this->button9->TabIndex = 5;
@@ -439,7 +498,7 @@ namespace SDIMaster {
 			// 
 			this->button10->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
 			this->button10->AutoSize = true;
-			this->button10->Location = System::Drawing::Point(238, 236);
+			this->button10->Location = System::Drawing::Point(232, 230);
 			this->button10->Name = L"button10";
 			this->button10->Size = System::Drawing::Size(168, 32);
 			this->button10->TabIndex = 4;
@@ -450,7 +509,7 @@ namespace SDIMaster {
 			// 
 			this->button11->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
 			this->button11->AutoSize = true;
-			this->button11->Location = System::Drawing::Point(7, 237);
+			this->button11->Location = System::Drawing::Point(7, 231);
 			this->button11->Name = L"button11";
 			this->button11->Size = System::Drawing::Size(154, 32);
 			this->button11->TabIndex = 3;
@@ -472,7 +531,7 @@ namespace SDIMaster {
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->textBox3->Location = System::Drawing::Point(76, 28);
 			this->textBox3->Name = L"textBox3";
-			this->textBox3->Size = System::Drawing::Size(332, 26);
+			this->textBox3->Size = System::Drawing::Size(326, 26);
 			this->textBox3->TabIndex = 1;
 			// 
 			// listBox3
@@ -484,7 +543,7 @@ namespace SDIMaster {
 			this->listBox3->ItemHeight = 20;
 			this->listBox3->Location = System::Drawing::Point(6, 67);
 			this->listBox3->Name = L"listBox3";
-			this->listBox3->Size = System::Drawing::Size(402, 124);
+			this->listBox3->Size = System::Drawing::Size(396, 104);
 			this->listBox3->TabIndex = 0;
 			// 
 			// groupBox4
@@ -503,7 +562,6 @@ namespace SDIMaster {
 			this->imageDisplay->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->imageDisplay->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
 			this->imageDisplay->Location = System::Drawing::Point(3, 3);
 			this->imageDisplay->Name = L"imageDisplay";
 			this->imageDisplay->Size = System::Drawing::Size(781, 687);
@@ -527,14 +585,17 @@ namespace SDIMaster {
 			this->splitContainer2->Panel2->ResumeLayout(false);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->splitContainer2))->EndInit();
 			this->splitContainer2->ResumeLayout(false);
+			this->tableLayoutPanel2->ResumeLayout(false);
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
 			this->splitContainer3->Panel1->ResumeLayout(false);
 			this->splitContainer3->Panel2->ResumeLayout(false);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->splitContainer3))->EndInit();
 			this->splitContainer3->ResumeLayout(false);
+			this->tableLayoutPanel1->ResumeLayout(false);
 			this->groupBox2->ResumeLayout(false);
 			this->groupBox2->PerformLayout();
+			this->tableLayoutPanel3->ResumeLayout(false);
 			this->groupBox3->ResumeLayout(false);
 			this->groupBox3->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imageDisplay))->EndInit();
@@ -546,7 +607,7 @@ namespace SDIMaster {
 
 
 	private: System::String^ loadImage() {
-		System::String^ imagePath = "";
+		System::String^ imagePath = "blank.jpg";
 		OpenFileDialog^ openFileDialog = gcnew OpenFileDialog;
 		{
 			openFileDialog->InitialDirectory = "c:\\";
@@ -564,13 +625,24 @@ namespace SDIMaster {
 	}
 
 	private: System::Void MainWindow_Load(System::Object^ sender, System::EventArgs^ e) {
-		
+		imageDisplay->Load("blank.jpg");
 	}
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		System::String^ tempString = loadImage();
-		Bitmap^ backgroundImage;
-		backgroundImage = gcnew Bitmap(tempString);
-		imageDisplay->BackgroundImage = backgroundImage;
+		Bitmap^ displayImage;
+		int hPadding;
+		int vPadding;
+		displayImage = gcnew Bitmap(tempString);
+		imageDisplay->Image = displayImage;
+		hPadding = (imageDisplay->Width - displayImage->Width) / 2;
+		vPadding = (imageDisplay->Height - displayImage->Height) / 2;
+		System::Windows::Forms::Padding newPadding;
+		newPadding.Left = hPadding;
+		newPadding.Right = hPadding;
+		newPadding.Top = vPadding;
+		newPadding.Bottom = vPadding;
+		imageDisplay->Padding = newPadding;
+
 	}
 };
 }

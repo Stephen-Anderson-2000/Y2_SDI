@@ -19,7 +19,8 @@ Class imageData: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Fields:
     System.Drawing.Bitmap srcImage : Public
-    System.Collections.Generic.List`1[System.Collections.Generic.List`1[System.Drawing.Point]] boxList : Public
+    System.Collections.Generic.List`1[System.Collections.Generic.List`1[System.Int32]] boxList : Public
+    System.Collections.Generic.List`1[System.String] boxNameList : Public
     System.Collections.Generic.List`1[System.String] labelList : Public
     System.String fileName : Public
 Class Globals.GlobalClass: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
@@ -33,6 +34,7 @@ Class SDIMaster.MainWindow: AutoLayout, AnsiClass, Class, Public, BeforeFieldIni
     System.Windows.Forms.PictureBox imageDisplay : Public
     System.Windows.Forms.ListBox listBoxImage : Public
     System.Windows.Forms.ListBox listBoxLabels : Public
+    System.Windows.Forms.ListBox listBoxAnnotations : Public
 Class SDIAdditional.LabelDialogue: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName

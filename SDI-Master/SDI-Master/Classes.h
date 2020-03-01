@@ -11,7 +11,8 @@
 	public ref class imageData {
 		public:
 			Bitmap^ srcImage;
-			List<List<Point>^>^ boxList;
+			List<List<int>^>^ boxList;
+			List<String^>^ boxNameList;
 			List<String^>^ labelList;
 			String^ fileName;
 	};

@@ -5,7 +5,8 @@
 #include "LabelDialogue.h"
 #include <filesystem>
 
-namespace SDIMaster {
+namespace SDIMaster 
+{
 
 	using namespace System;
 	using namespace System::ComponentModel;
@@ -62,7 +63,8 @@ namespace SDIMaster {
 
 	private: System::Windows::Forms::SplitContainer^ splitContainer3;
 	private: System::Windows::Forms::GroupBox^ groupBox2;
-	private: System::Windows::Forms::Button^ button4;
+	private: System::Windows::Forms::Button^ buttonRemoveLabel;
+
 	private: System::Windows::Forms::Button^ buttonAddLabel;
 
 	private: System::Windows::Forms::Button^ button5;
@@ -73,13 +75,15 @@ namespace SDIMaster {
 
 
 	private: System::Windows::Forms::GroupBox^ groupBox3;
-	private: System::Windows::Forms::Button^ button8;
-	private: System::Windows::Forms::Button^ button9;
+	private: System::Windows::Forms::Button^ buttonRemoveAnnotation;
+	private: System::Windows::Forms::Button^ buttonAddAnnotation;
+
+
 	private: System::Windows::Forms::Button^ button10;
 	private: System::Windows::Forms::Button^ button11;
 	private: System::Windows::Forms::Label^ label3;
 	private: System::Windows::Forms::TextBox^ searchBoxAnnotations;
-	private: System::Windows::Forms::ListBox^ listBoxAnnotations;
+	public: System::Windows::Forms::ListBox^ listBoxAnnotations;
 
 
 	private: System::Windows::Forms::TableLayoutPanel^ tableLayoutPanel1;
@@ -118,7 +122,7 @@ namespace SDIMaster {
 			this->splitContainer3 = (gcnew System::Windows::Forms::SplitContainer());
 			this->tableLayoutPanel1 = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
-			this->button4 = (gcnew System::Windows::Forms::Button());
+			this->buttonRemoveLabel = (gcnew System::Windows::Forms::Button());
 			this->buttonAddLabel = (gcnew System::Windows::Forms::Button());
 			this->button5 = (gcnew System::Windows::Forms::Button());
 			this->button6 = (gcnew System::Windows::Forms::Button());
@@ -127,8 +131,8 @@ namespace SDIMaster {
 			this->listBoxLabels = (gcnew System::Windows::Forms::ListBox());
 			this->tableLayoutPanel3 = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->groupBox3 = (gcnew System::Windows::Forms::GroupBox());
-			this->button8 = (gcnew System::Windows::Forms::Button());
-			this->button9 = (gcnew System::Windows::Forms::Button());
+			this->buttonRemoveAnnotation = (gcnew System::Windows::Forms::Button());
+			this->buttonAddAnnotation = (gcnew System::Windows::Forms::Button());
 			this->button10 = (gcnew System::Windows::Forms::Button());
 			this->button11 = (gcnew System::Windows::Forms::Button());
 			this->label3 = (gcnew System::Windows::Forms::Label());
@@ -343,7 +347,7 @@ namespace SDIMaster {
 			// 
 			// groupBox2
 			// 
-			this->groupBox2->Controls->Add(this->button4);
+			this->groupBox2->Controls->Add(this->buttonRemoveLabel);
 			this->groupBox2->Controls->Add(this->buttonAddLabel);
 			this->groupBox2->Controls->Add(this->button5);
 			this->groupBox2->Controls->Add(this->button6);
@@ -360,17 +364,18 @@ namespace SDIMaster {
 			this->groupBox2->TabStop = false;
 			this->groupBox2->Text = L"Labels";
 			// 
-			// button4
+			// buttonRemoveLabel
 			// 
-			this->button4->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
-			this->button4->AutoSize = true;
-			this->button4->Location = System::Drawing::Point(153, 144);
-			this->button4->Margin = System::Windows::Forms::Padding(2);
-			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(112, 23);
-			this->button4->TabIndex = 6;
-			this->button4->Text = L"Remove Label";
-			this->button4->UseVisualStyleBackColor = true;
+			this->buttonRemoveLabel->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
+			this->buttonRemoveLabel->AutoSize = true;
+			this->buttonRemoveLabel->Location = System::Drawing::Point(153, 144);
+			this->buttonRemoveLabel->Margin = System::Windows::Forms::Padding(2);
+			this->buttonRemoveLabel->Name = L"buttonRemoveLabel";
+			this->buttonRemoveLabel->Size = System::Drawing::Size(112, 23);
+			this->buttonRemoveLabel->TabIndex = 6;
+			this->buttonRemoveLabel->Text = L"Remove Label";
+			this->buttonRemoveLabel->UseVisualStyleBackColor = true;
+			this->buttonRemoveLabel->Click += gcnew System::EventHandler(this, &MainWindow::buttonRemoveLabel_Click);
 			// 
 			// buttonAddLabel
 			// 
@@ -461,8 +466,8 @@ namespace SDIMaster {
 			// 
 			// groupBox3
 			// 
-			this->groupBox3->Controls->Add(this->button8);
-			this->groupBox3->Controls->Add(this->button9);
+			this->groupBox3->Controls->Add(this->buttonRemoveAnnotation);
+			this->groupBox3->Controls->Add(this->buttonAddAnnotation);
 			this->groupBox3->Controls->Add(this->button10);
 			this->groupBox3->Controls->Add(this->button11);
 			this->groupBox3->Controls->Add(this->label3);
@@ -478,29 +483,31 @@ namespace SDIMaster {
 			this->groupBox3->TabStop = false;
 			this->groupBox3->Text = L"Annotations";
 			// 
-			// button8
+			// buttonRemoveAnnotation
 			// 
-			this->button8->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
-			this->button8->AutoSize = true;
-			this->button8->Location = System::Drawing::Point(153, 172);
-			this->button8->Margin = System::Windows::Forms::Padding(2);
-			this->button8->Name = L"button8";
-			this->button8->Size = System::Drawing::Size(112, 23);
-			this->button8->TabIndex = 6;
-			this->button8->Text = L"Remove Label";
-			this->button8->UseVisualStyleBackColor = true;
+			this->buttonRemoveAnnotation->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
+			this->buttonRemoveAnnotation->AutoSize = true;
+			this->buttonRemoveAnnotation->Location = System::Drawing::Point(153, 172);
+			this->buttonRemoveAnnotation->Margin = System::Windows::Forms::Padding(2);
+			this->buttonRemoveAnnotation->Name = L"buttonRemoveAnnotation";
+			this->buttonRemoveAnnotation->Size = System::Drawing::Size(112, 23);
+			this->buttonRemoveAnnotation->TabIndex = 6;
+			this->buttonRemoveAnnotation->Text = L"Remove Annotation";
+			this->buttonRemoveAnnotation->UseVisualStyleBackColor = true;
+			this->buttonRemoveAnnotation->Click += gcnew System::EventHandler(this, &MainWindow::buttonRemoveAnnotation_Click);
 			// 
-			// button9
+			// buttonAddAnnotation
 			// 
-			this->button9->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
-			this->button9->AutoSize = true;
-			this->button9->Location = System::Drawing::Point(4, 173);
-			this->button9->Margin = System::Windows::Forms::Padding(2);
-			this->button9->Name = L"button9";
-			this->button9->Size = System::Drawing::Size(103, 23);
-			this->button9->TabIndex = 5;
-			this->button9->Text = L"Add Label";
-			this->button9->UseVisualStyleBackColor = true;
+			this->buttonAddAnnotation->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
+			this->buttonAddAnnotation->AutoSize = true;
+			this->buttonAddAnnotation->Location = System::Drawing::Point(4, 173);
+			this->buttonAddAnnotation->Margin = System::Windows::Forms::Padding(2);
+			this->buttonAddAnnotation->Name = L"buttonAddAnnotation";
+			this->buttonAddAnnotation->Size = System::Drawing::Size(103, 23);
+			this->buttonAddAnnotation->TabIndex = 5;
+			this->buttonAddAnnotation->Text = L"Add Annotation";
+			this->buttonAddAnnotation->UseVisualStyleBackColor = true;
+			this->buttonAddAnnotation->Click += gcnew System::EventHandler(this, &MainWindow::buttonAddAnnotation_Click);
 			// 
 			// button10
 			// 
@@ -566,7 +573,7 @@ namespace SDIMaster {
 			this->groupBox4->Margin = System::Windows::Forms::Padding(2);
 			this->groupBox4->Name = L"groupBox4";
 			this->groupBox4->Padding = System::Windows::Forms::Padding(2);
-			this->groupBox4->Size = System::Drawing::Size(529, 102);
+			this->groupBox4->Size = System::Drawing::Size(533, 102);
 			this->groupBox4->TabIndex = 7;
 			this->groupBox4->TabStop = false;
 			this->groupBox4->Text = L"Shortcuts";
@@ -580,7 +587,7 @@ namespace SDIMaster {
 			this->imageDisplay->Location = System::Drawing::Point(2, 2);
 			this->imageDisplay->Margin = System::Windows::Forms::Padding(2);
 			this->imageDisplay->Name = L"imageDisplay";
-			this->imageDisplay->Size = System::Drawing::Size(530, 447);
+			this->imageDisplay->Size = System::Drawing::Size(534, 447);
 			this->imageDisplay->TabIndex = 6;
 			this->imageDisplay->TabStop = false;
 			// 
@@ -620,6 +627,7 @@ namespace SDIMaster {
 		}
 #pragma endregion
 
+		//Get path of a file from the file opening dialogue.
 		System::String^ GetFilePath();
 
 		//Loads the image from a given file path into the global array.
@@ -628,23 +636,46 @@ namespace SDIMaster {
 		//Refreshes the list of images in the ImageList component - this is NOT the actual list of files, as windows forms components handle this in their own way.
 		System::Void ReloadImageList(MainWindow^);
 
-		//Refreshes the list of labels in the ImageList component
+		//Refreshes the list of labels in the LabelList component
 		System::Void ReloadLabelList(MainWindow^);
-
-		//Draws a red rectangle - test function, to be removed
-		System::Void drawBoxTest(MainWindow^);
 
 		//Refreshes the PictureBox component to display the currently selected image.
 		System::Void RefreshImageBox(MainWindow^);
 
-		//
-		System::Void listBoxImage_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+		//Open the dialogue for adding a new label (currently has no functionality)
+		System::Void AddLabelDialogue(String^, MainWindow^);
+
+		//Add label to list (currently uses hardcoded "test" name)
+		System::Void AddLabel(String^, MainWindow^);
+
+		//Remove label from list
+		System::Void RemoveLabel(MainWindow^);
+
+		//Add Annotation to image
+		System::Void AddAnnotation(String^, Point^, Point^, MainWindow^);
+
+		//Remove Annotation from image
+		System::Void RemoveAnnotation(int, MainWindow^);
+
+		//Refresh list of annotations in the component
+		System::Void ReloadAnnotationList(MainWindow^);
+
+		//Draws a red rectangle - test function, to be removed
+		System::Void drawBoxTest(MainWindow^);
+
+		//!! Functions below cannot currently be moved out of header - cannot add more arguments (ie the MainWindow) as they use eventhandlers
+
+		//Refresh components when selecting a new image
+		System::Void listBoxImage_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) 
+		{
 			RefreshImageBox(this);
 			ReloadLabelList(this);
 			drawBoxTest(this);
 		}
 
-		System::Void buttonRemoveImage_Click(System::Object^ sender, System::EventArgs^ e) {
+		//Removing images from list
+		System::Void buttonRemoveImage_Click(System::Object^ sender, System::EventArgs^ e) 
+		{
 			if (this->listBoxImage->SelectedIndex != -1) {
 				GlobalClass::loadedImages.RemoveAt(this->listBoxImage->SelectedIndex);
 				ReloadImageList(this);
@@ -653,15 +684,39 @@ namespace SDIMaster {
 			}
 		}
 
-		System::Void buttonImportImage_Click(System::Object^ sender, System::EventArgs^ e) {
+		//Importing image
+		System::Void buttonImportImage_Click(System::Object^ sender, System::EventArgs^ e) 
+		{
 			LoadImage(GetFilePath(), this);
 		}
 
-		System::Void AddLabelDialogue(String^, MainWindow^);
-
-		System::Void buttonAddLabel_Click(System::Object^ sender, System::EventArgs^ e) {
-			AddLabelDialogue("test", this);
+		//Add new label
+		System::Void buttonAddLabel_Click(System::Object^ sender, System::EventArgs^ e) 
+		{
+			AddLabel("test", this);
 			ReloadLabelList(this);
+		}
+
+		//Remove label
+		System::Void buttonRemoveLabel_Click(System::Object^ sender, System::EventArgs^ e) 
+		{
+			RemoveLabel(this);
+		}
+
+		//Add Annotation
+		System::Void buttonAddAnnotation_Click(System::Object^ sender, System::EventArgs^ e) 
+		{
+			Point^ pointA = gcnew Point(10, 10);
+			Point^ pointB = gcnew Point(100, 100);
+			AddAnnotation(GlobalClass::loadedImages[listBoxImage->SelectedIndex]->labelList[listBoxLabels->SelectedIndex], pointA, pointB, this);
+			ReloadAnnotationList(this);
+		}
+
+		//Remove Annotation
+		System::Void buttonRemoveAnnotation_Click(System::Object^ sender, System::EventArgs^ e) 
+		{
+			RemoveAnnotation(listBoxAnnotations->SelectedIndex, this);
+			ReloadAnnotationList(this);
 		}
 };
 }

@@ -55,7 +55,8 @@ namespace SDIMaster {
 	private: System::Windows::Forms::Button^ buttonRemoveImage;
 
 	private: System::Windows::Forms::Button^ button2;
-	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::Button^ buttonImportImage;
+
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::TextBox^ textBox1;
 	private: System::Windows::Forms::ListBox^ listBoxImage;
@@ -106,7 +107,7 @@ namespace SDIMaster {
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
 			this->buttonRemoveImage = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
-			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->buttonImportImage = (gcnew System::Windows::Forms::Button());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->listBoxImage = (gcnew System::Windows::Forms::ListBox());
@@ -214,7 +215,7 @@ namespace SDIMaster {
 			// 
 			this->groupBox1->Controls->Add(this->buttonRemoveImage);
 			this->groupBox1->Controls->Add(this->button2);
-			this->groupBox1->Controls->Add(this->button1);
+			this->groupBox1->Controls->Add(this->buttonImportImage);
 			this->groupBox1->Controls->Add(this->label1);
 			this->groupBox1->Controls->Add(this->textBox1);
 			this->groupBox1->Controls->Add(this->listBoxImage);
@@ -253,18 +254,18 @@ namespace SDIMaster {
 			this->button2->Text = L"Export Image";
 			this->button2->UseVisualStyleBackColor = true;
 			// 
-			// button1
+			// buttonImportImage
 			// 
-			this->button1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
-			this->button1->AutoSize = true;
-			this->button1->Location = System::Drawing::Point(5, 100);
-			this->button1->Margin = System::Windows::Forms::Padding(2);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(103, 23);
-			this->button1->TabIndex = 3;
-			this->button1->Text = L"Import Image";
-			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &MainWindow::button1_Click);
+			this->buttonImportImage->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
+			this->buttonImportImage->AutoSize = true;
+			this->buttonImportImage->Location = System::Drawing::Point(5, 100);
+			this->buttonImportImage->Margin = System::Windows::Forms::Padding(2);
+			this->buttonImportImage->Name = L"buttonImportImage";
+			this->buttonImportImage->Size = System::Drawing::Size(103, 23);
+			this->buttonImportImage->TabIndex = 3;
+			this->buttonImportImage->Text = L"Import Image";
+			this->buttonImportImage->UseVisualStyleBackColor = true;
+			this->buttonImportImage->Click += gcnew System::EventHandler(this, &MainWindow::buttonImportImage_Click);
 			// 
 			// label1
 			// 
@@ -560,7 +561,7 @@ namespace SDIMaster {
 			this->groupBox4->Margin = System::Windows::Forms::Padding(2);
 			this->groupBox4->Name = L"groupBox4";
 			this->groupBox4->Padding = System::Windows::Forms::Padding(2);
-			this->groupBox4->Size = System::Drawing::Size(525, 102);
+			this->groupBox4->Size = System::Drawing::Size(527, 102);
 			this->groupBox4->TabIndex = 7;
 			this->groupBox4->TabStop = false;
 			this->groupBox4->Text = L"Shortcuts";
@@ -574,7 +575,7 @@ namespace SDIMaster {
 			this->imageDisplay->Location = System::Drawing::Point(2, 2);
 			this->imageDisplay->Margin = System::Windows::Forms::Padding(2);
 			this->imageDisplay->Name = L"imageDisplay";
-			this->imageDisplay->Size = System::Drawing::Size(526, 447);
+			this->imageDisplay->Size = System::Drawing::Size(528, 447);
 			this->imageDisplay->TabIndex = 6;
 			this->imageDisplay->TabStop = false;
 			// 
@@ -611,15 +612,12 @@ namespace SDIMaster {
 			this->groupBox3->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imageDisplay))->EndInit();
 			this->ResumeLayout(false);
-			//
-			//Canvas 
-			//
 
 		}
 #pragma endregion
 
-	private: System::String^ loadImage() {
-		System::String^ imagePath = "N/A";
+	private: System::String^ GetFilePath() {
+		System::String^ imagePath = nullptr;
 		OpenFileDialog^ openFileDialog = gcnew OpenFileDialog;
 		{
 			openFileDialog->InitialDirectory = "c:\\";
@@ -636,7 +634,25 @@ namespace SDIMaster {
 		}
 	}
 
-	private: System::Void reloadImageList() {
+	//Loads the image from a given file path into the global array.
+	private: System::Void LoadImage(String^ filePath) {
+		if (filePath != nullptr)
+		{
+			GlobalClass::loadedImages.Add(gcnew imageData);
+			GlobalClass::loadedImages[GlobalClass::loadedImages.Count - 1]->srcImage = gcnew Bitmap(filePath);
+			GlobalClass::loadedImages[GlobalClass::loadedImages.Count - 1]->boxList = gcnew List<List<Point>^>;
+			//GlobalClass::loadedImages[GlobalClass::loadedImages.Count - 1]->boxList->Add(gcnew List<List<Point>^>);
+			GlobalClass::loadedImages[GlobalClass::loadedImages.Count - 1]->fileName = filePath;
+			GlobalClass::loadedImages[GlobalClass::loadedImages.Count - 1]->labelList = gcnew List<String^>;
+			ReloadImageList();
+			RefreshImageBox();
+			listBoxImage->SelectedIndex = GlobalClass::loadedImages.Count - 1;
+
+		}
+	}
+
+	//Refreshes the list of images in the ImageList component - this is NOT the actual list of files, as windows forms components handle this in their own way.
+	private: System::Void ReloadImageList() {
 		listBoxImage->Items->Clear();
 		for (int i = 0; i < GlobalClass::loadedImages.Count; i++) {
 			listBoxImage->Items->Add(GlobalClass::loadedImages[i]->fileName);
@@ -649,7 +665,8 @@ namespace SDIMaster {
 		boxCanvas->DrawRectangle(boxPen, 0, 0, 20, 20);
 	}
 
-	private: System::Void refreshImageBox() {
+	//Refreshes the PictureBox component to display the currently selected image.
+	private: System::Void RefreshImageBox() {
 		if (-1 < listBoxImage->SelectedIndex && listBoxImage->SelectedIndex < GlobalClass::loadedImages.Count) {
 			imageDisplay->BackgroundImage = GlobalClass::loadedImages[listBoxImage->SelectedIndex]->srcImage;
 		}
@@ -661,31 +678,20 @@ namespace SDIMaster {
 	private: System::Void MainWindow_Load(System::Object^ sender, System::EventArgs^ e) {
 		
 	}
-	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-		System::String^ filePath = loadImage();
-		if (filePath != "N/A")
-		{
-			GlobalClass::loadedImages.Add(gcnew imageData);
-			GlobalClass::loadedImages[GlobalClass::loadedImages.Count - 1]->srcImage = gcnew Bitmap(filePath);
-			GlobalClass::loadedImages[GlobalClass::loadedImages.Count - 1]->boxList = gcnew List<List<Point>^>;
-			//GlobalClass::loadedImages[GlobalClass::loadedImages.Count - 1]->boxList->Add(gcnew List<List<Point>^>);
-			GlobalClass::loadedImages[GlobalClass::loadedImages.Count - 1]->fileName = filePath;
-			GlobalClass::loadedImages[GlobalClass::loadedImages.Count - 1]->labelList = gcnew List<String^>;
-
-			reloadImageList();
-		}
-	}
 	private: System::Void listBoxImage_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
-		refreshImageBox();
+		RefreshImageBox();
 		drawBoxTest();
 	}
 
 	private: System::Void buttonRemoveImage_Click(System::Object^ sender, System::EventArgs^ e) {
 		if (listBoxImage->SelectedIndex != -1) {
 			GlobalClass::loadedImages.RemoveAt(listBoxImage->SelectedIndex);
-			reloadImageList();
-			refreshImageBox();
+			ReloadImageList();
+			RefreshImageBox();
 		}
+	}
+	private: System::Void buttonImportImage_Click(System::Object^ sender, System::EventArgs^ e) {
+		LoadImage(GetFilePath());
 	}
 };
 }

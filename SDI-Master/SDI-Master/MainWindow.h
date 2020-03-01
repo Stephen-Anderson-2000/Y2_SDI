@@ -646,6 +646,9 @@ namespace SDIMaster {
 			this->groupBox3->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imageDisplay))->EndInit();
 			this->ResumeLayout(false);
+			//
+			//Canvas 
+			//
 
 		}
 #pragma endregion
@@ -675,6 +678,12 @@ namespace SDIMaster {
 		}
 	}
 
+	private: System::Void drawBoxTest() {
+		Graphics^ boxCanvas = imageDisplay->CreateGraphics();
+		Pen^ boxPen = gcnew Pen(Color::Red);
+		boxCanvas->DrawRectangle(boxPen, 0, 0, 20, 20);
+	}
+
 	private: System::Void refreshImageBox() {
 		if (-1 < listBoxImage->SelectedIndex && listBoxImage->SelectedIndex < GlobalClass::loadedImages.Count) {
 			imageDisplay->BackgroundImage = GlobalClass::loadedImages[listBoxImage->SelectedIndex]->srcImage;
@@ -685,7 +694,7 @@ namespace SDIMaster {
 	}
 
 	private: System::Void MainWindow_Load(System::Object^ sender, System::EventArgs^ e) {
-		Graphics^ boxCanvas = imageDisplay->CreateGraphics();
+		
 	}
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		System::String^ filePath = loadImage();
@@ -694,9 +703,8 @@ namespace SDIMaster {
 			GlobalClass::loadedImages.Add(gcnew imageData);
 			GlobalClass::loadedImages[GlobalClass::loadedImages.Count - 1]->srcImage = gcnew Bitmap(filePath);
 			GlobalClass::loadedImages[GlobalClass::loadedImages.Count - 1]->boxList = gcnew List<List<Point>^>;
+			//GlobalClass::loadedImages[GlobalClass::loadedImages.Count - 1]->boxList->Add(gcnew List<List<Point>^>);
 			GlobalClass::loadedImages[GlobalClass::loadedImages.Count - 1]->fileName = filePath;
-			//GlobalClass::loadedImages[GlobalClass::loadedImages.Count - 1]->boxList[0] = gcnew List<Point>;
-			//GlobalClass::loadedImages[GlobalClass::loadedImages.Count - 1]->boxList[1] = gcnew List<Point>;
 			GlobalClass::loadedImages[GlobalClass::loadedImages.Count - 1]->labelList = gcnew List<String^>;
 
 			reloadImageList();
@@ -704,7 +712,9 @@ namespace SDIMaster {
 	}
 	private: System::Void listBoxImage_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
 		refreshImageBox();
+		drawBoxTest();
 	}
+
 	private: System::Void buttonRemoveImage_Click(System::Object^ sender, System::EventArgs^ e) {
 		if (listBoxImage->SelectedIndex != -1) {
 			GlobalClass::loadedImages.RemoveAt(listBoxImage->SelectedIndex);

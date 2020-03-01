@@ -46,25 +46,6 @@ namespace SDIMaster {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	private: System::Windows::Forms::GroupBox^ groupBox4;
 	private: System::Windows::Forms::PictureBox^ imageDisplay;
 
@@ -99,22 +80,6 @@ namespace SDIMaster {
 	private: System::Windows::Forms::TableLayoutPanel^ tableLayoutPanel1;
 	private: System::Windows::Forms::TableLayoutPanel^ tableLayoutPanel2;
 	private: System::Windows::Forms::TableLayoutPanel^ tableLayoutPanel3;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -1,8 +1,8 @@
 ﻿  MainWindow.cpp
-C:\Users\sandr\Documents\Uni\Year 2\Software Design & Implementation\SDI-Project\SDI-Master\SDI-Master\MainWindow.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\sandr\Documents\Uni\Year 2\Software Design & Implementation\SDI-Project\SDI-Master\SDI-Master\MainWindow.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\sandr\Documents\Uni\Year 2\Software Design & Implementation\SDI-Project\SDI-Master\SDI-Master\MainWindow.h(4,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\sandr\Documents\Uni\Year 2\Software Design & Implementation\SDI-Project\SDI-Master\SDI-Master\Globals.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\MainWindow.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\MainWindow.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\MainWindow.h(4,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\Globals.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
   The contents of <filesystem> are only available with C++17 or later.
   MainWindow.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
-  SDI-Master.vcxproj -> C:\Users\sandr\Documents\Uni\Year 2\Software Design & Implementation\SDI-Project\SDI-Master\Debug\SDI-Master.exe
+  SDI-Master.vcxproj -> C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\Debug\SDI-Master.exe

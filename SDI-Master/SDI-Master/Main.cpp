@@ -1,11 +1,10 @@
-#include "Classes.h"
+#include "ImageData.h"
 #include "MainWindow.h"
-#include "Globals.h"
-#include "LabelDialogue.h"
+#include "GlobalImageList.h"
 
 using namespace System;
 using namespace System::Windows::Forms;
-using namespace Globals;
+using namespace GlobalList;
 
 [STAThreadAttribute]
 void Main(array<String^>^ args) {

@@ -1,16 +1,16 @@
-﻿  LabelDialogue.cpp
-C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\Globals.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+﻿  Main.cpp
 C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\MainWindow.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-  The contents of <filesystem> are only available with C++17 or later.
-  Main.cpp
-C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\MainWindow.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\Globals.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\GlobalImageList.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
   The contents of <filesystem> are only available with C++17 or later.
   MainWindow.cpp
 C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\MainWindow.cpp(1,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\Globals.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\GlobalImageList.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
 C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\MainWindow.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
   The contents of <filesystem> are only available with C++17 or later.
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\MainWindow.cpp(157,14): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\MainWindow.cpp(173,19): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\MainWindow.cpp(177,19): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
   Generating Code...
-  LabelDialogue.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
+  .NETFramework,Version=v4.0.AssemblyAttributes.cpp
+  Main.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
   SDI-Master.vcxproj -> C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\Debug\SDI-Master.exe

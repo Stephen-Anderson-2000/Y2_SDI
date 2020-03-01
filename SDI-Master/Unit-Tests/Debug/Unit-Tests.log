@@ -1,0 +1,41 @@
+﻿  Unit-Tests.cpp
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\MainWindow.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\ImageData.h(3,24): error C2871: 'System': a namespace with this name does not exist
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\ImageData.h(4,40): error C2653: 'System': is not a class or namespace name
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\ImageData.h(4,40): error C2871: 'ComponentModel': a namespace with this name does not exist
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\ImageData.h(5,37): error C2653: 'System': is not a class or namespace name
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\ImageData.h(5,37): error C2871: 'Collections': a namespace with this name does not exist
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\ImageData.h(6,46): error C2653: 'System': is not a class or namespace name
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\ImageData.h(6,46): error C2871: 'Generic': a namespace with this name does not exist
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\ImageData.h(7,40): error C2653: 'System': is not a class or namespace name
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\ImageData.h(7,40): error C2871: 'Forms': a namespace with this name does not exist
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\ImageData.h(8,30): error C2653: 'System': is not a class or namespace name
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\ImageData.h(8,30): error C2871: 'Data': a namespace with this name does not exist
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\ImageData.h(9,33): error C2653: 'System': is not a class or namespace name
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\ImageData.h(9,33): error C2871: 'Drawing': a namespace with this name does not exist
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\ImageData.h(12,2): error C2059: syntax error: 'public'
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\ImageData.h(12,29): error C2143: syntax error: missing ';' before '{'
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\ImageData.h(12,29): error C2447: '{': missing function header (old-style formal list?)
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\GlobalImageList.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\GlobalImageList.h(6,2): error C2059: syntax error: 'public'
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\GlobalImageList.h(7,2): error C2143: syntax error: missing ';' before '{'
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\GlobalImageList.h(7,2): error C2447: '{': missing function header (old-style formal list?)
+  The contents of <filesystem> are only available with C++17 or later.
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\MainWindow.h(10,24): error C2871: 'System': a namespace with this name does not exist
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\MainWindow.h(11,40): error C2653: 'System': is not a class or namespace name
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\MainWindow.h(11,40): error C2871: 'ComponentModel': a namespace with this name does not exist
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\MainWindow.h(12,37): error C2653: 'System': is not a class or namespace name
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\MainWindow.h(12,37): error C2871: 'Collections': a namespace with this name does not exist
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\MainWindow.h(13,46): error C2653: 'System': is not a class or namespace name
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\MainWindow.h(13,46): error C2871: 'Generic': a namespace with this name does not exist
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\MainWindow.h(14,40): error C2653: 'System': is not a class or namespace name
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\MainWindow.h(14,40): error C2871: 'Forms': a namespace with this name does not exist
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\MainWindow.h(15,30): error C2653: 'System': is not a class or namespace name
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\MainWindow.h(15,30): error C2871: 'Data': a namespace with this name does not exist
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\MainWindow.h(16,33): error C2653: 'System': is not a class or namespace name
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\MainWindow.h(16,33): error C2871: 'Drawing': a namespace with this name does not exist
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\MainWindow.h(22,2): error C2059: syntax error: 'public'
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\MainWindow.h(22,32): error C2059: syntax error: 'public'
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\MainWindow.h(23,2): error C2653: 'System': is not a class or namespace name
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\MainWindow.h(23,2): error C2143: syntax error: missing ';' before '{'
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\MainWindow.h(23,2): error C2447: '{': missing function header (old-style formal list?)

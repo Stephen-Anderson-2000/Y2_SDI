@@ -1,8 +1,7 @@
 #pragma once
 #include <string>;
-#include "Classes.h"
-#include "Globals.h"
-#include "LabelDialogue.h"
+#include "ImageData.h"
+#include "GlobalImageList.h"
 #include <filesystem>
 
 namespace SDIMaster 
@@ -15,7 +14,7 @@ namespace SDIMaster
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
-	using namespace Globals;
+	using namespace GlobalList;
 
 	/// <summary>
 	/// Summary for MainWindow
@@ -573,7 +572,7 @@ namespace SDIMaster
 			this->groupBox4->Margin = System::Windows::Forms::Padding(2);
 			this->groupBox4->Name = L"groupBox4";
 			this->groupBox4->Padding = System::Windows::Forms::Padding(2);
-			this->groupBox4->Size = System::Drawing::Size(533, 102);
+			this->groupBox4->Size = System::Drawing::Size(535, 102);
 			this->groupBox4->TabIndex = 7;
 			this->groupBox4->TabStop = false;
 			this->groupBox4->Text = L"Shortcuts";
@@ -583,11 +582,12 @@ namespace SDIMaster
 			this->imageDisplay->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
+			this->imageDisplay->BackColor = System::Drawing::SystemColors::WindowText;
 			this->imageDisplay->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
 			this->imageDisplay->Location = System::Drawing::Point(2, 2);
 			this->imageDisplay->Margin = System::Windows::Forms::Padding(2);
 			this->imageDisplay->Name = L"imageDisplay";
-			this->imageDisplay->Size = System::Drawing::Size(534, 447);
+			this->imageDisplay->Size = System::Drawing::Size(522, 446);
 			this->imageDisplay->TabIndex = 6;
 			this->imageDisplay->TabStop = false;
 			// 
@@ -627,54 +627,56 @@ namespace SDIMaster
 		}
 #pragma endregion
 
-		//Get path of a file from the file opening dialogue.
-		System::String^ GetFilePath();
+		///Get path of a file from the file opening dialogue.
+		protected: System::String^ GetFilePath();
 
-		//Loads the image from a given file path into the global array.
-		System::Void LoadImage(String^, MainWindow^);
+		///Loads the image from a given file path into the global array.
+		protected: System::Void LoadImage(String^, MainWindow^);
 
-		//Refreshes the list of images in the ImageList component - this is NOT the actual list of files, as windows forms components handle this in their own way.
-		System::Void ReloadImageList(MainWindow^);
+		///Refreshes the list of images in the ImageList component - this is NOT the actual list of files, as windows forms components handle this in their own way.
+		protected: System::Void ReloadImageList(MainWindow^);
 
-		//Refreshes the list of labels in the LabelList component
-		System::Void ReloadLabelList(MainWindow^);
+		///Refreshes the list of labels in the LabelList component
+		protected: System::Void ReloadLabelList(MainWindow^);
 
-		//Refreshes the PictureBox component to display the currently selected image.
-		System::Void RefreshImageBox(MainWindow^);
+		///Refreshes the PictureBox component to display the currently selected image.
+		protected: System::Void RefreshImageBox(MainWindow^);
 
-		//Open the dialogue for adding a new label (currently has no functionality)
-		System::Void AddLabelDialogue(String^, MainWindow^);
+		///Open the dialogue for adding a new label (currently has no functionality)
+		protected: System::Void AddLabelDialogue(String^, MainWindow^);
 
-		//Add label to list (currently uses hardcoded "test" name)
-		System::Void AddLabel(String^, MainWindow^);
+		///Add label to list (currently uses hardcoded "test" name)
+		protected: System::Void AddLabel(String^, MainWindow^);
 
-		//Remove label from list
-		System::Void RemoveLabel(MainWindow^);
+		///Remove label from list
+		protected: System::Void RemoveLabel(MainWindow^);
 
-		//Add Annotation to image
-		System::Void AddAnnotation(String^, Point^, Point^, MainWindow^);
+		///Add Annotation to image
+		protected: System::Void AddAnnotation(String^, Point^, Point^, MainWindow^);
 
-		//Remove Annotation from image
-		System::Void RemoveAnnotation(int, MainWindow^);
+		///Remove Annotation from image
+		protected: System::Void RemoveAnnotation(int, MainWindow^);
 
-		//Refresh list of annotations in the component
-		System::Void ReloadAnnotationList(MainWindow^);
+		///Refresh list of annotations in the component
+		protected: System::Void ReloadAnnotationList(MainWindow^);
 
-		//Draws a red rectangle - test function, to be removed
-		System::Void drawBoxTest(MainWindow^);
+		//Renders annotations
+		protected: System::Void DrawAnnotations(MainWindow^);
 
-		//!! Functions below cannot currently be moved out of header - cannot add more arguments (ie the MainWindow) as they use eventhandlers
+		///Calculate point relative to image
+		protected: int CalculatePos(int, int, float);
 
-		//Refresh components when selecting a new image
-		System::Void listBoxImage_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) 
+		// Functions below cannot currently be moved out of header - cannot add more arguments (ie the MainWindow) as they use eventhandlers
+
+		///Select image
+		protected: System::Void listBoxImage_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e)
 		{
 			RefreshImageBox(this);
 			ReloadLabelList(this);
-			drawBoxTest(this);
 		}
 
-		//Removing images from list
-		System::Void buttonRemoveImage_Click(System::Object^ sender, System::EventArgs^ e) 
+		///Removing image button
+		protected: System::Void buttonRemoveImage_Click(System::Object^ sender, System::EventArgs^ e)
 		{
 			if (this->listBoxImage->SelectedIndex != -1) {
 				GlobalClass::loadedImages.RemoveAt(this->listBoxImage->SelectedIndex);
@@ -684,36 +686,37 @@ namespace SDIMaster
 			}
 		}
 
-		//Importing image
-		System::Void buttonImportImage_Click(System::Object^ sender, System::EventArgs^ e) 
+		///Import image button
+		protected: System::Void buttonImportImage_Click(System::Object^ sender, System::EventArgs^ e)
 		{
 			LoadImage(GetFilePath(), this);
 		}
 
-		//Add new label
-		System::Void buttonAddLabel_Click(System::Object^ sender, System::EventArgs^ e) 
+		///Add new label button
+		protected: System::Void buttonAddLabel_Click(System::Object^ sender, System::EventArgs^ e)
 		{
 			AddLabel("test", this);
 			ReloadLabelList(this);
 		}
 
-		//Remove label
-		System::Void buttonRemoveLabel_Click(System::Object^ sender, System::EventArgs^ e) 
+		///Remove label button
+		protected: System::Void buttonRemoveLabel_Click(System::Object^ sender, System::EventArgs^ e)
 		{
 			RemoveLabel(this);
 		}
 
-		//Add Annotation
-		System::Void buttonAddAnnotation_Click(System::Object^ sender, System::EventArgs^ e) 
+		///Add Annotation button
+		protected: System::Void buttonAddAnnotation_Click(System::Object^ sender, System::EventArgs^ e)
 		{
 			Point^ pointA = gcnew Point(10, 10);
 			Point^ pointB = gcnew Point(100, 100);
 			AddAnnotation(GlobalClass::loadedImages[listBoxImage->SelectedIndex]->labelList[listBoxLabels->SelectedIndex], pointA, pointB, this);
 			ReloadAnnotationList(this);
+			DrawAnnotations(this);
 		}
 
-		//Remove Annotation
-		System::Void buttonRemoveAnnotation_Click(System::Object^ sender, System::EventArgs^ e) 
+		///Remove Annotation button
+		protected: System::Void buttonRemoveAnnotation_Click(System::Object^ sender, System::EventArgs^ e)
 		{
 			RemoveAnnotation(listBoxAnnotations->SelectedIndex, this);
 			ReloadAnnotationList(this);

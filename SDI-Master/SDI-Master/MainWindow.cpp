@@ -1,7 +1,6 @@
 #include <string>;
-#include "Classes.h"
-#include "Globals.h"
-#include "LabelDialogue.h"
+#include "ImageData.h"
+#include "GlobalImageList.h"
 #include "MainWindow.h"
 #include <filesystem>
 
@@ -13,12 +12,12 @@ using namespace System::Windows::Forms;
 using namespace System::Data;
 using namespace System::Drawing;
 using namespace SDIMaster;
-using namespace Globals;
+using namespace GlobalList;
 
-namespace SDIMaster 
+namespace SDIMaster
 {
 
-	System::String^ MainWindow::GetFilePath() 
+	System::String^ MainWindow::GetFilePath()
 	{
 		System::String^ imagePath = nullptr;
 		OpenFileDialog^ openFileDialog = gcnew OpenFileDialog;
@@ -37,7 +36,7 @@ namespace SDIMaster
 		}
 	}
 
-	System::Void MainWindow::LoadImage(String^ filePath, MainWindow^ w) 
+	System::Void MainWindow::LoadImage(String^ filePath, MainWindow^ w)
 	{
 		if (filePath != nullptr)
 		{
@@ -54,7 +53,7 @@ namespace SDIMaster
 		}
 	}
 
-	System::Void MainWindow::ReloadImageList(MainWindow^ w) 
+	System::Void MainWindow::ReloadImageList(MainWindow^ w)
 	{
 		w->listBoxImage->Items->Clear();
 		for (int i = 0; i < GlobalClass::loadedImages.Count; i++) {
@@ -62,7 +61,7 @@ namespace SDIMaster
 		}
 	}
 
-	System::Void MainWindow::ReloadLabelList(MainWindow^ w) 
+	System::Void MainWindow::ReloadLabelList(MainWindow^ w)
 	{
 		w->listBoxLabels->Items->Clear();
 		if (-1 < w->listBoxImage->SelectedIndex && w->listBoxImage->SelectedIndex < GlobalClass::loadedImages.Count) {
@@ -72,33 +71,33 @@ namespace SDIMaster
 		}
 	}
 
-	System::Void MainWindow::RefreshImageBox(MainWindow^ w) 
+	System::Void MainWindow::RefreshImageBox(MainWindow^ w)
 	{
-		if (-1 < w->listBoxImage->SelectedIndex && w->listBoxImage->SelectedIndex < GlobalClass::loadedImages.Count) 
+		if (-1 < w->listBoxImage->SelectedIndex && w->listBoxImage->SelectedIndex < GlobalClass::loadedImages.Count)
 		{
 			w->imageDisplay->BackgroundImage = GlobalClass::loadedImages[w->listBoxImage->SelectedIndex]->srcImage;
 		}
-		else 
+		else
 		{
 			w->imageDisplay->BackgroundImage = nullptr;
 		}
 	}
 
-	System::Void MainWindow::AddLabelDialogue(String^ labelName, MainWindow^ w) 
+	System::Void MainWindow::AddLabelDialogue(String^ labelName, MainWindow^ w)
 	{
 		//TBA
 	}
 
-	System::Void MainWindow::AddLabel(String^ labelName, MainWindow^ w) 
+	System::Void MainWindow::AddLabel(String^ labelName, MainWindow^ w)
 	{
 		GlobalClass::loadedImages[w->listBoxImage->SelectedIndex]->labelList->Add(labelName);
 	}
 
-	System::Void MainWindow::RemoveLabel(MainWindow^ w) 
+	System::Void MainWindow::RemoveLabel(MainWindow^ w)
 	{
-		if (-1 < w->listBoxImage->SelectedIndex && w->listBoxImage->SelectedIndex < GlobalClass::loadedImages.Count) 
+		if (-1 < w->listBoxImage->SelectedIndex && w->listBoxImage->SelectedIndex < GlobalClass::loadedImages.Count)
 		{
-			if (-1 < w->listBoxLabels->SelectedIndex && w->listBoxLabels->SelectedIndex < GlobalClass::loadedImages[w->listBoxImage->SelectedIndex]->labelList->Count) 
+			if (-1 < w->listBoxLabels->SelectedIndex && w->listBoxLabels->SelectedIndex < GlobalClass::loadedImages[w->listBoxImage->SelectedIndex]->labelList->Count)
 			{
 				GlobalClass::loadedImages[listBoxImage->SelectedIndex]->labelList->RemoveAt(listBoxLabels->SelectedIndex);
 				ReloadLabelList(w);
@@ -106,7 +105,7 @@ namespace SDIMaster
 		}
 	}
 
-	System::Void MainWindow::AddAnnotation(String^ Name, Point^ lCorner, Point^ rCorner, MainWindow^ w) 
+	System::Void MainWindow::AddAnnotation(String^ Name, Point^ lCorner, Point^ rCorner, MainWindow^ w)
 	{
 		GlobalClass::loadedImages[w->listBoxImage->SelectedIndex]->boxList->Add(gcnew List<int>);
 		int index = GlobalClass::loadedImages[w->listBoxImage->SelectedIndex]->boxList->Count - 1;
@@ -132,26 +131,61 @@ namespace SDIMaster
 
 	System::Void MainWindow::ReloadAnnotationList(MainWindow^ w) {
 		listBoxAnnotations->Items->Clear();
-		if (-1 < w->listBoxImage->SelectedIndex && w->listBoxImage->SelectedIndex < GlobalClass::loadedImages.Count)
-		{
-			for (int i = 0; i < GlobalClass::loadedImages[w->listBoxImage->SelectedIndex]->boxNameList->Count; i++)
+		try {
+			if (-1 < w->listBoxImage->SelectedIndex && w->listBoxImage->SelectedIndex < GlobalClass::loadedImages.Count)
 			{
-				List<int>^ tempList = GlobalClass::loadedImages[w->listBoxImage->SelectedIndex]->boxList[i];
-				int posX1 = tempList[0];
-				int posY1 = tempList[1];
-				int posX2 = tempList[2];
-				int posY2 = tempList[3];
-				String^ name = GlobalClass::loadedImages[w->listBoxImage->SelectedIndex]->boxNameList[i];
-				//Format: [name] (X1-X2, Y1-Y2)
-				listBoxAnnotations->Items->Add("[" + name + "] (" + posX1.ToString() + "-" + posX2.ToString() + ", " + posY1.ToString() + "-" + posY2.ToString() + ")");
+				for (int i = 0; i < GlobalClass::loadedImages[w->listBoxImage->SelectedIndex]->boxNameList->Count; i++)
+				{
+					List<int>^ tempList = GlobalClass::loadedImages[w->listBoxImage->SelectedIndex]->boxList[i];
+					int posX1 = tempList[0];
+					int posY1 = tempList[1];
+					int posX2 = tempList[2];
+					int posY2 = tempList[3];
+					String^ name = GlobalClass::loadedImages[w->listBoxImage->SelectedIndex]->boxNameList[i];
+					//Format: [name] (X1-X2, Y1-Y2)
+					listBoxAnnotations->Items->Add("[" + name + "] (" + posX1.ToString() + "-" + posX2.ToString() + ", " + posY1.ToString() + "-" + posY2.ToString() + ")");
+				}
 			}
 		}
+		catch (...) {
+			//oop
+		}
+
 	}
 
-	System::Void MainWindow::drawBoxTest(MainWindow^ w) 
+	int MainWindow::CalculatePos(int position, int offset, float imageScale) {
+		int newPos = floor(float(position) * imageScale + float(offset));
+		return newPos;
+	}
+
+	System::Void MainWindow::DrawAnnotations(MainWindow^ w)
 	{
 		Graphics^ boxCanvas = w->imageDisplay->CreateGraphics();
-		Pen^ boxPen = gcnew Pen(Color::Red);
-		boxCanvas->DrawRectangle(boxPen, 0, 0, 20, 20);
+		boxCanvas->Clear(Color::Black);
+		float imageScale;
+		int xOffset;
+		int yOffset;
+		imageScale = float(w->imageDisplay->Width) / float(w->imageDisplay->BackgroundImage->Width);
+		if (w->imageDisplay->Height / imageDisplay->BackgroundImage->Height < imageScale)
+		{
+			imageScale = float(w->imageDisplay->Height) / float(w->imageDisplay->BackgroundImage->Height);
+			yOffset = 0;
+			xOffset = floor((imageDisplay->Width - float(imageDisplay->BackgroundImage->Width) * imageScale) / 2);
+		}
+		else
+		{
+			yOffset = floor((imageDisplay->Height - float(imageDisplay->BackgroundImage->Height) * imageScale) / 2);
+			xOffset = 0;
+		}
+		boxCanvas->DrawImage(imageDisplay->BackgroundImage, float(xOffset), float(yOffset), float(imageDisplay->BackgroundImage->Width) * imageScale, float(imageDisplay->BackgroundImage->Height) * imageScale);
+		Color boxColour = Color::FromArgb(128, 255, 0, 0);
+		SolidBrush^ boxBrush = gcnew SolidBrush(boxColour);
+		int imageIndex = w->listBoxImage->SelectedIndex;
+		for (int i = 0; i < GlobalClass::loadedImages[imageIndex]->boxList->Count; i++)
+		{
+			List<int>^ coordinates = GlobalClass::loadedImages[imageIndex]->boxList[i];
+			boxCanvas->FillRectangle(boxBrush, CalculatePos(coordinates[0], xOffset, imageScale), CalculatePos(coordinates[1], yOffset, imageScale), CalculatePos(coordinates[2], xOffset, imageScale) - CalculatePos(coordinates[0], xOffset, imageScale), CalculatePos(coordinates[3], yOffset, imageScale) - CalculatePos(coordinates[1], yOffset, imageScale));
+		}
+
 	}
 }

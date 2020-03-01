@@ -660,7 +660,7 @@ namespace SDIMaster
 		///Refresh list of annotations in the component
 		protected: System::Void ReloadAnnotationList(MainWindow^);
 
-		//Renders annotations
+		///Renders annotations on top of the displayed image
 		protected: System::Void DrawAnnotations(MainWindow^);
 
 		///Calculate point relative to image

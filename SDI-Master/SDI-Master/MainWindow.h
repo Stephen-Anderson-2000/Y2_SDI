@@ -1,7 +1,8 @@
 #pragma once
 #include <string>;
-#include "Classes.h";
-#include "Globals.h";
+#include "Classes.h"
+#include "Globals.h"
+#include "LabelDialogue.h"
 #include <filesystem>
 
 namespace SDIMaster {
@@ -43,11 +44,8 @@ namespace SDIMaster {
 	private: System::Windows::Forms::SplitContainer^ splitContainer1;
 	protected:
 
-
-
-
 	private: System::Windows::Forms::GroupBox^ groupBox4;
-	private: System::Windows::Forms::PictureBox^ imageDisplay;
+	public: System::Windows::Forms::PictureBox^ imageDisplay;
 
 
 	private: System::Windows::Forms::SplitContainer^ splitContainer2;
@@ -58,26 +56,32 @@ namespace SDIMaster {
 	private: System::Windows::Forms::Button^ buttonImportImage;
 
 	private: System::Windows::Forms::Label^ label1;
-	private: System::Windows::Forms::TextBox^ textBox1;
-	private: System::Windows::Forms::ListBox^ listBoxImage;
+	private: System::Windows::Forms::TextBox^ searchBoxImage;
+
+	public: System::Windows::Forms::ListBox^ listBoxImage;
 
 	private: System::Windows::Forms::SplitContainer^ splitContainer3;
 	private: System::Windows::Forms::GroupBox^ groupBox2;
 	private: System::Windows::Forms::Button^ button4;
-	private: System::Windows::Forms::Button^ button7;
+	private: System::Windows::Forms::Button^ buttonAddLabel;
+
 	private: System::Windows::Forms::Button^ button5;
 	private: System::Windows::Forms::Button^ button6;
 	private: System::Windows::Forms::Label^ label2;
-	private: System::Windows::Forms::TextBox^ textBox2;
-	private: System::Windows::Forms::ListBox^ listBox2;
+	private: System::Windows::Forms::TextBox^ searchBoxLabels;
+	public: System::Windows::Forms::ListBox^ listBoxLabels;
+
+
 	private: System::Windows::Forms::GroupBox^ groupBox3;
 	private: System::Windows::Forms::Button^ button8;
 	private: System::Windows::Forms::Button^ button9;
 	private: System::Windows::Forms::Button^ button10;
 	private: System::Windows::Forms::Button^ button11;
 	private: System::Windows::Forms::Label^ label3;
-	private: System::Windows::Forms::TextBox^ textBox3;
-	private: System::Windows::Forms::ListBox^ listBox3;
+	private: System::Windows::Forms::TextBox^ searchBoxAnnotations;
+	private: System::Windows::Forms::ListBox^ listBoxAnnotations;
+
+
 	private: System::Windows::Forms::TableLayoutPanel^ tableLayoutPanel1;
 	private: System::Windows::Forms::TableLayoutPanel^ tableLayoutPanel2;
 	private: System::Windows::Forms::TableLayoutPanel^ tableLayoutPanel3;
@@ -109,18 +113,18 @@ namespace SDIMaster {
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->buttonImportImage = (gcnew System::Windows::Forms::Button());
 			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->searchBoxImage = (gcnew System::Windows::Forms::TextBox());
 			this->listBoxImage = (gcnew System::Windows::Forms::ListBox());
 			this->splitContainer3 = (gcnew System::Windows::Forms::SplitContainer());
 			this->tableLayoutPanel1 = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
 			this->button4 = (gcnew System::Windows::Forms::Button());
-			this->button7 = (gcnew System::Windows::Forms::Button());
+			this->buttonAddLabel = (gcnew System::Windows::Forms::Button());
 			this->button5 = (gcnew System::Windows::Forms::Button());
 			this->button6 = (gcnew System::Windows::Forms::Button());
 			this->label2 = (gcnew System::Windows::Forms::Label());
-			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
-			this->listBox2 = (gcnew System::Windows::Forms::ListBox());
+			this->searchBoxLabels = (gcnew System::Windows::Forms::TextBox());
+			this->listBoxLabels = (gcnew System::Windows::Forms::ListBox());
 			this->tableLayoutPanel3 = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->groupBox3 = (gcnew System::Windows::Forms::GroupBox());
 			this->button8 = (gcnew System::Windows::Forms::Button());
@@ -128,8 +132,8 @@ namespace SDIMaster {
 			this->button10 = (gcnew System::Windows::Forms::Button());
 			this->button11 = (gcnew System::Windows::Forms::Button());
 			this->label3 = (gcnew System::Windows::Forms::Label());
-			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
-			this->listBox3 = (gcnew System::Windows::Forms::ListBox());
+			this->searchBoxAnnotations = (gcnew System::Windows::Forms::TextBox());
+			this->listBoxAnnotations = (gcnew System::Windows::Forms::ListBox());
 			this->groupBox4 = (gcnew System::Windows::Forms::GroupBox());
 			this->imageDisplay = (gcnew System::Windows::Forms::PictureBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->splitContainer1))->BeginInit();
@@ -217,7 +221,7 @@ namespace SDIMaster {
 			this->groupBox1->Controls->Add(this->button2);
 			this->groupBox1->Controls->Add(this->buttonImportImage);
 			this->groupBox1->Controls->Add(this->label1);
-			this->groupBox1->Controls->Add(this->textBox1);
+			this->groupBox1->Controls->Add(this->searchBoxImage);
 			this->groupBox1->Controls->Add(this->listBoxImage);
 			this->groupBox1->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->groupBox1->Location = System::Drawing::Point(2, 2);
@@ -277,15 +281,15 @@ namespace SDIMaster {
 			this->label1->TabIndex = 2;
 			this->label1->Text = L"Search:";
 			// 
-			// textBox1
+			// searchBoxImage
 			// 
-			this->textBox1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+			this->searchBoxImage->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->textBox1->Location = System::Drawing::Point(51, 18);
-			this->textBox1->Margin = System::Windows::Forms::Padding(2);
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(216, 20);
-			this->textBox1->TabIndex = 1;
+			this->searchBoxImage->Location = System::Drawing::Point(51, 18);
+			this->searchBoxImage->Margin = System::Windows::Forms::Padding(2);
+			this->searchBoxImage->Name = L"searchBoxImage";
+			this->searchBoxImage->Size = System::Drawing::Size(216, 20);
+			this->searchBoxImage->TabIndex = 1;
 			// 
 			// listBoxImage
 			// 
@@ -340,12 +344,12 @@ namespace SDIMaster {
 			// groupBox2
 			// 
 			this->groupBox2->Controls->Add(this->button4);
-			this->groupBox2->Controls->Add(this->button7);
+			this->groupBox2->Controls->Add(this->buttonAddLabel);
 			this->groupBox2->Controls->Add(this->button5);
 			this->groupBox2->Controls->Add(this->button6);
 			this->groupBox2->Controls->Add(this->label2);
-			this->groupBox2->Controls->Add(this->textBox2);
-			this->groupBox2->Controls->Add(this->listBox2);
+			this->groupBox2->Controls->Add(this->searchBoxLabels);
+			this->groupBox2->Controls->Add(this->listBoxLabels);
 			this->groupBox2->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->groupBox2->Location = System::Drawing::Point(2, 2);
 			this->groupBox2->Margin = System::Windows::Forms::Padding(2);
@@ -368,17 +372,18 @@ namespace SDIMaster {
 			this->button4->Text = L"Remove Label";
 			this->button4->UseVisualStyleBackColor = true;
 			// 
-			// button7
+			// buttonAddLabel
 			// 
-			this->button7->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
-			this->button7->AutoSize = true;
-			this->button7->Location = System::Drawing::Point(4, 145);
-			this->button7->Margin = System::Windows::Forms::Padding(2);
-			this->button7->Name = L"button7";
-			this->button7->Size = System::Drawing::Size(103, 23);
-			this->button7->TabIndex = 5;
-			this->button7->Text = L"Add Label";
-			this->button7->UseVisualStyleBackColor = true;
+			this->buttonAddLabel->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
+			this->buttonAddLabel->AutoSize = true;
+			this->buttonAddLabel->Location = System::Drawing::Point(4, 145);
+			this->buttonAddLabel->Margin = System::Windows::Forms::Padding(2);
+			this->buttonAddLabel->Name = L"buttonAddLabel";
+			this->buttonAddLabel->Size = System::Drawing::Size(103, 23);
+			this->buttonAddLabel->TabIndex = 5;
+			this->buttonAddLabel->Text = L"Add Label";
+			this->buttonAddLabel->UseVisualStyleBackColor = true;
+			this->buttonAddLabel->Click += gcnew System::EventHandler(this, &MainWindow::buttonAddLabel_Click);
 			// 
 			// button5
 			// 
@@ -414,27 +419,27 @@ namespace SDIMaster {
 			this->label2->TabIndex = 2;
 			this->label2->Text = L"Search:";
 			// 
-			// textBox2
+			// searchBoxLabels
 			// 
-			this->textBox2->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+			this->searchBoxLabels->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->textBox2->Location = System::Drawing::Point(51, 18);
-			this->textBox2->Margin = System::Windows::Forms::Padding(2);
-			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(218, 20);
-			this->textBox2->TabIndex = 1;
+			this->searchBoxLabels->Location = System::Drawing::Point(51, 18);
+			this->searchBoxLabels->Margin = System::Windows::Forms::Padding(2);
+			this->searchBoxLabels->Name = L"searchBoxLabels";
+			this->searchBoxLabels->Size = System::Drawing::Size(218, 20);
+			this->searchBoxLabels->TabIndex = 1;
 			// 
-			// listBox2
+			// listBoxLabels
 			// 
-			this->listBox2->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+			this->listBoxLabels->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->listBox2->FormattingEnabled = true;
-			this->listBox2->Location = System::Drawing::Point(4, 44);
-			this->listBox2->Margin = System::Windows::Forms::Padding(2);
-			this->listBox2->Name = L"listBox2";
-			this->listBox2->Size = System::Drawing::Size(264, 56);
-			this->listBox2->TabIndex = 0;
+			this->listBoxLabels->FormattingEnabled = true;
+			this->listBoxLabels->Location = System::Drawing::Point(4, 44);
+			this->listBoxLabels->Margin = System::Windows::Forms::Padding(2);
+			this->listBoxLabels->Name = L"listBoxLabels";
+			this->listBoxLabels->Size = System::Drawing::Size(264, 56);
+			this->listBoxLabels->TabIndex = 0;
 			// 
 			// tableLayoutPanel3
 			// 
@@ -461,8 +466,8 @@ namespace SDIMaster {
 			this->groupBox3->Controls->Add(this->button10);
 			this->groupBox3->Controls->Add(this->button11);
 			this->groupBox3->Controls->Add(this->label3);
-			this->groupBox3->Controls->Add(this->textBox3);
-			this->groupBox3->Controls->Add(this->listBox3);
+			this->groupBox3->Controls->Add(this->searchBoxAnnotations);
+			this->groupBox3->Controls->Add(this->listBoxAnnotations);
 			this->groupBox3->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->groupBox3->Location = System::Drawing::Point(2, 2);
 			this->groupBox3->Margin = System::Windows::Forms::Padding(2);
@@ -471,7 +476,7 @@ namespace SDIMaster {
 			this->groupBox3->Size = System::Drawing::Size(270, 206);
 			this->groupBox3->TabIndex = 7;
 			this->groupBox3->TabStop = false;
-			this->groupBox3->Text = L"Labels";
+			this->groupBox3->Text = L"Annotations";
 			// 
 			// button8
 			// 
@@ -531,27 +536,27 @@ namespace SDIMaster {
 			this->label3->TabIndex = 2;
 			this->label3->Text = L"Search:";
 			// 
-			// textBox3
+			// searchBoxAnnotations
 			// 
-			this->textBox3->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+			this->searchBoxAnnotations->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->textBox3->Location = System::Drawing::Point(51, 18);
-			this->textBox3->Margin = System::Windows::Forms::Padding(2);
-			this->textBox3->Name = L"textBox3";
-			this->textBox3->Size = System::Drawing::Size(218, 20);
-			this->textBox3->TabIndex = 1;
+			this->searchBoxAnnotations->Location = System::Drawing::Point(51, 18);
+			this->searchBoxAnnotations->Margin = System::Windows::Forms::Padding(2);
+			this->searchBoxAnnotations->Name = L"searchBoxAnnotations";
+			this->searchBoxAnnotations->Size = System::Drawing::Size(218, 20);
+			this->searchBoxAnnotations->TabIndex = 1;
 			// 
-			// listBox3
+			// listBoxAnnotations
 			// 
-			this->listBox3->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+			this->listBoxAnnotations->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->listBox3->FormattingEnabled = true;
-			this->listBox3->Location = System::Drawing::Point(4, 44);
-			this->listBox3->Margin = System::Windows::Forms::Padding(2);
-			this->listBox3->Name = L"listBox3";
-			this->listBox3->Size = System::Drawing::Size(264, 82);
-			this->listBox3->TabIndex = 0;
+			this->listBoxAnnotations->FormattingEnabled = true;
+			this->listBoxAnnotations->Location = System::Drawing::Point(4, 44);
+			this->listBoxAnnotations->Margin = System::Windows::Forms::Padding(2);
+			this->listBoxAnnotations->Name = L"listBoxAnnotations";
+			this->listBoxAnnotations->Size = System::Drawing::Size(264, 82);
+			this->listBoxAnnotations->TabIndex = 0;
 			// 
 			// groupBox4
 			// 
@@ -561,7 +566,7 @@ namespace SDIMaster {
 			this->groupBox4->Margin = System::Windows::Forms::Padding(2);
 			this->groupBox4->Name = L"groupBox4";
 			this->groupBox4->Padding = System::Windows::Forms::Padding(2);
-			this->groupBox4->Size = System::Drawing::Size(527, 102);
+			this->groupBox4->Size = System::Drawing::Size(529, 102);
 			this->groupBox4->TabIndex = 7;
 			this->groupBox4->TabStop = false;
 			this->groupBox4->Text = L"Shortcuts";
@@ -575,7 +580,7 @@ namespace SDIMaster {
 			this->imageDisplay->Location = System::Drawing::Point(2, 2);
 			this->imageDisplay->Margin = System::Windows::Forms::Padding(2);
 			this->imageDisplay->Name = L"imageDisplay";
-			this->imageDisplay->Size = System::Drawing::Size(528, 447);
+			this->imageDisplay->Size = System::Drawing::Size(530, 447);
 			this->imageDisplay->TabIndex = 6;
 			this->imageDisplay->TabStop = false;
 			// 
@@ -588,7 +593,6 @@ namespace SDIMaster {
 			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"MainWindow";
 			this->Text = L"MainWindow";
-			this->Load += gcnew System::EventHandler(this, &MainWindow::MainWindow_Load);
 			this->splitContainer1->Panel1->ResumeLayout(false);
 			this->splitContainer1->Panel2->ResumeLayout(false);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->splitContainer1))->EndInit();
@@ -616,82 +620,48 @@ namespace SDIMaster {
 		}
 #pragma endregion
 
-	private: System::String^ GetFilePath() {
-		System::String^ imagePath = nullptr;
-		OpenFileDialog^ openFileDialog = gcnew OpenFileDialog;
-		{
-			openFileDialog->InitialDirectory = "c:\\";
-			openFileDialog->Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
-			openFileDialog->FilterIndex = 2;
-			openFileDialog->RestoreDirectory = true;
-			if (openFileDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
-			{
-				//Get the path of specified file
-				imagePath = openFileDialog->FileName;
+		System::String^ GetFilePath();
 
+		//Loads the image from a given file path into the global array.
+		System::Void LoadImage(String^, MainWindow^);
+
+		//Refreshes the list of images in the ImageList component - this is NOT the actual list of files, as windows forms components handle this in their own way.
+		System::Void ReloadImageList(MainWindow^);
+
+		//Refreshes the list of labels in the ImageList component
+		System::Void ReloadLabelList(MainWindow^);
+
+		//Draws a red rectangle - test function, to be removed
+		System::Void drawBoxTest(MainWindow^);
+
+		//Refreshes the PictureBox component to display the currently selected image.
+		System::Void RefreshImageBox(MainWindow^);
+
+		//
+		System::Void listBoxImage_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+			RefreshImageBox(this);
+			ReloadLabelList(this);
+			drawBoxTest(this);
+		}
+
+		System::Void buttonRemoveImage_Click(System::Object^ sender, System::EventArgs^ e) {
+			if (this->listBoxImage->SelectedIndex != -1) {
+				GlobalClass::loadedImages.RemoveAt(this->listBoxImage->SelectedIndex);
+				ReloadImageList(this);
+				ReloadLabelList(this);
+				RefreshImageBox(this);
 			}
-			return imagePath;
 		}
-	}
 
-	//Loads the image from a given file path into the global array.
-	private: System::Void LoadImage(String^ filePath) {
-		if (filePath != nullptr)
-		{
-			GlobalClass::loadedImages.Add(gcnew imageData);
-			GlobalClass::loadedImages[GlobalClass::loadedImages.Count - 1]->srcImage = gcnew Bitmap(filePath);
-			GlobalClass::loadedImages[GlobalClass::loadedImages.Count - 1]->boxList = gcnew List<List<Point>^>;
-			//GlobalClass::loadedImages[GlobalClass::loadedImages.Count - 1]->boxList->Add(gcnew List<List<Point>^>);
-			GlobalClass::loadedImages[GlobalClass::loadedImages.Count - 1]->fileName = filePath;
-			GlobalClass::loadedImages[GlobalClass::loadedImages.Count - 1]->labelList = gcnew List<String^>;
-			ReloadImageList();
-			RefreshImageBox();
-			listBoxImage->SelectedIndex = GlobalClass::loadedImages.Count - 1;
-
+		System::Void buttonImportImage_Click(System::Object^ sender, System::EventArgs^ e) {
+			LoadImage(GetFilePath(), this);
 		}
-	}
 
-	//Refreshes the list of images in the ImageList component - this is NOT the actual list of files, as windows forms components handle this in their own way.
-	private: System::Void ReloadImageList() {
-		listBoxImage->Items->Clear();
-		for (int i = 0; i < GlobalClass::loadedImages.Count; i++) {
-			listBoxImage->Items->Add(GlobalClass::loadedImages[i]->fileName);
+		System::Void AddLabelDialogue(String^, MainWindow^);
+
+		System::Void buttonAddLabel_Click(System::Object^ sender, System::EventArgs^ e) {
+			AddLabelDialogue("test", this);
+			ReloadLabelList(this);
 		}
-	}
-
-	private: System::Void drawBoxTest() {
-		Graphics^ boxCanvas = imageDisplay->CreateGraphics();
-		Pen^ boxPen = gcnew Pen(Color::Red);
-		boxCanvas->DrawRectangle(boxPen, 0, 0, 20, 20);
-	}
-
-	//Refreshes the PictureBox component to display the currently selected image.
-	private: System::Void RefreshImageBox() {
-		if (-1 < listBoxImage->SelectedIndex && listBoxImage->SelectedIndex < GlobalClass::loadedImages.Count) {
-			imageDisplay->BackgroundImage = GlobalClass::loadedImages[listBoxImage->SelectedIndex]->srcImage;
-		}
-		else {
-			imageDisplay->BackgroundImage = nullptr;
-		}
-	}
-
-	private: System::Void MainWindow_Load(System::Object^ sender, System::EventArgs^ e) {
-		
-	}
-	private: System::Void listBoxImage_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
-		RefreshImageBox();
-		drawBoxTest();
-	}
-
-	private: System::Void buttonRemoveImage_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (listBoxImage->SelectedIndex != -1) {
-			GlobalClass::loadedImages.RemoveAt(listBoxImage->SelectedIndex);
-			ReloadImageList();
-			RefreshImageBox();
-		}
-	}
-	private: System::Void buttonImportImage_Click(System::Object^ sender, System::EventArgs^ e) {
-		LoadImage(GetFilePath());
-	}
 };
 }

@@ -1,3 +1,4 @@
+  SDIMaster.LabelDialogue.resources - Embedded, ContainedInManifestFile, 
   SDIMaster.MainWindow.resources - Embedded, ContainedInManifestFile, 
 ImageRuntimeVersion: v4.0.30319
 Assembly SDI-Master, Version=0.0.*, Culture=Invariant Language (Invariant Country): 
@@ -26,5 +27,12 @@ Class Globals.GlobalClass: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   Fields:
     System.Collections.Generic.List`1[imageData] loadedImages IsByValue : Public, Static, InitOnly
 Class SDIMaster.MainWindow: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.Windows.Forms.PictureBox imageDisplay : Public
+    System.Windows.Forms.ListBox listBoxImage : Public
+    System.Windows.Forms.ListBox listBoxLabels : Public
+Class SDIAdditional.LabelDialogue: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName

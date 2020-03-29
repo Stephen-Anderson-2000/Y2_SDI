@@ -5,6 +5,8 @@
 #include <filesystem>
 #include "Annotation.h"
 #include "AnnotationFile.h"
+#include "ImageFile.h"
+#include "GUI.h"
 
 using namespace System;
 using namespace System::ComponentModel;

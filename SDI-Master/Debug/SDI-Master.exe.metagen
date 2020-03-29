@@ -66,3 +66,25 @@ Class AnnotationFile: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
     createCircularAnnotation(String): PrivateScope, Public, HideBySig
     createPolygonalAnnotation(String, List`1): PrivateScope, Public, HideBySig
     saveFile(basic_string<char\,std::char_traits<char>\,std::allocator<char> >*): PrivateScope, Public, HideBySig
+Class ImageFile: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.Drawing.Image imageID : Public
+    System.String displayFileName : Public
+    System.Collections.Generic.List`1[AnnotationFile] annotationFiles : Public
+    System.ValueType dimensions Point IsBoxed : Public
+  Methods:
+    replaceImage(Image): PrivateScope, Public, HideBySig
+    createAnnotationFile(): PrivateScope, Public, HideBySig
+    checkCompatibility(): PrivateScope, Public, HideBySig
+Class GUI: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    Int32 drawnImage : Public, Static
+    System.Collections.Generic.List`1[ImageFile] loadedImages : Public, Static
+    System.Collections.Generic.List`1[Annotation] annotations : Public, Static
+    System.ValueType mouseDownLocation Point IsBoxed : Public, Static
+  Methods:
+    LoadImageToList(ImageFile): PrivateScope, Public, Static, HideBySig
+    LoadImageToCanvas(Int32): PrivateScope, Public, Static, HideBySig
+    DrawImage(): PrivateScope, Public, Static, HideBySig

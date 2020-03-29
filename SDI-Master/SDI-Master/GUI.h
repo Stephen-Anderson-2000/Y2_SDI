@@ -31,8 +31,4 @@ using namespace System::Drawing;
 
 		}
 
-		ImageFile^ GetImage(int index) {
-
-		}
-
 	};

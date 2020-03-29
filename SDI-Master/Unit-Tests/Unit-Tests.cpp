@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "CppUnitTest.h"
-#include "../SDI-Master/MainWindow.h"
+//#include "../SDI-Master/MainWindow.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -12,8 +12,8 @@ namespace UnitTests
 		
 		TEST_METHOD(TestMethod1)
 		{
-			std::string fileName = "treez.jpg";
-			
+			int myInt = 11;
+			Assert::AreEqual(myInt, 11);	
 		}
 	};
 }

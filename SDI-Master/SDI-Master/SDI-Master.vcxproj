@@ -123,8 +123,12 @@
     <ClCompile Include="MainWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Annotation.h" />
+    <ClInclude Include="AnnotationFile.h" />
+    <ClInclude Include="GUI.h" />
     <ClInclude Include="ImageData.h" />
     <ClInclude Include="GlobalImageList.h" />
+    <ClInclude Include="ImageFile.h" />
     <ClInclude Include="MainWindow.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -133,6 +137,9 @@
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.h</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="blank.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

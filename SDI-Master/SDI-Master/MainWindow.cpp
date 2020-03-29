@@ -3,6 +3,8 @@
 #include "GlobalImageList.h"
 #include "MainWindow.h"
 #include <filesystem>
+#include "Annotation.h"
+#include "AnnotationFile.h"
 
 using namespace System;
 using namespace System::ComponentModel;

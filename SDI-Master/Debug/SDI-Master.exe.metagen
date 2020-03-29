@@ -34,3 +34,35 @@ Class SDIMaster.MainWindow: AutoLayout, AnsiClass, Class, Public, BeforeFieldIni
     System.Windows.Forms.ListBox listBoxImage : Public
     System.Windows.Forms.ListBox listBoxLabels : Public
     System.Windows.Forms.ListBox listBoxAnnotations : Public
+Class Annotation: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    Int32 annotationID : Public
+    System.String label : Public
+    System.ValueType creationDate DateTime IsBoxed : Public
+  Methods:
+    setLabel(String): PrivateScope, Public, HideBySig
+    deleteAnnotation(): PrivateScope, Public, HideBySig
+    copyAnnotation(): PrivateScope, Public, HideBySig
+Class CircularAnnotation: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Annotation
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.ValueType origin Point IsBoxed : Public
+    Int32 radius : Public
+Class PolygonalAnnotation: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Annotation
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.Collections.Generic.List`1[System.Int32] vertices : Public
+Class AnnotationFile: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.String annotationFileID : Public
+    System.Collections.Generic.List`1[PolygonalAnnotation] annotationsPolygonal : Public
+    System.Collections.Generic.List`1[CircularAnnotation] annotationsCircular : Public
+    Int32 numericalIDPool : Public
+  Methods:
+    createCircularAnnotation(String): PrivateScope, Public, HideBySig
+    createPolygonalAnnotation(String, List`1): PrivateScope, Public, HideBySig
+    saveFile(basic_string<char\,std::char_traits<char>\,std::allocator<char> >*): PrivateScope, Public, HideBySig

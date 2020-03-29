@@ -4,6 +4,7 @@
 #include "GlobalImageList.h"
 #include <filesystem>
 
+
 namespace SDIMaster 
 {
 

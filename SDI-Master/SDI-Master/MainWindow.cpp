@@ -52,7 +52,7 @@ namespace SDIMaster
 	{
 		FileInfo^ tempFileInfo = gcnew FileInfo(filePath);
 		ImageFile^ tempImage = gcnew ImageFile;
-		tempImage->displayFileName = filePath;
+		tempImage->displayFileName = Path::GetFileName(filePath);
 		tempImage->imageID = gcnew Bitmap(filePath);
 		tempImage->dimensions = gcnew Point(tempImage->imageID->Width, tempImage->imageID->Height);
 		tempImage->annotationFiles->Add(gcnew AnnotationFile);
@@ -114,9 +114,11 @@ namespace SDIMaster
 
 	System::Void MainWindow::SortImageByName(String^ order) {
 		GUI::imageIndices->Clear();
+		GroupBox_Images->Items->Clear();
 		//sort
 		for (int i = 0; i < GUI::loadedImages->Count; i++) {
-
+			GUI::imageIndices->Add(i);
+			GroupBox_Images->Items->Add(GUI::loadedImages[i]->displayFileName);
 		}
 	}
 

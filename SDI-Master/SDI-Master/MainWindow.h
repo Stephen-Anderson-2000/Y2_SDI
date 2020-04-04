@@ -607,9 +607,11 @@ namespace SDIMaster
 			tempAnnotation->vertices = tempVertices;
 			GUI::loadedImages[GUI::drawnImage]->annotationFiles[0]->annotationsPolygonal->Add(tempAnnotation);
 		}
-private: System::Void Button_ChangeDir_Click(System::Object^ sender, System::EventArgs^ e) {
-	BrowseFolder();
-	Label_FolderPath->Text = "Path: " + GUI::workingFolderPath;
-}
+		
+		private: System::Void Button_ChangeDir_Click(System::Object^ sender, System::EventArgs^ e) {
+			BrowseFolder();
+			SortImageByName("A");
+			Label_FolderPath->Text = "Path: " + GUI::workingFolderPath;
+		}
 };
 }

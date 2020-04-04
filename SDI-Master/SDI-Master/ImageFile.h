@@ -13,7 +13,7 @@ public ref class ImageFile
 	public: 
 		Image^ imageID;
 		String^ displayFileName;
-		List<AnnotationFile^>^ annotationFiles;
+		List<AnnotationFile^>^ annotationFiles = gcnew List<AnnotationFile^>;
 		Point^ dimensions;
 		DateTime^ creationDate = gcnew DateTime;
 		void replaceImage(Image^ imageToLoad) {

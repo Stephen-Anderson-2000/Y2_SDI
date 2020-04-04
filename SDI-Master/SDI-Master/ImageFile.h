@@ -15,6 +15,7 @@ public ref class ImageFile
 		String^ displayFileName;
 		List<AnnotationFile^>^ annotationFiles;
 		Point^ dimensions;
+		DateTime^ creationDate = gcnew DateTime;
 		void replaceImage(Image^ imageToLoad) {
 			imageID = imageToLoad;
 		}

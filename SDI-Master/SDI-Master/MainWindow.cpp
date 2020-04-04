@@ -7,6 +7,7 @@
 #include "AnnotationFile.h"
 #include "ImageFile.h"
 #include "GUI.h"
+#include <fstream>
 
 using namespace System;
 using namespace System::ComponentModel;
@@ -15,11 +16,109 @@ using namespace System::Collections::Generic;
 using namespace System::Windows::Forms;
 using namespace System::Data;
 using namespace System::Drawing;
+using namespace System::IO;
 using namespace SDIMaster;
 using namespace GlobalList;
+using namespace std;
 
 namespace SDIMaster
 {
+
+	System::Void BrowseFolder() {
+		System::String^ folderPath;
+		FolderBrowserDialog^ folderBrowserDialog = gcnew FolderBrowserDialog;
+		{
+			if (folderBrowserDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+				folderPath = folderBrowserDialog->SelectedPath;
+				LoadFolder(folderPath);
+			}
+		}
+	}
+
+	System::Void LoadFolder(String^ folderPath)
+	{
+		cli::array<System::String^>^ fileArray = System::IO::Directory::GetFiles(folderPath);
+
+		for (int i = 0; i < fileArray->Length; i++) {
+			if (fileArray[i]->EndsWith(".jpg") || fileArray[i]->EndsWith(".png") || fileArray[i]->EndsWith(".bmp"))
+			{
+				AddImage(fileArray[i]);
+			}
+		}
+	}
+
+	System::Void AddImage(String^ filePath)
+	{
+		FileInfo^ tempFileInfo = gcnew FileInfo(filePath);
+		ImageFile^ tempImage = gcnew ImageFile;
+		tempImage->displayFileName = filePath;
+		tempImage->imageID = gcnew Bitmap(filePath);
+		tempImage->dimensions = gcnew Point(tempImage->imageID->Width, tempImage->imageID->Height);
+		tempImage->annotationFiles->Add(gcnew AnnotationFile);
+		tempImage->creationDate = tempFileInfo->LastWriteTime;
+		GUI::LoadImageToList(tempImage);
+	}
+
+	System::Void ClearImages()
+	{
+		GUI::loadedImages->Clear();
+	}
+
+	System::Void BrowseFile() {
+		System::String^ namesPath;
+		OpenFileDialog^ openFileDialog = gcnew OpenFileDialog;
+		{
+			openFileDialog->InitialDirectory = "c:\\";
+			openFileDialog->Filter = ".names file (*.names)|*.names";
+			openFileDialog->FilterIndex = 0;
+			openFileDialog->RestoreDirectory = true;
+			if (openFileDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+			{
+				//Get the path of specified file
+				namesPath = openFileDialog->FileName;
+				ClearClasses();
+				LoadClasses(namesPath);
+
+
+			}
+		}
+	}
+
+	System::Void LoadClasses(String^ filePath) {
+		StreamReader^ nameFile = gcnew StreamReader(filePath);
+		String^ line;
+		while (!nameFile->EndOfStream) {
+			line = nameFile->ReadLine();
+			GUI::labelNames->Add(line);
+		}
+		nameFile->Close();
+	}
+
+	System::Void ClearClasses()
+	{
+		GUI::labelNames->Clear();
+		GUI::labelIndices->Clear();
+	}
+
+	System::Void AddClass(String^ className) {
+		GUI::labelNames->Add(className);
+	}
+
+	System::Void WriteClass(String^ className) {
+		GUI::labelNames->Add(className);
+	}
+
+	System::Void SortImageByName() {
+		GUI::imageIndices->Clear();
+
+		for (int i = 0; i < GUI::loadedImages->Count; i++) {
+
+		}
+	}
+
+	System::Void AddPolygonalAnnotation(int imageIndex, List<int>^ vertices, String^ label) {
+
+	}
 
 	System::String^ MainWindow::GetFilePath()
 	{
@@ -40,19 +139,25 @@ namespace SDIMaster
 		}
 	}
 
+	System::String^ SetFilePath()
+	{
+		System::String^ folderPath;
+		FolderBrowserDialog^ folderBroswerDialogue = gcnew FolderBrowserDialog;
+
+	}
+
 	System::Void MainWindow::LoadImage(String^ filePath, MainWindow^ w)
 	{
 		if (filePath != nullptr)
 		{
-			GlobalClass::loadedImages.Add(gcnew imageData);
-			GlobalClass::loadedImages[GlobalClass::loadedImages.Count - 1]->srcImage = gcnew Bitmap(filePath);
-			GlobalClass::loadedImages[GlobalClass::loadedImages.Count - 1]->boxList = gcnew List<List<int>^>;
-			GlobalClass::loadedImages[GlobalClass::loadedImages.Count - 1]->fileName = filePath;
-			GlobalClass::loadedImages[GlobalClass::loadedImages.Count - 1]->labelList = gcnew List<String^>;
-			GlobalClass::loadedImages[GlobalClass::loadedImages.Count - 1]->boxNameList = gcnew List<String^>;
+			ImageFile^ tempImage = gcnew ImageFile;
+			tempImage->displayFileName = filePath;
+			tempImage->imageID = gcnew Bitmap(filePath);
+			tempImage->dimensions = gcnew Point(tempImage->imageID->Width, tempImage->imageID->Height);
+			GUI::LoadImageToList(tempImage);
 			ReloadImageList(w);
-			RefreshImageBox(w);
-			w->listBoxImage->SelectedIndex = GlobalClass::loadedImages.Count - 1;
+			//RefreshImageBox(w);
+			w->listBoxImage->SelectedIndex = GUI::loadedImages->Count - 1;
 
 		}
 	}
@@ -60,8 +165,9 @@ namespace SDIMaster
 	System::Void MainWindow::ReloadImageList(MainWindow^ w)
 	{
 		w->listBoxImage->Items->Clear();
-		for (int i = 0; i < GlobalClass::loadedImages.Count; i++) {
-			w->listBoxImage->Items->Add(GlobalClass::loadedImages[i]->fileName);
+		
+		for (int i = 0; i < GUI::imageIndices->Count; i++) {
+			w->listBoxImage->Items->Add(GUI::loadedImages[GUI::imageIndices[i]]->displayFileName);
 		}
 	}
 
@@ -77,9 +183,9 @@ namespace SDIMaster
 
 	System::Void MainWindow::RefreshImageBox(MainWindow^ w)
 	{
-		if (-1 < w->listBoxImage->SelectedIndex && w->listBoxImage->SelectedIndex < GlobalClass::loadedImages.Count)
+		if (-1 < w->listBoxImage->SelectedIndex && w->listBoxImage->SelectedIndex < GUI::imageIndices->Count)
 		{
-			w->imageDisplay->BackgroundImage = GlobalClass::loadedImages[w->listBoxImage->SelectedIndex]->srcImage;
+			w->imageDisplay->BackgroundImage = GUI::loadedImages[GUI::drawnImage]->imageID;
 		}
 		else
 		{

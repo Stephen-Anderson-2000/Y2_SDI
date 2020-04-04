@@ -6,6 +6,9 @@ namespace GlobalList
 	public ref class GlobalClass 
 	{
 		public: static List<imageData^> loadedImages;
+	public: static String^ imageKeyword = "";
+	public: static String^ labelKeyword = "";
+	public: static String^ boxKeyword = "";
 	};
 	
 }

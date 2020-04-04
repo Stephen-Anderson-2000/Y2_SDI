@@ -3,6 +3,10 @@
 #include "ImageData.h"
 #include "GlobalImageList.h"
 #include <filesystem>
+#include "Annotation.h"
+#include "AnnotationFile.h"
+#include "ImageFile.h"
+#include "GUI.h"
 
 
 namespace SDIMaster 
@@ -591,6 +595,8 @@ namespace SDIMaster
 			this->imageDisplay->Size = System::Drawing::Size(522, 446);
 			this->imageDisplay->TabIndex = 6;
 			this->imageDisplay->TabStop = false;
+			this->imageDisplay->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &MainWindow::imageDisplay_MouseDown);
+			this->imageDisplay->MouseUp += gcnew System::Windows::Forms::MouseEventHandler(this, &MainWindow::imageDisplay_MouseUp);
 			// 
 			// MainWindow
 			// 
@@ -627,6 +633,61 @@ namespace SDIMaster
 
 		}
 #pragma endregion
+
+		protected: System::Void BrowseFolder();
+		//Browse for a folder of images
+
+		protected: System::Void LoadFolder(String^);
+		//Loop through the contents of a folder and load supported image files
+
+		protected: System::Void AddImage(String^);
+		//Create a new image object and add it to the list
+
+		protected: System::Void BrowseFile();
+		//Browse for a single file (classes only)
+
+		protected: System::Void ClearImages();
+		//Clear image list
+
+		protected: System::Void ClearClasses();
+		//Clear class list
+
+		protected: System::Void LoadClasses(String^);
+		//Load classes from a file
+
+		protected: System::Void AddClass(String^);
+		//Add a class to the list
+
+		protected: System::Void RemoveClass();
+		//Remove a class from the list
+
+		protected: System::Void WriteClass(String^);
+		//Append a class to the file
+
+		protected: System::Void AddPolygonalAnnotation(int, List<int>^, String^);
+		//Create a square annotation
+
+		protected: System::Void RemovePolygonalAnnotation(int, int);
+		//Remove a square annotation
+
+		protected: System::Void ResizePolygonalAnnotation(int, int, List<int>^);
+		//Resize a square annotation
+
+		protected: System::Void RenamePolygonalAnnotation(int, int, String^);
+		//Change the label of a polygonal annotation
+
+		protected: System::Void SortImageByName(String^);
+		//Sort the files in the image pane by their name (ascending or descending)
+
+		protected: System::Void SortImageByDate(String^);
+		//Sort the files in the image pane by their date modified (ascending or descending)
+
+		protected: System::Void SortClassPane(String^);
+		//Sort the items in the class pane by their name (ascending or descending)
+
+
+
+
 
 		///Get path of a file from the file opening dialogue.
 		protected: System::String^ GetFilePath();
@@ -721,6 +782,37 @@ namespace SDIMaster
 		{
 			RemoveAnnotation(listBoxAnnotations->SelectedIndex, this);
 			ReloadAnnotationList(this);
+		}
+
+		private: System::Void imageDisplay_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e)
+		{
+			GUI::mouseDownLocation = System::Windows::Forms::Cursor::Position;
+
+			if (GUI::loadedImages->Count == 0)
+			{
+				GUI::loadedImages->Add(gcnew ImageFile);
+			}
+
+			if (GUI::loadedImages[GUI::drawnImage]->annotationFiles->Count == 0) 
+			{
+				GUI::loadedImages[GUI::drawnImage]->annotationFiles->Add(gcnew AnnotationFile);
+			}
+		}
+
+		private: System::Void imageDisplay_MouseUp(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e)
+		{
+			List<int>^ tempVertices = gcnew List<int>;
+			Point mouseUpLocation = System::Windows::Forms::Cursor::Position;
+			Point^ mouseDownLocation = GUI::mouseDownLocation;
+			int mouseUpX = mouseDownLocation->X;
+			int mouseUpY = mouseDownLocation->Y;
+			PolygonalAnnotation^ tempAnnotation = gcnew PolygonalAnnotation;
+			tempVertices->Add(mouseUpX);
+			tempVertices->Add(mouseUpY);
+			tempVertices->Add(mouseUpLocation.X);
+			tempVertices->Add(mouseUpLocation.Y);
+			tempAnnotation->vertices = tempVertices;
+			GUI::loadedImages[GUI::drawnImage]->annotationFiles[0]->annotationsPolygonal->Add(tempAnnotation);
 		}
 };
 }

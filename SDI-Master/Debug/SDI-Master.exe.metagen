@@ -26,14 +26,9 @@ Class GlobalList.GlobalClass: AutoLayout, AnsiClass, Class, Public, BeforeFieldI
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Fields:
     System.Collections.Generic.List`1[imageData] loadedImages IsByValue : Public, Static, InitOnly
-Class SDIMaster.MainWindow: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
-  :System.Windows.Forms.Form
-    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
-  Fields:
-    System.Windows.Forms.PictureBox imageDisplay : Public
-    System.Windows.Forms.ListBox listBoxImage : Public
-    System.Windows.Forms.ListBox listBoxLabels : Public
-    System.Windows.Forms.ListBox listBoxAnnotations : Public
+    System.String imageKeyword : Public, Static
+    System.String labelKeyword : Public, Static
+    System.String boxKeyword : Public, Static
 Class Annotation: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Fields:
@@ -65,7 +60,6 @@ Class AnnotationFile: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   Methods:
     createCircularAnnotation(String): PrivateScope, Public, HideBySig
     createPolygonalAnnotation(String, List`1): PrivateScope, Public, HideBySig
-    saveFile(basic_string<char\,std::char_traits<char>\,std::allocator<char> >*): PrivateScope, Public, HideBySig
 Class ImageFile: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Fields:
@@ -88,3 +82,11 @@ Class GUI: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
     LoadImageToList(ImageFile): PrivateScope, Public, Static, HideBySig
     LoadImageToCanvas(Int32): PrivateScope, Public, Static, HideBySig
     DrawImage(): PrivateScope, Public, Static, HideBySig
+Class SDIMaster.MainWindow: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.Windows.Forms.PictureBox imageDisplay : Public
+    System.Windows.Forms.ListBox listBoxImage : Public
+    System.Windows.Forms.ListBox listBoxLabels : Public
+    System.Windows.Forms.ListBox listBoxAnnotations : Public

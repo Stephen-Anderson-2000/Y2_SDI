@@ -15,16 +15,29 @@ using namespace System::Drawing;
 	{
 	public :
 		static int drawnImage;
-		static List<ImageFile^>^ loadedImages;
-		static List<Annotation^>^ annotations;
-		static Point^ mouseDownLocation;
+		static List<ImageFile^>^ loadedImages = gcnew List<ImageFile^>;
+		static List<Annotation^>^ annotations = gcnew List<Annotation^>;
+		static Point^ mouseDownLocation = gcnew Point;
+		static List<int>^ imageIndices = gcnew List<int>;
+		static List<int>^ labelIndices = gcnew List<int>;
+		static List<String^>^ labelNames = gcnew List<String^>;
+		static String^ workingFolderPath = "";
+		static String^ labelFile = "";
+		static String^ imageSearchTerm = "";
 		
-		static void LoadImageToList(ImageFile^ file) {
+		static void LoadImageToList(ImageFile^ file) 
+		{
 			loadedImages->Add(file);
 		}
 
-		static void LoadImageToCanvas(int imageIndex) {
+		static void LoadImageToCanvas(int imageIndex) 
+		{
 			drawnImage = imageIndex;
+		}
+
+		static void CreateLabel(String^ labelName) 
+		{
+
 		}
 
 		static void DrawImage() {

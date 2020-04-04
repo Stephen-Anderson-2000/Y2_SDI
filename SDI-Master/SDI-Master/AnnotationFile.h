@@ -5,7 +5,7 @@
 #include <string>
 //#include <msclr\marshal_cppstd.h>
 #include "Annotation.h"
-using namespace std;
+
 using namespace System;
 using namespace System::ComponentModel;
 using namespace System::Collections;
@@ -18,8 +18,8 @@ public ref class AnnotationFile
 {
 public:
 	String^ annotationFileID;
-	List<PolygonalAnnotation^>^ annotationsPolygonal;
-	List<CircularAnnotation^>^ annotationsCircular;
+	List<PolygonalAnnotation^>^ annotationsPolygonal = gcnew List<PolygonalAnnotation^>;
+	List<CircularAnnotation^>^ annotationsCircular = gcnew List<CircularAnnotation^>;
 	int numericalIDPool;
 
 	AnnotationFile()
@@ -46,37 +46,37 @@ public:
 		annotationsPolygonal->Add(tempAnnotation);
 	}
 
-	void saveFile(std::string filePath) {
-		String^ currentLine;
-		std::string currentLineStd;
-		ofstream saveFile;
-		CircularAnnotation^ tempCircularAnnotation;
-		PolygonalAnnotation^ tempPolygonalAnnotation;
-		String^ vertexString;
-		int tempVertex;
-		saveFile.open(filePath);
-		for (int i = 0; i < annotationsCircular->Count; i++)
-		{
-			tempCircularAnnotation = annotationsCircular[i];
-			currentLine = gcnew String(tempCircularAnnotation->label + "," + tempCircularAnnotation->creationDate->Date + "," + tempCircularAnnotation->origin + "," + tempCircularAnnotation->radius);
-			
-			saveFile << currentLineStd;
-		}
+	//void saveFile(std::string filePath) {
+	//	String^ currentLine;
+	//	std::string currentLineStd;
+	//	ofstream saveFile;
+	//	CircularAnnotation^ tempCircularAnnotation;
+	//	PolygonalAnnotation^ tempPolygonalAnnotation;
+	//	String^ vertexString;
+	//	int tempVertex;
+	//	saveFile.open(filePath);
+	//	for (int i = 0; i < annotationsCircular->Count; i++)
+	//	{
+	//		tempCircularAnnotation = annotationsCircular[i];
+	//		currentLine = gcnew String(tempCircularAnnotation->label + "," + tempCircularAnnotation->creationDate->Date + "," + tempCircularAnnotation->origin + "," + tempCircularAnnotation->radius);
+	//		
+	//		saveFile << currentLineStd;
+	//	}
+	
+	//	for (int i = 0; i < annotationsPolygonal->Count; i++)
+	//	{
+	//		tempPolygonalAnnotation = annotationsPolygonal[i];
+	//		vertexString = "";
+	//		for (int j = 0; j < 4; j++) {
+	//			tempVertex = tempPolygonalAnnotation->vertices[j];
+	//			vertexString = vertexString + tempVertex.ToString() + ",";
+	//		}
+	//		currentLine = gcnew String(tempPolygonalAnnotation->label + "," + tempPolygonalAnnotation->creationDate->Date + "," + vertexString);
+	//		saveFile << currentLineStd;
+	//	}
 
-		for (int i = 0; i < annotationsPolygonal->Count; i++)
-		{
-			tempPolygonalAnnotation = annotationsPolygonal[i];
-			vertexString = "";
-			for (int j = 0; j < 4; j++) {
-				tempVertex = tempPolygonalAnnotation->vertices[j];
-				vertexString = vertexString + tempVertex.ToString() + ",";
-			}
-			currentLine = gcnew String(tempPolygonalAnnotation->label + "," + tempPolygonalAnnotation->creationDate->Date + "," + vertexString);
-			saveFile << currentLineStd;
-		}
+	//	saveFile.close();
 
-		saveFile.close();
-
-	}
+	//}
 
 };

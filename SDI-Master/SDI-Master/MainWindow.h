@@ -294,6 +294,7 @@ namespace SDIMaster
 			this->GroupBox_Images->Name = L"GroupBox_Images";
 			this->GroupBox_Images->Size = System::Drawing::Size(262, 82);
 			this->GroupBox_Images->TabIndex = 0;
+			this->GroupBox_Images->SelectedIndexChanged += gcnew System::EventHandler(this, &MainWindow::GroupBox_Images_SelectedIndexChanged);
 			// 
 			// splitContainer3
 			// 
@@ -462,7 +463,7 @@ namespace SDIMaster
 			this->groupBox4->Margin = System::Windows::Forms::Padding(2);
 			this->groupBox4->Name = L"groupBox4";
 			this->groupBox4->Padding = System::Windows::Forms::Padding(2);
-			this->groupBox4->Size = System::Drawing::Size(539, 102);
+			this->groupBox4->Size = System::Drawing::Size(540, 102);
 			this->groupBox4->TabIndex = 7;
 			this->groupBox4->TabStop = false;
 			this->groupBox4->Text = L"Shortcuts";
@@ -477,7 +478,7 @@ namespace SDIMaster
 			this->imageDisplay->Location = System::Drawing::Point(2, 2);
 			this->imageDisplay->Margin = System::Windows::Forms::Padding(2);
 			this->imageDisplay->Name = L"imageDisplay";
-			this->imageDisplay->Size = System::Drawing::Size(526, 446);
+			this->imageDisplay->Size = System::Drawing::Size(527, 446);
 			this->imageDisplay->TabIndex = 6;
 			this->imageDisplay->TabStop = false;
 			this->imageDisplay->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &MainWindow::imageDisplay_MouseDown);
@@ -621,6 +622,10 @@ namespace SDIMaster
 		private: System::Void Button_LoadClasses_Click(System::Object^ sender, System::EventArgs^ e) {
 			BrowseFile();
 			SortClassPane("B");
+		}
+		private: System::Void GroupBox_Images_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+			GUI::drawnImage = GUI::imageIndices[GroupBox_Images->SelectedIndex];
+			RenderAnnotations(GUI::drawnImage);
 		}
 };
 }

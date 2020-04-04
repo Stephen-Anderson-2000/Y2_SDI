@@ -41,7 +41,7 @@ namespace SDIMaster
 		cli::array<System::String^>^ fileArray = System::IO::Directory::GetFiles(folderPath);
 		ClearImages();
 		for (int i = 0; i < fileArray->Length; i++) {
-			if (fileArray[i]->EndsWith(".jpg") || fileArray[i]->EndsWith(".png") || fileArray[i]->EndsWith(".bmp"))
+			if (fileArray[i]->EndsWith(".jpg") || fileArray[i]->EndsWith(".png") || fileArray[i]->EndsWith(".jpeg") || fileArray[i]->EndsWith(".bmp"))
 			{
 				AddImage(fileArray[i]);
 			}
@@ -163,6 +163,7 @@ namespace SDIMaster
 		float imageScale;
 		int xOffset;
 		int yOffset;
+		imageDisplay->BackgroundImage = GUI::loadedImages[GUI::drawnImage]->imageID;
 
 		//Calculate scaling of image
 		imageScale = float(imageDisplay->Width) / float(imageDisplay->BackgroundImage->Width);

@@ -3,8 +3,8 @@ C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\MainWindow.cpp(1
 C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\GlobalImageList.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
 C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\MainWindow.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
   The contents of <filesystem> are only available with C++17 or later.
-C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\MainWindow.cpp(173,19): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\MainWindow.cpp(177,19): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\MainWindow.cpp(195,14): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\MainWindow.cpp(174,19): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\MainWindow.cpp(178,19): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\SDI-Master\MainWindow.cpp(196,14): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
   Main.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
   SDI-Master.vcxproj -> C:\Users\Sam\Documents\GitHub\SDI-Project\SDI-Master\Debug\SDI-Master.exe

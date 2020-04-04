@@ -387,13 +387,12 @@ namespace SDIMaster
 			// 
 			// Button_LoadClasses
 			// 
-			this->Button_LoadClasses->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left)
-				| System::Windows::Forms::AnchorStyles::Right));
+			this->Button_LoadClasses->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
 			this->Button_LoadClasses->AutoSize = true;
 			this->Button_LoadClasses->Location = System::Drawing::Point(5, 144);
 			this->Button_LoadClasses->Margin = System::Windows::Forms::Padding(2);
 			this->Button_LoadClasses->Name = L"Button_LoadClasses";
-			this->Button_LoadClasses->Size = System::Drawing::Size(117, 23);
+			this->Button_LoadClasses->Size = System::Drawing::Size(143, 23);
 			this->Button_LoadClasses->TabIndex = 3;
 			this->Button_LoadClasses->Text = L"Change .names File";
 			this->Button_LoadClasses->UseVisualStyleBackColor = true;
@@ -475,7 +474,7 @@ namespace SDIMaster
 			this->groupBox4->Margin = System::Windows::Forms::Padding(2);
 			this->groupBox4->Name = L"groupBox4";
 			this->groupBox4->Padding = System::Windows::Forms::Padding(2);
-			this->groupBox4->Size = System::Drawing::Size(543, 102);
+			this->groupBox4->Size = System::Drawing::Size(544, 102);
 			this->groupBox4->TabIndex = 7;
 			this->groupBox4->TabStop = false;
 			this->groupBox4->Text = L"Shortcuts";
@@ -490,7 +489,7 @@ namespace SDIMaster
 			this->imageDisplay->Location = System::Drawing::Point(2, 2);
 			this->imageDisplay->Margin = System::Windows::Forms::Padding(2);
 			this->imageDisplay->Name = L"imageDisplay";
-			this->imageDisplay->Size = System::Drawing::Size(530, 446);
+			this->imageDisplay->Size = System::Drawing::Size(531, 446);
 			this->imageDisplay->TabIndex = 6;
 			this->imageDisplay->TabStop = false;
 			this->imageDisplay->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &MainWindow::imageDisplay_MouseDown);
@@ -505,6 +504,7 @@ namespace SDIMaster
 			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"MainWindow";
 			this->Text = L"MainWindow";
+			this->Load += gcnew System::EventHandler(this, &MainWindow::MainWindow_Load);
 			this->splitContainer1->Panel1->ResumeLayout(false);
 			this->splitContainer1->Panel2->ResumeLayout(false);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->splitContainer1))->EndInit();
@@ -587,8 +587,11 @@ namespace SDIMaster
 		//Render currently loaded image and annotation
 
 
-		///Calculate point relative to image
+		///Calculate point relative to image, for rendering
 		protected: int CalculatePos(int, int, float);
+
+		///Calculate point relative to image, for placement
+		protected: int CalculatePosInverse(int, int, float);
 
 		// Functions below cannot currently be moved out of header - cannot add more arguments (ie the MainWindow) as they use eventhandlers
 
@@ -596,7 +599,7 @@ namespace SDIMaster
 
 		private: System::Void imageDisplay_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e)
 		{
-			GUI::mouseDownLocation = System::Windows::Forms::Cursor::Position;
+			GUI::mouseDownLocation = e->Location;
 
 			if (GUI::loadedImages->Count == 0)
 			{
@@ -612,17 +615,18 @@ namespace SDIMaster
 		private: System::Void imageDisplay_MouseUp(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e)
 		{
 			List<int>^ tempVertices = gcnew List<int>;
-			Point mouseUpLocation = System::Windows::Forms::Cursor::Position;
+			Point mouseUpLocation = e->Location;
 			Point^ mouseDownLocation = GUI::mouseDownLocation;
 			int mouseUpX = mouseDownLocation->X;
 			int mouseUpY = mouseDownLocation->Y;
 			PolygonalAnnotation^ tempAnnotation = gcnew PolygonalAnnotation;
-			tempVertices->Add(mouseUpX);
-			tempVertices->Add(mouseUpY);
-			tempVertices->Add(mouseUpLocation.X);
-			tempVertices->Add(mouseUpLocation.Y);
+			tempVertices->Add(CalculatePosInverse(mouseUpX, GUI::xOffset, GUI::imageScale));
+			tempVertices->Add(CalculatePosInverse(mouseUpY, GUI::yOffset, GUI::imageScale));
+			tempVertices->Add(CalculatePosInverse(mouseUpLocation.X, GUI::xOffset, GUI::imageScale));
+			tempVertices->Add(CalculatePosInverse(mouseUpLocation.Y, GUI::yOffset, GUI::imageScale));
 			tempAnnotation->vertices = tempVertices;
 			GUI::loadedImages[GUI::drawnImage]->annotationFiles[0]->annotationsPolygonal->Add(tempAnnotation);
+			RenderAnnotations(GUI::drawnImage);
 		}
 		
 		private: System::Void Button_ChangeDir_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -651,6 +655,10 @@ namespace SDIMaster
 		private: System::Void Button_RemoveClass_Click(System::Object^ sender, System::EventArgs^ e) {
 			RemoveClass(GUI::labelIndices[GroupBox_Classes->SelectedIndex]);
 			SortClassPane("B");
+		}
+
+		private: System::Void MainWindow_Load(System::Object^ sender, System::EventArgs^ e) {
+			GUI::boxCanvas = imageDisplay->CreateGraphics();
 		}
 };
 }

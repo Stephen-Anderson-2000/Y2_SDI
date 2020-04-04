@@ -166,42 +166,42 @@ namespace SDIMaster
 
 	System::Void MainWindow::RenderAnnotations(int imageIndex)
 	{
-		Graphics^ boxCanvas = imageDisplay->CreateGraphics();
-		boxCanvas->Clear(Color::Black);
-		float imageScale;
-		int xOffset;
-		int yOffset;
 		imageDisplay->BackgroundImage = GUI::loadedImages[GUI::drawnImage]->imageID;
+		GUI::boxCanvas->Clear(Color::Black);
 
 		//Calculate scaling of image
-		imageScale = float(imageDisplay->Width) / float(imageDisplay->BackgroundImage->Width);
-		if (imageDisplay->Height / imageDisplay->BackgroundImage->Height < imageScale)
+		GUI::imageScale = float(imageDisplay->Width) / float(imageDisplay->BackgroundImage->Width);
+		if (float(imageDisplay->Height) / float(imageDisplay->BackgroundImage->Height) < GUI::imageScale)
 		{
-			imageScale = float(imageDisplay->Height) / float(imageDisplay->BackgroundImage->Height);
-			yOffset = 0;
-			xOffset = floor((imageDisplay->Width - float(imageDisplay->BackgroundImage->Width) * imageScale) / 2);
+			GUI::imageScale = float(imageDisplay->Height) / float(imageDisplay->BackgroundImage->Height);
+			GUI::yOffset = 0;
+			GUI::xOffset = floor((imageDisplay->Width - float(imageDisplay->BackgroundImage->Width) * GUI::imageScale) / 2);
 		}
 		else
 		{
-			yOffset = floor((imageDisplay->Height - float(imageDisplay->BackgroundImage->Height) * imageScale) / 2);
-			xOffset = 0;
+			GUI::yOffset = floor((imageDisplay->Height - float(imageDisplay->BackgroundImage->Height) * GUI::imageScale) / 2);
+			GUI::xOffset = 0;
 		}
-		boxCanvas->DrawImage(imageDisplay->BackgroundImage, float(xOffset), float(yOffset), float(imageDisplay->BackgroundImage->Width) * imageScale, float(imageDisplay->BackgroundImage->Height) * imageScale);
-		
+		GUI::boxCanvas->DrawImage(imageDisplay->BackgroundImage, float(GUI::xOffset), float(GUI::yOffset), float(imageDisplay->BackgroundImage->Width) * GUI::imageScale, float(imageDisplay->BackgroundImage->Height) * GUI::imageScale);
 		//Draw boxes
 		Color boxColour = Color::FromArgb(128, 255, 0, 0);
 		Pen^ boxBrush = gcnew Pen(boxColour, 2);
 		for (int i = 0; i < GUI::loadedImages[imageIndex]->annotationFiles[0]->annotationsPolygonal->Count; i++)
 		{
 			List<int>^ coordinates = GUI::loadedImages[GUI::drawnImage]->annotationFiles[0]->annotationsPolygonal[i]->vertices;
-			Rectangle polygonalAnnotation = Rectangle(CalculatePos(coordinates[0], xOffset, imageScale), CalculatePos(coordinates[1], yOffset, imageScale), CalculatePos(coordinates[2], xOffset, imageScale) - CalculatePos(coordinates[0], xOffset, imageScale), CalculatePos(coordinates[3], yOffset, imageScale) - CalculatePos(coordinates[1], yOffset, imageScale));
-			boxCanvas->DrawRectangle(boxBrush, polygonalAnnotation);
+			Rectangle polygonalAnnotation = Rectangle(CalculatePos(coordinates[0], GUI::xOffset, GUI::imageScale), CalculatePos(coordinates[1], GUI::yOffset, GUI::imageScale), CalculatePos(coordinates[2], GUI::xOffset, GUI::imageScale) - CalculatePos(coordinates[0], GUI::xOffset, GUI::imageScale), CalculatePos(coordinates[3], GUI::yOffset, GUI::imageScale) - CalculatePos(coordinates[1], GUI::yOffset, GUI::imageScale));
+			GUI::boxCanvas->DrawRectangle(boxBrush, polygonalAnnotation);
 		}
 
 	}
 
 	int MainWindow::CalculatePos(int position, int offset, float imageScale) {
 		int newPos = floor(float(position) * imageScale + float(offset));
+		return newPos;
+	}
+
+	int MainWindow::CalculatePosInverse(int position, int offset, float imageScale) {
+		int newPos = floor(float(position - float(offset)) / imageScale);
 		return newPos;
 	}
 

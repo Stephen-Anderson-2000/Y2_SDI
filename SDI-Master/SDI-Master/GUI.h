@@ -24,6 +24,10 @@ using namespace System::Drawing;
 		static String^ workingFolderPath = "";
 		static String^ labelFile = "";
 		static String^ imageSearchTerm = "";
+		static Graphics^ boxCanvas;
+		static float imageScale;
+		static int xOffset;
+		static int yOffset;
 		
 		static void LoadImageToList(ImageFile^ file) 
 		{

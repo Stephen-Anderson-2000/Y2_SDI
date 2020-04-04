@@ -85,6 +85,10 @@ Class GUI: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
     System.String workingFolderPath : Public, Static
     System.String labelFile : Public, Static
     System.String imageSearchTerm : Public, Static
+    System.Drawing.Graphics boxCanvas : Public, Static
+    Single imageScale : Public, Static
+    Int32 xOffset : Public, Static
+    Int32 yOffset : Public, Static
   Methods:
     LoadImageToList(ImageFile): PrivateScope, Public, Static, HideBySig
     LoadImageToCanvas(Int32): PrivateScope, Public, Static, HideBySig

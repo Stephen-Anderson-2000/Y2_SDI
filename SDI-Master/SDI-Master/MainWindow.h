@@ -691,6 +691,11 @@ namespace SDIMaster
 		}
 
 		private: System::Void buttonRemoveAnnotation_Click(System::Object^ sender, System::EventArgs^ e) {
+			if (GroupBox_Annotations->SelectedIndex >= 0){
+				RemovePolygonalAnnotation(GUI::drawnImage, GroupBox_Annotations->SelectedIndex);
+				RenderAnnotations(GUI::drawnImage);
+				ListAnnotations();
+			}
 		}
 };
 }

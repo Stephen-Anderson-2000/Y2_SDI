@@ -685,6 +685,9 @@ namespace SDIMaster
 		protected: System::Void SortClassPane(String^);
 		//Sort the items in the class pane by their name (ascending or descending)
 
+		protected: System::Void RenderAnnotations(int);
+		//Render currently loaded image and annotation
+
 
 
 

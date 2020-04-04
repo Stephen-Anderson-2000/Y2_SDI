@@ -24,7 +24,7 @@ using namespace std;
 namespace SDIMaster
 {
 
-	System::Void BrowseFolder() {
+	System::Void MainWindow::BrowseFolder() {
 		System::String^ folderPath;
 		FolderBrowserDialog^ folderBrowserDialog = gcnew FolderBrowserDialog;
 		{
@@ -35,7 +35,7 @@ namespace SDIMaster
 		}
 	}
 
-	System::Void LoadFolder(String^ folderPath)
+	System::Void MainWindow::LoadFolder(String^ folderPath)
 	{
 		cli::array<System::String^>^ fileArray = System::IO::Directory::GetFiles(folderPath);
 
@@ -47,7 +47,7 @@ namespace SDIMaster
 		}
 	}
 
-	System::Void AddImage(String^ filePath)
+	System::Void MainWindow::AddImage(String^ filePath)
 	{
 		FileInfo^ tempFileInfo = gcnew FileInfo(filePath);
 		ImageFile^ tempImage = gcnew ImageFile;
@@ -59,12 +59,12 @@ namespace SDIMaster
 		GUI::LoadImageToList(tempImage);
 	}
 
-	System::Void ClearImages()
+	System::Void MainWindow::ClearImages()
 	{
 		GUI::loadedImages->Clear();
 	}
 
-	System::Void BrowseFile() {
+	System::Void MainWindow::BrowseFile() {
 		System::String^ namesPath;
 		OpenFileDialog^ openFileDialog = gcnew OpenFileDialog;
 		{
@@ -76,15 +76,14 @@ namespace SDIMaster
 			{
 				//Get the path of specified file
 				namesPath = openFileDialog->FileName;
+				GUI::labelFile = namesPath;
 				ClearClasses();
 				LoadClasses(namesPath);
-
-
 			}
 		}
 	}
 
-	System::Void LoadClasses(String^ filePath) {
+	System::Void MainWindow::LoadClasses(String^ filePath) {
 		StreamReader^ nameFile = gcnew StreamReader(filePath);
 		String^ line;
 		while (!nameFile->EndOfStream) {
@@ -94,31 +93,97 @@ namespace SDIMaster
 		nameFile->Close();
 	}
 
-	System::Void ClearClasses()
+	System::Void MainWindow::ClearClasses()
 	{
 		GUI::labelNames->Clear();
 		GUI::labelIndices->Clear();
 	}
 
-	System::Void AddClass(String^ className) {
+	System::Void MainWindow::AddClass(String^ className) {
 		GUI::labelNames->Add(className);
 	}
 
-	System::Void WriteClass(String^ className) {
+	System::Void MainWindow::WriteClass(String^ className) {
 		GUI::labelNames->Add(className);
 	}
 
-	System::Void SortImageByName() {
+	System::Void MainWindow::SortImageByName(String^ order) {
 		GUI::imageIndices->Clear();
-
+		//sort
 		for (int i = 0; i < GUI::loadedImages->Count; i++) {
 
 		}
 	}
 
-	System::Void AddPolygonalAnnotation(int imageIndex, List<int>^ vertices, String^ label) {
+	System::Void MainWindow::SortImageByDate(String^ order) {
+		GUI::imageIndices->Clear();
+		//sort
+		for (int i = 0; i < GUI::loadedImages->Count; i++) {
+
+		}
+	}
+
+	System::Void MainWindow::SortClassPane(String^ order) {
+		GUI::imageIndices->Clear();
+		//sort
+		for (int i = 0; i < GUI::loadedImages->Count; i++) {
+
+		}
+	}
+
+	System::Void MainWindow::AddPolygonalAnnotation(int imageIndex, List<int>^ vertices, String^ label) {
+		GUI::loadedImages[imageIndex]->annotationFiles[0]->createPolygonalAnnotation(label, vertices);
+	}
+
+	System::Void MainWindow::ResizePolygonalAnnotation(int imageIndex, int annotationIndex, List<int>^ vertices) {
+		GUI::loadedImages[imageIndex]->annotationFiles[0]->annotationsPolygonal[annotationIndex]->vertices = vertices;
+	}
+
+	System::Void MainWindow::RenamePolygonalAnnotation(int imageIndex, int annotationIndex, String^ name) {
+		GUI::loadedImages[imageIndex]->annotationFiles[0]->annotationsPolygonal[annotationIndex]->label = name;
+	}
+
+	System::Void MainWindow::RemovePolygonalAnnotation(int imageIndex, int annotationIndex) {
+		GUI::loadedImages[imageIndex]->annotationFiles[0]->annotationsPolygonal->RemoveAt(annotationIndex);
+	}
+
+	System::Void MainWindow::RenderAnnotations(int imageIndex)
+	{
+		Graphics^ boxCanvas = imageDisplay->CreateGraphics();
+		boxCanvas->Clear(Color::Black);
+		float imageScale;
+		int xOffset;
+		int yOffset;
+
+		//Calculate scaling of image
+		imageScale = float(imageDisplay->Width) / float(imageDisplay->BackgroundImage->Width);
+		if (imageDisplay->Height / imageDisplay->BackgroundImage->Height < imageScale)
+		{
+			imageScale = float(imageDisplay->Height) / float(imageDisplay->BackgroundImage->Height);
+			yOffset = 0;
+			xOffset = floor((imageDisplay->Width - float(imageDisplay->BackgroundImage->Width) * imageScale) / 2);
+		}
+		else
+		{
+			yOffset = floor((imageDisplay->Height - float(imageDisplay->BackgroundImage->Height) * imageScale) / 2);
+			xOffset = 0;
+		}
+		boxCanvas->DrawImage(imageDisplay->BackgroundImage, float(xOffset), float(yOffset), float(imageDisplay->BackgroundImage->Width) * imageScale, float(imageDisplay->BackgroundImage->Height) * imageScale);
+		
+		//Draw boxes
+		Color boxColour = Color::FromArgb(128, 255, 0, 0);
+		Pen^ boxBrush = gcnew Pen(boxColour, 2);
+		int imageIndex = listBoxImage->SelectedIndex;
+		for (int i = 0; i < GUI::loadedImages[GUI::drawnImage]->annotationFiles[0]->annotationsPolygonal->Count; i++)
+		{
+			List<int>^ coordinates = GUI::loadedImages[GUI::drawnImage]->annotationFiles[0]->annotationsPolygonal[i]->vertices;
+			Rectangle polygonalAnnotation = Rectangle(CalculatePos(coordinates[0], xOffset, imageScale), CalculatePos(coordinates[1], yOffset, imageScale), CalculatePos(coordinates[2], xOffset, imageScale) - CalculatePos(coordinates[0], xOffset, imageScale), CalculatePos(coordinates[3], yOffset, imageScale) - CalculatePos(coordinates[1], yOffset, imageScale));
+			boxCanvas->DrawRectangle(boxBrush, polygonalAnnotation);
+		}
 
 	}
+
+
 
 	System::String^ MainWindow::GetFilePath()
 	{
@@ -183,7 +248,7 @@ namespace SDIMaster
 
 	System::Void MainWindow::RefreshImageBox(MainWindow^ w)
 	{
-		if (-1 < w->listBoxImage->SelectedIndex && w->listBoxImage->SelectedIndex < GUI::imageIndices->Count)
+		if (-1 < w->listBoxImage->SelectedIndex && w->listBoxImage->SelectedIndex < GUI::loadedImages->Count)
 		{
 			w->imageDisplay->BackgroundImage = GUI::loadedImages[GUI::drawnImage]->imageID;
 		}

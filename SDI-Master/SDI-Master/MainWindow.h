@@ -89,6 +89,8 @@ namespace SDIMaster
 
 	private: System::Windows::Forms::GroupBox^ groupBox3;
 	private: System::Windows::Forms::Button^ buttonRemoveAnnotation;
+	public: System::Windows::Forms::ListBox^ GroupBox_Annotations;
+	private:
 
 
 
@@ -96,7 +98,7 @@ namespace SDIMaster
 
 
 
-	public: System::Windows::Forms::ListBox^ listBoxAnnotations;
+
 
 
 	private: System::Windows::Forms::TableLayoutPanel^ tableLayoutPanel1;
@@ -147,7 +149,7 @@ namespace SDIMaster
 			this->tableLayoutPanel3 = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->groupBox3 = (gcnew System::Windows::Forms::GroupBox());
 			this->buttonRemoveAnnotation = (gcnew System::Windows::Forms::Button());
-			this->listBoxAnnotations = (gcnew System::Windows::Forms::ListBox());
+			this->GroupBox_Annotations = (gcnew System::Windows::Forms::ListBox());
 			this->groupBox4 = (gcnew System::Windows::Forms::GroupBox());
 			this->imageDisplay = (gcnew System::Windows::Forms::PictureBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->splitContainer1))->BeginInit();
@@ -431,7 +433,7 @@ namespace SDIMaster
 			// groupBox3
 			// 
 			this->groupBox3->Controls->Add(this->buttonRemoveAnnotation);
-			this->groupBox3->Controls->Add(this->listBoxAnnotations);
+			this->groupBox3->Controls->Add(this->GroupBox_Annotations);
 			this->groupBox3->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->groupBox3->Location = System::Drawing::Point(2, 2);
 			this->groupBox3->Margin = System::Windows::Forms::Padding(2);
@@ -453,18 +455,19 @@ namespace SDIMaster
 			this->buttonRemoveAnnotation->TabIndex = 6;
 			this->buttonRemoveAnnotation->Text = L"Remove Annotation";
 			this->buttonRemoveAnnotation->UseVisualStyleBackColor = true;
+			this->buttonRemoveAnnotation->Click += gcnew System::EventHandler(this, &MainWindow::buttonRemoveAnnotation_Click);
 			// 
-			// listBoxAnnotations
+			// GroupBox_Annotations
 			// 
-			this->listBoxAnnotations->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+			this->GroupBox_Annotations->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->listBoxAnnotations->FormattingEnabled = true;
-			this->listBoxAnnotations->Location = System::Drawing::Point(2, 17);
-			this->listBoxAnnotations->Margin = System::Windows::Forms::Padding(2);
-			this->listBoxAnnotations->Name = L"listBoxAnnotations";
-			this->listBoxAnnotations->Size = System::Drawing::Size(264, 82);
-			this->listBoxAnnotations->TabIndex = 0;
+			this->GroupBox_Annotations->FormattingEnabled = true;
+			this->GroupBox_Annotations->Location = System::Drawing::Point(2, 17);
+			this->GroupBox_Annotations->Margin = System::Windows::Forms::Padding(2);
+			this->GroupBox_Annotations->Name = L"GroupBox_Annotations";
+			this->GroupBox_Annotations->Size = System::Drawing::Size(264, 82);
+			this->GroupBox_Annotations->TabIndex = 0;
 			// 
 			// groupBox4
 			// 
@@ -474,7 +477,7 @@ namespace SDIMaster
 			this->groupBox4->Margin = System::Windows::Forms::Padding(2);
 			this->groupBox4->Name = L"groupBox4";
 			this->groupBox4->Padding = System::Windows::Forms::Padding(2);
-			this->groupBox4->Size = System::Drawing::Size(544, 102);
+			this->groupBox4->Size = System::Drawing::Size(546, 102);
 			this->groupBox4->TabIndex = 7;
 			this->groupBox4->TabStop = false;
 			this->groupBox4->Text = L"Shortcuts";
@@ -489,7 +492,7 @@ namespace SDIMaster
 			this->imageDisplay->Location = System::Drawing::Point(2, 2);
 			this->imageDisplay->Margin = System::Windows::Forms::Padding(2);
 			this->imageDisplay->Name = L"imageDisplay";
-			this->imageDisplay->Size = System::Drawing::Size(531, 446);
+			this->imageDisplay->Size = System::Drawing::Size(533, 446);
 			this->imageDisplay->TabIndex = 6;
 			this->imageDisplay->TabStop = false;
 			this->imageDisplay->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &MainWindow::imageDisplay_MouseDown);
@@ -593,40 +596,65 @@ namespace SDIMaster
 		///Calculate point relative to image, for placement
 		protected: int CalculatePosInverse(int, int, float);
 
+		protected: System::Void ListAnnotations();
+
 		// Functions below cannot currently be moved out of header - cannot add more arguments (ie the MainWindow) as they use eventhandlers
 
 		
 
 		private: System::Void imageDisplay_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e)
 		{
-			GUI::mouseDownLocation = e->Location;
+			if (GUI::loadedImages->Count > 0 && GUI::labelNames->Count > 0 && GroupBox_Classes->SelectedIndex >= 0) {
+				GUI::mouseDownLocation = e->Location;
 
-			if (GUI::loadedImages->Count == 0)
-			{
-				GUI::loadedImages->Add(gcnew ImageFile);
-			}
+				if (GUI::loadedImages->Count == 0)
+				{
+					GUI::loadedImages->Add(gcnew ImageFile);
+				}
 
-			if (GUI::loadedImages[GUI::drawnImage]->annotationFiles->Count == 0) 
-			{
-				GUI::loadedImages[GUI::drawnImage]->annotationFiles->Add(gcnew AnnotationFile);
+				if (GUI::loadedImages[GUI::drawnImage]->annotationFiles->Count == 0) 
+				{
+					GUI::loadedImages[GUI::drawnImage]->annotationFiles->Add(gcnew AnnotationFile);
+				}
 			}
 		}
 
 		private: System::Void imageDisplay_MouseUp(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e)
 		{
-			List<int>^ tempVertices = gcnew List<int>;
-			Point mouseUpLocation = e->Location;
-			Point^ mouseDownLocation = GUI::mouseDownLocation;
-			int mouseUpX = mouseDownLocation->X;
-			int mouseUpY = mouseDownLocation->Y;
-			PolygonalAnnotation^ tempAnnotation = gcnew PolygonalAnnotation;
-			tempVertices->Add(CalculatePosInverse(mouseUpX, GUI::xOffset, GUI::imageScale));
-			tempVertices->Add(CalculatePosInverse(mouseUpY, GUI::yOffset, GUI::imageScale));
-			tempVertices->Add(CalculatePosInverse(mouseUpLocation.X, GUI::xOffset, GUI::imageScale));
-			tempVertices->Add(CalculatePosInverse(mouseUpLocation.Y, GUI::yOffset, GUI::imageScale));
-			tempAnnotation->vertices = tempVertices;
-			GUI::loadedImages[GUI::drawnImage]->annotationFiles[0]->annotationsPolygonal->Add(tempAnnotation);
-			RenderAnnotations(GUI::drawnImage);
+			if (GUI::loadedImages->Count > 0 && GUI::labelNames->Count > 0 && GroupBox_Classes->SelectedIndex >= 0) {
+				List<int>^ tempVertices = gcnew List<int>;
+				Point mouseUpLocation = e->Location;
+				Point^ mouseDownLocation = GUI::mouseDownLocation;
+				int mouseUpX = mouseDownLocation->X;
+				int mouseUpY = mouseDownLocation->Y;
+				PolygonalAnnotation^ tempAnnotation = gcnew PolygonalAnnotation;
+				tempVertices->Add(0);
+				tempVertices->Add(0);
+				tempVertices->Add(0);
+				tempVertices->Add(0);
+				if (mouseUpX <= mouseUpLocation.X) {
+					tempVertices[0] = (CalculatePosInverse(mouseUpX, GUI::xOffset, GUI::imageScale));
+					tempVertices[2] = (CalculatePosInverse(mouseUpLocation.X, GUI::xOffset, GUI::imageScale));
+				}
+				else {
+					tempVertices[2] = (CalculatePosInverse(mouseUpX, GUI::xOffset, GUI::imageScale));
+					tempVertices[0] = (CalculatePosInverse(mouseUpLocation.X, GUI::xOffset, GUI::imageScale));
+				}
+
+				if (mouseUpY <= mouseUpLocation.Y) {
+					tempVertices[1] = (CalculatePosInverse(mouseUpY, GUI::yOffset, GUI::imageScale));
+					tempVertices[3] = (CalculatePosInverse(mouseUpLocation.Y, GUI::yOffset, GUI::imageScale));
+				}
+				else {
+					tempVertices[3] = (CalculatePosInverse(mouseUpY, GUI::yOffset, GUI::imageScale));
+					tempVertices[1] = (CalculatePosInverse(mouseUpLocation.Y, GUI::yOffset, GUI::imageScale));
+				}
+				tempAnnotation->vertices = tempVertices;
+				tempAnnotation->label = GUI::labelNames[GUI::labelIndices[GroupBox_Classes->SelectedIndex]];
+				GUI::loadedImages[GUI::drawnImage]->annotationFiles[0]->annotationsPolygonal->Add(tempAnnotation);
+				RenderAnnotations(GUI::drawnImage);
+				ListAnnotations();
+			}
 		}
 		
 		private: System::Void Button_ChangeDir_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -642,6 +670,7 @@ namespace SDIMaster
 		private: System::Void GroupBox_Images_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
 			GUI::drawnImage = GUI::imageIndices[GroupBox_Images->SelectedIndex];
 			RenderAnnotations(GUI::drawnImage);
+			ListAnnotations();
 		}
 		
 		private: System::Void Button_AddClass_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -659,6 +688,9 @@ namespace SDIMaster
 
 		private: System::Void MainWindow_Load(System::Object^ sender, System::EventArgs^ e) {
 			GUI::boxCanvas = imageDisplay->CreateGraphics();
+		}
+
+		private: System::Void buttonRemoveAnnotation_Click(System::Object^ sender, System::EventArgs^ e) {
 		}
 };
 }

@@ -139,12 +139,23 @@ namespace SDIMaster
 	}
 
 	System::Void MainWindow::SortClassPane(String^ order) {
-		GUI::imageIndices->Clear();
+		GUI::labelIndices->Clear();
 		GroupBox_Classes->Items->Clear();
 		//sort
 		for (int i = 0; i < GUI::labelNames->Count; i++) {
 			GUI::labelIndices->Add(i);
 			GroupBox_Classes->Items->Add(GUI::labelNames[i]);
+		}
+	}
+
+	System::Void MainWindow::ListAnnotations() {
+		GroupBox_Annotations->Items->Clear();
+		//sort
+		for (int i = 0; i < GUI::loadedImages[GUI::drawnImage]->annotationFiles[0]->annotationsPolygonal->Count; i++) {
+			List<int>^ tempVertices = GUI::loadedImages[GUI::drawnImage]->annotationFiles[0]->annotationsPolygonal[i]->vertices;
+			String^ tempLabel = GUI::loadedImages[GUI::drawnImage]->annotationFiles[0]->annotationsPolygonal[i]->label;
+			String^ displayName = "{" + tempLabel + "} [" + System::Convert::ToString(tempVertices[0]) + ", " + System::Convert::ToString(tempVertices[1]) + "] - [" + System::Convert::ToString(tempVertices[2]) + ", " + System::Convert::ToString(tempVertices[3]) + "]";
+			GroupBox_Annotations->Items->Add(displayName);
 		}
 	}
 

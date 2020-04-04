@@ -96,5 +96,5 @@ Class SDIMaster.MainWindow: AutoLayout, AnsiClass, Class, Public, BeforeFieldIni
   Fields:
     System.Windows.Forms.PictureBox imageDisplay : Public
     System.Windows.Forms.ListBox GroupBox_Images : Public
-    System.Windows.Forms.ListBox listBoxLabels : Public
+    System.Windows.Forms.ListBox GroupBox_Classes : Public
     System.Windows.Forms.ListBox listBoxAnnotations : Public

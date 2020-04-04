@@ -68,7 +68,8 @@ namespace SDIMaster
 
 
 	private: System::Windows::Forms::SplitContainer^ splitContainer3;
-	private: System::Windows::Forms::GroupBox^ GroupBox_Classes;
+	private: System::Windows::Forms::GroupBox^ classescontainer;
+
 	private: System::Windows::Forms::Button^ Button_RemoveClass;
 
 
@@ -76,12 +77,14 @@ namespace SDIMaster
 
 
 	private: System::Windows::Forms::Button^ Button_LoadClasses;
+	public: System::Windows::Forms::ListBox^ GroupBox_Classes;
+	private:
 
 
 
 
 
-	public: System::Windows::Forms::ListBox^ listBoxLabels;
+
 
 
 	private: System::Windows::Forms::GroupBox^ groupBox3;
@@ -134,11 +137,11 @@ namespace SDIMaster
 			this->GroupBox_Images = (gcnew System::Windows::Forms::ListBox());
 			this->splitContainer3 = (gcnew System::Windows::Forms::SplitContainer());
 			this->tableLayoutPanel1 = (gcnew System::Windows::Forms::TableLayoutPanel());
-			this->GroupBox_Classes = (gcnew System::Windows::Forms::GroupBox());
+			this->classescontainer = (gcnew System::Windows::Forms::GroupBox());
 			this->Button_RemoveClass = (gcnew System::Windows::Forms::Button());
 			this->Button_AddClass = (gcnew System::Windows::Forms::Button());
 			this->Button_LoadClasses = (gcnew System::Windows::Forms::Button());
-			this->listBoxLabels = (gcnew System::Windows::Forms::ListBox());
+			this->GroupBox_Classes = (gcnew System::Windows::Forms::ListBox());
 			this->tableLayoutPanel3 = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->groupBox3 = (gcnew System::Windows::Forms::GroupBox());
 			this->buttonRemoveAnnotation = (gcnew System::Windows::Forms::Button());
@@ -160,7 +163,7 @@ namespace SDIMaster
 			this->splitContainer3->Panel2->SuspendLayout();
 			this->splitContainer3->SuspendLayout();
 			this->tableLayoutPanel1->SuspendLayout();
-			this->GroupBox_Classes->SuspendLayout();
+			this->classescontainer->SuspendLayout();
 			this->tableLayoutPanel3->SuspendLayout();
 			this->groupBox3->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imageDisplay))->BeginInit();
@@ -318,7 +321,7 @@ namespace SDIMaster
 			this->tableLayoutPanel1->ColumnCount = 1;
 			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
 				100)));
-			this->tableLayoutPanel1->Controls->Add(this->GroupBox_Classes, 0, 0);
+			this->tableLayoutPanel1->Controls->Add(this->classescontainer, 0, 0);
 			this->tableLayoutPanel1->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->tableLayoutPanel1->Location = System::Drawing::Point(0, 0);
 			this->tableLayoutPanel1->Margin = System::Windows::Forms::Padding(2);
@@ -329,21 +332,21 @@ namespace SDIMaster
 			this->tableLayoutPanel1->Size = System::Drawing::Size(274, 181);
 			this->tableLayoutPanel1->TabIndex = 8;
 			// 
-			// GroupBox_Classes
+			// classescontainer
 			// 
-			this->GroupBox_Classes->Controls->Add(this->Button_RemoveClass);
-			this->GroupBox_Classes->Controls->Add(this->Button_AddClass);
-			this->GroupBox_Classes->Controls->Add(this->Button_LoadClasses);
-			this->GroupBox_Classes->Controls->Add(this->listBoxLabels);
-			this->GroupBox_Classes->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->GroupBox_Classes->Location = System::Drawing::Point(2, 2);
-			this->GroupBox_Classes->Margin = System::Windows::Forms::Padding(2);
-			this->GroupBox_Classes->Name = L"GroupBox_Classes";
-			this->GroupBox_Classes->Padding = System::Windows::Forms::Padding(2);
-			this->GroupBox_Classes->Size = System::Drawing::Size(270, 177);
-			this->GroupBox_Classes->TabIndex = 6;
-			this->GroupBox_Classes->TabStop = false;
-			this->GroupBox_Classes->Text = L"Classes";
+			this->classescontainer->Controls->Add(this->Button_RemoveClass);
+			this->classescontainer->Controls->Add(this->Button_AddClass);
+			this->classescontainer->Controls->Add(this->Button_LoadClasses);
+			this->classescontainer->Controls->Add(this->GroupBox_Classes);
+			this->classescontainer->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->classescontainer->Location = System::Drawing::Point(2, 2);
+			this->classescontainer->Margin = System::Windows::Forms::Padding(2);
+			this->classescontainer->Name = L"classescontainer";
+			this->classescontainer->Padding = System::Windows::Forms::Padding(2);
+			this->classescontainer->Size = System::Drawing::Size(270, 177);
+			this->classescontainer->TabIndex = 6;
+			this->classescontainer->TabStop = false;
+			this->classescontainer->Text = L"Classes";
 			// 
 			// Button_RemoveClass
 			// 
@@ -381,18 +384,19 @@ namespace SDIMaster
 			this->Button_LoadClasses->TabIndex = 3;
 			this->Button_LoadClasses->Text = L"Change .names File";
 			this->Button_LoadClasses->UseVisualStyleBackColor = true;
+			this->Button_LoadClasses->Click += gcnew System::EventHandler(this, &MainWindow::Button_LoadClasses_Click);
 			// 
-			// listBoxLabels
+			// GroupBox_Classes
 			// 
-			this->listBoxLabels->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+			this->GroupBox_Classes->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->listBoxLabels->FormattingEnabled = true;
-			this->listBoxLabels->Location = System::Drawing::Point(4, 18);
-			this->listBoxLabels->Margin = System::Windows::Forms::Padding(2);
-			this->listBoxLabels->Name = L"listBoxLabels";
-			this->listBoxLabels->Size = System::Drawing::Size(264, 82);
-			this->listBoxLabels->TabIndex = 0;
+			this->GroupBox_Classes->FormattingEnabled = true;
+			this->GroupBox_Classes->Location = System::Drawing::Point(4, 18);
+			this->GroupBox_Classes->Margin = System::Windows::Forms::Padding(2);
+			this->GroupBox_Classes->Name = L"GroupBox_Classes";
+			this->GroupBox_Classes->Size = System::Drawing::Size(264, 82);
+			this->GroupBox_Classes->TabIndex = 0;
 			// 
 			// tableLayoutPanel3
 			// 
@@ -458,7 +462,7 @@ namespace SDIMaster
 			this->groupBox4->Margin = System::Windows::Forms::Padding(2);
 			this->groupBox4->Name = L"groupBox4";
 			this->groupBox4->Padding = System::Windows::Forms::Padding(2);
-			this->groupBox4->Size = System::Drawing::Size(537, 102);
+			this->groupBox4->Size = System::Drawing::Size(539, 102);
 			this->groupBox4->TabIndex = 7;
 			this->groupBox4->TabStop = false;
 			this->groupBox4->Text = L"Shortcuts";
@@ -473,7 +477,7 @@ namespace SDIMaster
 			this->imageDisplay->Location = System::Drawing::Point(2, 2);
 			this->imageDisplay->Margin = System::Windows::Forms::Padding(2);
 			this->imageDisplay->Name = L"imageDisplay";
-			this->imageDisplay->Size = System::Drawing::Size(524, 446);
+			this->imageDisplay->Size = System::Drawing::Size(526, 446);
 			this->imageDisplay->TabIndex = 6;
 			this->imageDisplay->TabStop = false;
 			this->imageDisplay->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &MainWindow::imageDisplay_MouseDown);
@@ -504,8 +508,8 @@ namespace SDIMaster
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->splitContainer3))->EndInit();
 			this->splitContainer3->ResumeLayout(false);
 			this->tableLayoutPanel1->ResumeLayout(false);
-			this->GroupBox_Classes->ResumeLayout(false);
-			this->GroupBox_Classes->PerformLayout();
+			this->classescontainer->ResumeLayout(false);
+			this->classescontainer->PerformLayout();
 			this->tableLayoutPanel3->ResumeLayout(false);
 			this->groupBox3->ResumeLayout(false);
 			this->groupBox3->PerformLayout();
@@ -612,6 +616,11 @@ namespace SDIMaster
 			BrowseFolder();
 			SortImageByName("A");
 			Label_FolderPath->Text = "Path: " + GUI::workingFolderPath;
+		}
+
+		private: System::Void Button_LoadClasses_Click(System::Object^ sender, System::EventArgs^ e) {
+			BrowseFile();
+			SortClassPane("B");
 		}
 };
 }

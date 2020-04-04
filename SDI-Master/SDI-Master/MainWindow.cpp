@@ -39,7 +39,7 @@ namespace SDIMaster
 	System::Void MainWindow::LoadFolder(String^ folderPath)
 	{
 		cli::array<System::String^>^ fileArray = System::IO::Directory::GetFiles(folderPath);
-
+		ClearImages();
 		for (int i = 0; i < fileArray->Length; i++) {
 			if (fileArray[i]->EndsWith(".jpg") || fileArray[i]->EndsWith(".png") || fileArray[i]->EndsWith(".bmp"))
 			{
@@ -132,9 +132,11 @@ namespace SDIMaster
 
 	System::Void MainWindow::SortClassPane(String^ order) {
 		GUI::imageIndices->Clear();
+		GroupBox_Classes->Items->Clear();
 		//sort
-		for (int i = 0; i < GUI::loadedImages->Count; i++) {
-
+		for (int i = 0; i < GUI::labelNames->Count; i++) {
+			GUI::labelIndices->Add(i);
+			GroupBox_Classes->Items->Add(GUI::labelNames[i]);
 		}
 	}
 

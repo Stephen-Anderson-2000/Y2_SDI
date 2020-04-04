@@ -106,6 +106,7 @@ namespace SDIMaster
 	private: System::Windows::Forms::ComboBox^ Combobox_SortImages;
 	private: System::Windows::Forms::Label^ Label_FolderPath;
 	private: System::Windows::Forms::Button^ Button_ChangeDir;
+	private: System::Windows::Forms::TextBox^ TextBox_ClassName;
 
 
 
@@ -138,6 +139,7 @@ namespace SDIMaster
 			this->splitContainer3 = (gcnew System::Windows::Forms::SplitContainer());
 			this->tableLayoutPanel1 = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->classescontainer = (gcnew System::Windows::Forms::GroupBox());
+			this->TextBox_ClassName = (gcnew System::Windows::Forms::TextBox());
 			this->Button_RemoveClass = (gcnew System::Windows::Forms::Button());
 			this->Button_AddClass = (gcnew System::Windows::Forms::Button());
 			this->Button_LoadClasses = (gcnew System::Windows::Forms::Button());
@@ -335,6 +337,7 @@ namespace SDIMaster
 			// 
 			// classescontainer
 			// 
+			this->classescontainer->Controls->Add(this->TextBox_ClassName);
 			this->classescontainer->Controls->Add(this->Button_RemoveClass);
 			this->classescontainer->Controls->Add(this->Button_AddClass);
 			this->classescontainer->Controls->Add(this->Button_LoadClasses);
@@ -349,6 +352,13 @@ namespace SDIMaster
 			this->classescontainer->TabStop = false;
 			this->classescontainer->Text = L"Classes";
 			// 
+			// TextBox_ClassName
+			// 
+			this->TextBox_ClassName->Location = System::Drawing::Point(6, 106);
+			this->TextBox_ClassName->Name = L"TextBox_ClassName";
+			this->TextBox_ClassName->Size = System::Drawing::Size(142, 20);
+			this->TextBox_ClassName->TabIndex = 7;
+			// 
 			// Button_RemoveClass
 			// 
 			this->Button_RemoveClass->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
@@ -360,28 +370,30 @@ namespace SDIMaster
 			this->Button_RemoveClass->TabIndex = 6;
 			this->Button_RemoveClass->Text = L"Remove Class";
 			this->Button_RemoveClass->UseVisualStyleBackColor = true;
+			this->Button_RemoveClass->Click += gcnew System::EventHandler(this, &MainWindow::Button_RemoveClass_Click);
 			// 
 			// Button_AddClass
 			// 
 			this->Button_AddClass->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
 			this->Button_AddClass->AutoSize = true;
-			this->Button_AddClass->Location = System::Drawing::Point(4, 145);
+			this->Button_AddClass->Location = System::Drawing::Point(153, 104);
 			this->Button_AddClass->Margin = System::Windows::Forms::Padding(2);
 			this->Button_AddClass->Name = L"Button_AddClass";
-			this->Button_AddClass->Size = System::Drawing::Size(103, 23);
+			this->Button_AddClass->Size = System::Drawing::Size(112, 23);
 			this->Button_AddClass->TabIndex = 5;
 			this->Button_AddClass->Text = L"Add Class";
 			this->Button_AddClass->UseVisualStyleBackColor = true;
+			this->Button_AddClass->Click += gcnew System::EventHandler(this, &MainWindow::Button_AddClass_Click);
 			// 
 			// Button_LoadClasses
 			// 
 			this->Button_LoadClasses->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->Button_LoadClasses->AutoSize = true;
-			this->Button_LoadClasses->Location = System::Drawing::Point(5, 113);
+			this->Button_LoadClasses->Location = System::Drawing::Point(5, 144);
 			this->Button_LoadClasses->Margin = System::Windows::Forms::Padding(2);
 			this->Button_LoadClasses->Name = L"Button_LoadClasses";
-			this->Button_LoadClasses->Size = System::Drawing::Size(260, 23);
+			this->Button_LoadClasses->Size = System::Drawing::Size(117, 23);
 			this->Button_LoadClasses->TabIndex = 3;
 			this->Button_LoadClasses->Text = L"Change .names File";
 			this->Button_LoadClasses->UseVisualStyleBackColor = true;
@@ -463,7 +475,7 @@ namespace SDIMaster
 			this->groupBox4->Margin = System::Windows::Forms::Padding(2);
 			this->groupBox4->Name = L"groupBox4";
 			this->groupBox4->Padding = System::Windows::Forms::Padding(2);
-			this->groupBox4->Size = System::Drawing::Size(540, 102);
+			this->groupBox4->Size = System::Drawing::Size(543, 102);
 			this->groupBox4->TabIndex = 7;
 			this->groupBox4->TabStop = false;
 			this->groupBox4->Text = L"Shortcuts";
@@ -478,7 +490,7 @@ namespace SDIMaster
 			this->imageDisplay->Location = System::Drawing::Point(2, 2);
 			this->imageDisplay->Margin = System::Windows::Forms::Padding(2);
 			this->imageDisplay->Name = L"imageDisplay";
-			this->imageDisplay->Size = System::Drawing::Size(527, 446);
+			this->imageDisplay->Size = System::Drawing::Size(530, 446);
 			this->imageDisplay->TabIndex = 6;
 			this->imageDisplay->TabStop = false;
 			this->imageDisplay->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &MainWindow::imageDisplay_MouseDown);
@@ -626,6 +638,19 @@ namespace SDIMaster
 		private: System::Void GroupBox_Images_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
 			GUI::drawnImage = GUI::imageIndices[GroupBox_Images->SelectedIndex];
 			RenderAnnotations(GUI::drawnImage);
+		}
+		
+		private: System::Void Button_AddClass_Click(System::Object^ sender, System::EventArgs^ e) {
+			if (GUI::labelFile != ""){
+				AddClass(TextBox_ClassName->Text);
+				TextBox_ClassName->Text = "";
+				SortClassPane("B");
+			}
+		}
+		
+		private: System::Void Button_RemoveClass_Click(System::Object^ sender, System::EventArgs^ e) {
+			RemoveClass(GUI::labelIndices[GroupBox_Classes->SelectedIndex]);
+			SortClassPane("B");
 		}
 };
 }

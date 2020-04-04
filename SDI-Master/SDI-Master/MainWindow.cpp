@@ -102,14 +102,22 @@ namespace SDIMaster
 
 	System::Void MainWindow::AddClass(String^ className) {
 		GUI::labelNames->Add(className);
+		WriteClass(className);
 	}
 
 	System::Void MainWindow::WriteClass(String^ className) {
-		GUI::labelNames->Add(className);
+		StreamWriter^ nameFile = gcnew StreamWriter(GUI::labelFile, true);
+		nameFile->WriteLine(className);
+		nameFile->Close();
 	}
 
 	System::Void MainWindow::RemoveClass(int classIndex) {
-
+		StreamWriter^ nameFile = gcnew StreamWriter(GUI::labelFile);
+		GUI::labelNames->RemoveAt(classIndex);
+		for (int i = 0; i < GUI::labelNames->Count; i++) {
+			nameFile->WriteLine(GUI::labelNames[i]);
+		}
+		nameFile->Close();
 	}
 
 	System::Void MainWindow::SortImageByName(String^ order) {

@@ -125,8 +125,11 @@ namespace SDIMaster
 		GroupBox_Images->Items->Clear();
 		//sort
 		for (int i = 0; i < GUI::loadedImages->Count; i++) {
-			GUI::imageIndices->Add(i);
-			GroupBox_Images->Items->Add(GUI::loadedImages[i]->displayFileName);
+			if (GUI::loadedImages[i]->displayFileName->Contains(GUI::imageSearchTerm))
+			{
+				GUI::imageIndices->Add(i);
+				GroupBox_Images->Items->Add(GUI::loadedImages[i]->displayFileName);
+			}
 		}
 	}
 
@@ -143,8 +146,11 @@ namespace SDIMaster
 		GroupBox_Classes->Items->Clear();
 		//sort
 		for (int i = 0; i < GUI::labelNames->Count; i++) {
-			GUI::labelIndices->Add(i);
-			GroupBox_Classes->Items->Add(GUI::labelNames[i]);
+			if (GUI::labelNames[i]->Contains(GUI::labelSearchTerm))
+			{
+				GroupBox_Classes->Items->Add(GUI::labelNames[i]);
+				GUI::labelIndices->Add(i);
+			}
 		}
 	}
 

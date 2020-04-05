@@ -24,6 +24,7 @@ using namespace System::Drawing;
 		static String^ workingFolderPath = "";
 		static String^ labelFile = "";
 		static String^ imageSearchTerm = "";
+		static String^ labelSearchTerm = "";
 		static Graphics^ boxCanvas;
 		static float imageScale;
 		static int xOffset;

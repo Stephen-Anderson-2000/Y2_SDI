@@ -1,3 +1,112 @@
 ﻿  Unit-Tests.cpp
-     Creating library D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\Debug\Unit-Tests.lib and object D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\Debug\Unit-Tests.exp
-  Unit-Tests.vcxproj -> D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\Debug\Unit-Tests.dll
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\MainWindow.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\ImageData.h(3,24): error C2871: 'System': a namespace with this name does not exist
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\ImageData.h(4,40): error C2653: 'System': is not a class or namespace name
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\ImageData.h(4,40): error C2871: 'ComponentModel': a namespace with this name does not exist
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\ImageData.h(5,37): error C2653: 'System': is not a class or namespace name
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\ImageData.h(5,37): error C2871: 'Collections': a namespace with this name does not exist
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\ImageData.h(6,46): error C2653: 'System': is not a class or namespace name
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\ImageData.h(6,46): error C2871: 'Generic': a namespace with this name does not exist
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\ImageData.h(7,40): error C2653: 'System': is not a class or namespace name
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\ImageData.h(7,40): error C2871: 'Forms': a namespace with this name does not exist
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\ImageData.h(8,30): error C2653: 'System': is not a class or namespace name
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\ImageData.h(8,30): error C2871: 'Data': a namespace with this name does not exist
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\ImageData.h(9,33): error C2653: 'System': is not a class or namespace name
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\ImageData.h(9,33): error C2871: 'Drawing': a namespace with this name does not exist
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\ImageData.h(12,2): error C2059: syntax error: 'public'
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\ImageData.h(12,29): error C2143: syntax error: missing ';' before '{'
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\ImageData.h(12,29): error C2447: '{': missing function header (old-style formal list?)
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\GlobalImageList.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\GlobalImageList.h(6,2): error C2059: syntax error: 'public'
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\GlobalImageList.h(7,2): error C2143: syntax error: missing ';' before '{'
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\GlobalImageList.h(7,2): error C2447: '{': missing function header (old-style formal list?)
+  The contents of <filesystem> are available only with C++17 or later.
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\Annotation.h(3,23): error C2871: 'System': a namespace with this name does not exist
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\Annotation.h(4,39): error C2653: 'System': is not a class or namespace name
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\Annotation.h(4,39): error C2871: 'ComponentModel': a namespace with this name does not exist
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\Annotation.h(5,36): error C2653: 'System': is not a class or namespace name
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\Annotation.h(5,36): error C2871: 'Collections': a namespace with this name does not exist
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\Annotation.h(6,45): error C2653: 'System': is not a class or namespace name
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\Annotation.h(6,45): error C2871: 'Generic': a namespace with this name does not exist
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\Annotation.h(7,39): error C2653: 'System': is not a class or namespace name
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\Annotation.h(7,39): error C2871: 'Forms': a namespace with this name does not exist
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\Annotation.h(8,29): error C2653: 'System': is not a class or namespace name
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\Annotation.h(8,29): error C2871: 'Data': a namespace with this name does not exist
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\Annotation.h(9,32): error C2653: 'System': is not a class or namespace name
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\Annotation.h(9,32): error C2871: 'Drawing': a namespace with this name does not exist
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\Annotation.h(11,1): error C2059: syntax error: 'public'
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\Annotation.h(12,1): error C2143: syntax error: missing ';' before '{'
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\Annotation.h(12,1): error C2447: '{': missing function header (old-style formal list?)
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\Annotation.h(34,1): error C2059: syntax error: 'public'
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\Annotation.h(35,1): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\Annotation.h(36,1): error C2059: syntax error: 'public'
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\Annotation.h(37,7): error C2143: syntax error: missing ';' before '^'
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\Annotation.h(37,7): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\Annotation.h(37,15): error C3193: '^': requires '/clr' or '/ZW' command line option
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\Annotation.h(37,15): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\Annotation.h(39,1): error C2059: syntax error: '}'
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\Annotation.h(39,1): error C2143: syntax error: missing ';' before '}'
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\Annotation.h(41,1): error C2059: syntax error: 'public'
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\Annotation.h(42,1): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\Annotation.h(41,40): error C2374: 'Annotation': redefinition; multiple initialization
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\Annotation.h(34): message : see declaration of 'Annotation'
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\Annotation.h(43,1): error C2059: syntax error: 'public'
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\Annotation.h(44,6): error C2143: syntax error: missing ';' before '<'
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\Annotation.h(44,6): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\Annotation.h(45,1): error C2059: syntax error: '}'
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\Annotation.h(45,1): error C2143: syntax error: missing ';' before '}'
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\AnnotationFile.h(9,23): error C2871: 'System': a namespace with this name does not exist
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\AnnotationFile.h(10,39): error C2653: 'System': is not a class or namespace name
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\AnnotationFile.h(10,39): error C2871: 'ComponentModel': a namespace with this name does not exist
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\AnnotationFile.h(11,36): error C2653: 'System': is not a class or namespace name
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\AnnotationFile.h(11,36): error C2871: 'Collections': a namespace with this name does not exist
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\AnnotationFile.h(12,45): error C2653: 'System': is not a class or namespace name
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\AnnotationFile.h(12,45): error C2871: 'Generic': a namespace with this name does not exist
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\AnnotationFile.h(13,39): error C2653: 'System': is not a class or namespace name
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\AnnotationFile.h(13,39): error C2871: 'Forms': a namespace with this name does not exist
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\AnnotationFile.h(14,29): error C2653: 'System': is not a class or namespace name
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\AnnotationFile.h(14,29): error C2871: 'Data': a namespace with this name does not exist
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\AnnotationFile.h(15,32): error C2653: 'System': is not a class or namespace name
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\AnnotationFile.h(15,32): error C2871: 'Drawing': a namespace with this name does not exist
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\AnnotationFile.h(17,1): error C2059: syntax error: 'public'
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\AnnotationFile.h(18,1): error C2143: syntax error: missing ';' before '{'
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\AnnotationFile.h(18,1): error C2447: '{': missing function header (old-style formal list?)
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\ImageFile.h(3,23): error C2871: 'System': a namespace with this name does not exist
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\ImageFile.h(4,39): error C2653: 'System': is not a class or namespace name
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\ImageFile.h(4,39): error C2871: 'ComponentModel': a namespace with this name does not exist
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\ImageFile.h(5,36): error C2653: 'System': is not a class or namespace name
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\ImageFile.h(5,36): error C2871: 'Collections': a namespace with this name does not exist
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\ImageFile.h(6,45): error C2653: 'System': is not a class or namespace name
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\ImageFile.h(6,45): error C2871: 'Generic': a namespace with this name does not exist
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\ImageFile.h(7,39): error C2653: 'System': is not a class or namespace name
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\ImageFile.h(7,39): error C2871: 'Forms': a namespace with this name does not exist
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\ImageFile.h(8,29): error C2653: 'System': is not a class or namespace name
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\ImageFile.h(8,29): error C2871: 'Data': a namespace with this name does not exist
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\ImageFile.h(9,32): error C2653: 'System': is not a class or namespace name
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\ImageFile.h(9,32): error C2871: 'Drawing': a namespace with this name does not exist
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\ImageFile.h(11,1): error C2059: syntax error: 'public'
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\ImageFile.h(12,1): error C2143: syntax error: missing ';' before '{'
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\ImageFile.h(12,1): error C2447: '{': missing function header (old-style formal list?)
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\GUI.h(6,23): error C2871: 'System': a namespace with this name does not exist
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\GUI.h(7,39): error C2653: 'System': is not a class or namespace name
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\GUI.h(7,39): error C2871: 'ComponentModel': a namespace with this name does not exist
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\GUI.h(8,36): error C2653: 'System': is not a class or namespace name
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\GUI.h(8,36): error C2871: 'Collections': a namespace with this name does not exist
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\GUI.h(9,45): error C2653: 'System': is not a class or namespace name
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\GUI.h(9,45): error C2871: 'Generic': a namespace with this name does not exist
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\GUI.h(10,39): error C2653: 'System': is not a class or namespace name
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\GUI.h(10,39): error C2871: 'Forms': a namespace with this name does not exist
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\GUI.h(11,29): error C2653: 'System': is not a class or namespace name
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\GUI.h(11,29): error C2871: 'Data': a namespace with this name does not exist
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\GUI.h(12,32): error C2653: 'System': is not a class or namespace name
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\GUI.h(12,32): error C2871: 'Drawing': a namespace with this name does not exist
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\GUI.h(14,2): error C2059: syntax error: 'public'
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\GUI.h(15,2): error C2143: syntax error: missing ';' before '{'
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\GUI.h(15,2): error C2447: '{': missing function header (old-style formal list?)
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\MainWindow.h(15,24): error C2871: 'System': a namespace with this name does not exist
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\MainWindow.h(16,40): error C2653: 'System': is not a class or namespace name
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\MainWindow.h(16,40): error C2871: 'ComponentModel': a namespace with this name does not exist
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\MainWindow.h(17,37): error C2653: 'System': is not a class or namespace name
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\MainWindow.h(17,37): error C2871: 'Collections': a namespace with this name does not exist
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\MainWindow.h(18,46): error C2653: 'System': is not a class or namespace name
+D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\MainWindow.h(18,46): fatal error C1003: error count exceeds 100; stopping compilation

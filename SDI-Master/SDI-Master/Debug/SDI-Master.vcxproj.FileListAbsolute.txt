@@ -1,3 +1,0 @@
-D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\Debug\SDI-Master.vcxprojAssemblyReference.cache
-D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\Debug\SDIMaster.MainWindow.resources
-D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\SDI-Master\SDI-Master\Debug\SDI-Master.vcxproj.GenerateResource.cache

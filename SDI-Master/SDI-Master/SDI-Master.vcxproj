@@ -24,6 +24,7 @@
     <Keyword>ManagedCProj</Keyword>
     <RootNamespace>SDIMaster</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>SDI-Master</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -72,7 +73,12 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\BUILD\Debug</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\BUILD\Release</OutDir>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -81,7 +87,6 @@
     <Link>
       <AdditionalDependencies />
       <SubSystem>Windows</SubSystem>
-      <EntryPointSymbol>Main</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -119,6 +124,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="SortAndSearch.cpp" />
@@ -134,14 +140,22 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="SortAndSearch.h" />
+=======
+    <ClInclude Include="..\SRC\Annotation.h" />
+    <ClInclude Include="..\SRC\AnnotationFile.h" />
+    <ClInclude Include="..\SRC\GlobalImageList.h" />
+    <ClInclude Include="..\SRC\GUI.h" />
+    <ClInclude Include="..\SRC\ImageData.h" />
+    <ClInclude Include="..\SRC\ImageFile.h" />
+    <ClInclude Include="..\SRC\MainWindow.h" />
+>>>>>>> b7e24cac06a453ba23f0b89525b96f8e0d542bb9
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MainWindow.resx">
-      <DependentUpon>MainWindow.h</DependentUpon>
-    </EmbeddedResource>
+    <ClCompile Include="..\SRC\Main.cpp" />
+    <ClCompile Include="..\SRC\MainWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="blank.jpg" />
+    <EmbeddedResource Include="..\SRC\MainWindow.resx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

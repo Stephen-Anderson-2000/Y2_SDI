@@ -15,6 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <ClCompile Include="MainWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -27,24 +28,27 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainWindow.h">
+=======
+    <ClInclude Include="..\SRC\Annotation.h">
+>>>>>>> b7e24cac06a453ba23f0b89525b96f8e0d542bb9
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ImageData.h">
+    <ClInclude Include="..\SRC\AnnotationFile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GlobalImageList.h">
+    <ClInclude Include="..\SRC\GlobalImageList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ImageFile.h">
+    <ClInclude Include="..\SRC\GUI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GUI.h">
+    <ClInclude Include="..\SRC\ImageData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AnnotationFile.h">
+    <ClInclude Include="..\SRC\ImageFile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Annotation.h">
+    <ClInclude Include="..\SRC\MainWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SortAndSearch.h">
@@ -52,8 +56,16 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="blank.jpg">
+    <ClCompile Include="..\SRC\Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SRC\MainWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\SRC\MainWindow.resx">
       <Filter>Resource Files</Filter>
-    </Image>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

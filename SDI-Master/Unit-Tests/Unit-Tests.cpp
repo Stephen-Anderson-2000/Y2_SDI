@@ -1,8 +1,9 @@
 #include "pch.h"
 #include "CppUnitTest.h"
-//#include "../SDI-Master/MainWindow.h"
+#include "../SDI-Master/MainWindow.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
+using namespace SDIMaster;
 
 namespace UnitTests
 {

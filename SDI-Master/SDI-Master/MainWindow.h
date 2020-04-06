@@ -669,15 +669,6 @@ namespace SDIMaster
 		protected: System::Void RenamePolygonalAnnotation(int, int, String^);
 		//Change the label of a polygonal annotation
 
-		protected: System::Void SortImageByName(String^);
-		//Sort the files in the image pane by their name (ascending or descending)
-
-		protected: System::Void SortImageByDate(String^);
-		//Sort the files in the image pane by their date modified (ascending or descending)
-
-		protected: System::Void SortClassPane(String^);
-		//Sort the items in the class pane by their name (ascending or descending)
-
 		protected: System::Void RenderAnnotations(int);
 		//Render currently loaded image and annotation
 
@@ -689,6 +680,15 @@ namespace SDIMaster
 		protected: int CalculatePosInverse(int, int, float);
 
 		protected: System::Void ListAnnotations();
+
+		public: System::Void SortImageByName(String^);
+						  //Sort the files in the image pane by their name (ascending or descending)
+
+		public: System::Void SortImageByDate(String^);
+				 //Sort the files in the image pane by their date modified (ascending or descending)
+
+		public: System::Void SortClassPane(String^);
+				 //Sort the items in the class pane by their name (ascending or descending)
 
 		// Functions below cannot currently be moved out of header - cannot add more arguments (ie the MainWindow) as they use eventhandlers
 

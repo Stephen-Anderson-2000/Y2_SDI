@@ -103,3 +103,7 @@ Class SDIMaster.MainWindow: AutoLayout, AnsiClass, Class, Public, BeforeFieldIni
     System.Windows.Forms.ListBox GroupBox_Images : Public
     System.Windows.Forms.ListBox GroupBox_Classes : Public
     System.Windows.Forms.ListBox GroupBox_Annotations : Public
+  Methods:
+    SortImageByName(String): PrivateScope, Public, HideBySig
+    SortImageByDate(String): PrivateScope, Public, HideBySig
+    SortClassPane(String): PrivateScope, Public, HideBySig

@@ -121,6 +121,7 @@
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
+    <ClCompile Include="SortAndSearch.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Annotation.h" />
@@ -132,6 +133,7 @@
     <ClInclude Include="MainWindow.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="SortAndSearch.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainWindow.resx">

@@ -113,6 +113,19 @@ namespace SDIMaster
 
 	System::Void MainWindow::RemoveClass(int classIndex) {
 		StreamWriter^ nameFile = gcnew StreamWriter(GUI::labelFile);
+		String^ className = GUI::labelNames[classIndex];
+
+		//Remove annotations that match
+		for (int i = 0; i < GUI::loadedImages->Count; i++) {
+			for (int j = GUI::loadedImages[i]->annotationFiles[0]->annotationsPolygonal->Count; j > 0; j--) {
+				if (GUI::loadedImages[i]->annotationFiles[0]->annotationsPolygonal[j]->label = className) 
+				{
+					GUI::loadedImages[i]->annotationFiles[0]->annotationsPolygonal->RemoveAt(j);
+					j -= 1;
+				}
+			}
+		}
+
 		GUI::labelNames->RemoveAt(classIndex);
 		for (int i = 0; i < GUI::labelNames->Count; i++) {
 			nameFile->WriteLine(GUI::labelNames[i]);

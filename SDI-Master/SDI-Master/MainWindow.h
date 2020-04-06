@@ -761,9 +761,11 @@ namespace SDIMaster
 			Label_NamesPath->Text = "Path: " + GUI::labelFile;
 		}
 		private: System::Void GroupBox_Images_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
-			GUI::drawnImage = GUI::imageIndices[GroupBox_Images->SelectedIndex];
-			RenderAnnotations(GUI::drawnImage);
-			ListAnnotations();
+			if (GroupBox_Images->SelectedIndex > -1){
+				GUI::drawnImage = GUI::imageIndices[GroupBox_Images->SelectedIndex];
+				RenderAnnotations(GUI::drawnImage);
+				ListAnnotations();
+			}
 		}
 		
 		private: System::Void Button_AddClass_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -777,6 +779,8 @@ namespace SDIMaster
 		private: System::Void Button_RemoveClass_Click(System::Object^ sender, System::EventArgs^ e) {
 			RemoveClass(GUI::labelIndices[GroupBox_Classes->SelectedIndex]);
 			SortClassPane("B");
+			RenderAnnotations(GUI::drawnImage);
+			ListAnnotations();
 		}
 
 		private: System::Void MainWindow_Load(System::Object^ sender, System::EventArgs^ e) {

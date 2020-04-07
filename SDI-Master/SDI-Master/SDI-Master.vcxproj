@@ -124,23 +124,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="MainWindow.cpp" />
-    <ClCompile Include="SortAndSearch.cpp" />
+    <ClCompile Include="..\SRC\SortAndSearch.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Annotation.h" />
-    <ClInclude Include="AnnotationFile.h" />
-    <ClInclude Include="GUI.h" />
-    <ClInclude Include="ImageData.h" />
-    <ClInclude Include="GlobalImageList.h" />
-    <ClInclude Include="ImageFile.h" />
-    <ClInclude Include="MainWindow.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
-    <ClInclude Include="SortAndSearch.h" />
-=======
     <ClInclude Include="..\SRC\Annotation.h" />
     <ClInclude Include="..\SRC\AnnotationFile.h" />
     <ClInclude Include="..\SRC\GlobalImageList.h" />
@@ -148,7 +134,7 @@
     <ClInclude Include="..\SRC\ImageData.h" />
     <ClInclude Include="..\SRC\ImageFile.h" />
     <ClInclude Include="..\SRC\MainWindow.h" />
->>>>>>> b7e24cac06a453ba23f0b89525b96f8e0d542bb9
+    <ClInclude Include="..\SRC\SortAndSearch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\SRC\Main.cpp" />

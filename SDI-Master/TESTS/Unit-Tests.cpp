@@ -1,9 +1,11 @@
 #include "pch.h"
 #include "CppUnitTest.h"
-#include "../SDI-Master/MainWindow.h"
+#include "../SRC/MainWindow.h"
+#include "../SRC/SortAndSearch.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace SDIMaster;
+
 
 namespace UnitTests
 {

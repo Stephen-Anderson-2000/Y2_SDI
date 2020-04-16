@@ -41,14 +41,14 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="SRC\MainWindow.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="SRC\Main.cpp">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SRC\MainWindow.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SRC\SortAndSearch.cpp">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

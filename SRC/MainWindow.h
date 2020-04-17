@@ -805,4 +805,5 @@ namespace SDIMaster
 		SortClassPane("A");
 	}
 	};
+
 }

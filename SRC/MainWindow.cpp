@@ -1,4 +1,4 @@
-#include <string>;
+﻿#include <string>;
 #include "ImageData.h"
 #include "GlobalImageList.h"
 #include "MainWindow.h"

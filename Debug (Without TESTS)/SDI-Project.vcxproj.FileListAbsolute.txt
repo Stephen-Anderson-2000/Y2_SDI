@@ -3,3 +3,6 @@ D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\2nd A
 D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\Debug (Without TESTS)\SDI-Project.vcxprojAssemblyReference.cache
 D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\Debug (Without TESTS)\SDIProject.SRC.MainWindow.resources
 D:\stepp\Documents\Uni\Year 2\Software Design & Implementation\SDI Project\SDI-Project\Debug (Without TESTS)\SDI-Project.vcxproj.GenerateResource.cache
+C:\Users\irich\Documents\SDI\SDI-Project\Debug (Without TESTS)\SDI-Project.vcxprojAssemblyReference.cache
+C:\Users\irich\Documents\SDI\SDI-Project\Debug (Without TESTS)\SDIProject.SRC.MainWindow.resources
+C:\Users\irich\Documents\SDI\SDI-Project\Debug (Without TESTS)\SDI-Project.vcxproj.GenerateResource.cache

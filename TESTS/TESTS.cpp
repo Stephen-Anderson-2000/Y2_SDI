@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "CppUnitTest.h"
-#include "../SRC/MainWindow.h"
+//#include "../SRC/MainWindow.h"
+#include "../SRC/SortAndSearch.h"
+#include "../SRC/Annotation.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -12,8 +14,9 @@ namespace TESTS
 		
 		TEST_METHOD(TestMethod1)
 		{
-			SDIMaster::InitializeComponent;
-			SDIMaster::
+			Assert::AreEqual(0, 0);
+			
+			FilterList;
 		}
 	};
 }

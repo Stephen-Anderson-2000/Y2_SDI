@@ -2,6 +2,7 @@
 #include "MainWindow.h"
 #include "GlobalImageList.h"
 
+[STAThread]
 int main()
 {
 	Application::EnableVisualStyles();

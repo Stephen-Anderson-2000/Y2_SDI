@@ -23,7 +23,6 @@ using namespace std;
 
 namespace SDIMaster
 {
-
 	System::Void MainWindow::BrowseFolder() {
 		System::String^ folderPath;
 		FolderBrowserDialog^ folderBrowserDialog = gcnew FolderBrowserDialog;

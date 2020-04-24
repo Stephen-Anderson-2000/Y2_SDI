@@ -167,6 +167,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\Downloads\json.hpp" />
+    <ClInclude Include="JSONparsing.h" />
+    <ClInclude Include="ResizeAnnotation.h" />
     <ClInclude Include="SRC\Annotation.h" />
     <ClInclude Include="SRC\AnnotationFile.h" />
     <ClInclude Include="SRC\GlobalImageList.h" />

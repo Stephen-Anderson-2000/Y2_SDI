@@ -39,6 +39,15 @@
     <ClInclude Include="SRC\SortAndSearch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="JSONparsing.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Downloads\json.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ResizeAnnotation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SRC\Main.cpp">

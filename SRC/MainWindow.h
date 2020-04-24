@@ -49,7 +49,7 @@ namespace SDIMaster
 	private: System::Windows::Forms::SplitContainer^ splitContainer1;
 	protected:
 
-	private: System::Windows::Forms::GroupBox^ groupBox4;
+
 	public: System::Windows::Forms::PictureBox^ imageDisplay;
 
 
@@ -117,6 +117,7 @@ namespace SDIMaster
 	private: System::Windows::Forms::Label^ label4;
 	private: System::Windows::Forms::Label^ label3;
 	private: System::Windows::Forms::TextBox^ TextBox_SearchClasses;
+	private: System::Windows::Forms::ComboBox^ ComboBox_ToolSelection;
 
 
 
@@ -166,8 +167,8 @@ namespace SDIMaster
 			this->groupBox3 = (gcnew System::Windows::Forms::GroupBox());
 			this->buttonRemoveAnnotation = (gcnew System::Windows::Forms::Button());
 			this->GroupBox_Annotations = (gcnew System::Windows::Forms::ListBox());
-			this->groupBox4 = (gcnew System::Windows::Forms::GroupBox());
 			this->imageDisplay = (gcnew System::Windows::Forms::PictureBox());
+			this->ComboBox_ToolSelection = (gcnew System::Windows::Forms::ComboBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->splitContainer1))->BeginInit();
 			this->splitContainer1->Panel1->SuspendLayout();
 			this->splitContainer1->Panel2->SuspendLayout();
@@ -202,7 +203,7 @@ namespace SDIMaster
 			// 
 			// splitContainer1.Panel2
 			// 
-			this->splitContainer1->Panel2->Controls->Add(this->groupBox4);
+			this->splitContainer1->Panel2->Controls->Add(this->ComboBox_ToolSelection);
 			this->splitContainer1->Panel2->Controls->Add(this->imageDisplay);
 			this->splitContainer1->Size = System::Drawing::Size(977, 642);
 			this->splitContainer1->SplitterDistance = 317;
@@ -561,19 +562,6 @@ namespace SDIMaster
 			this->GroupBox_Annotations->Size = System::Drawing::Size(311, 147);
 			this->GroupBox_Annotations->TabIndex = 0;
 			// 
-			// groupBox4
-			// 
-			this->groupBox4->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left)
-				| System::Windows::Forms::AnchorStyles::Right));
-			this->groupBox4->Location = System::Drawing::Point(3, 520);
-			this->groupBox4->Margin = System::Windows::Forms::Padding(2);
-			this->groupBox4->Name = L"groupBox4";
-			this->groupBox4->Padding = System::Windows::Forms::Padding(2);
-			this->groupBox4->Size = System::Drawing::Size(652, 102);
-			this->groupBox4->TabIndex = 7;
-			this->groupBox4->TabStop = false;
-			this->groupBox4->Text = L"Shortcuts";
-			// 
 			// imageDisplay
 			// 
 			this->imageDisplay->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
@@ -584,11 +572,20 @@ namespace SDIMaster
 			this->imageDisplay->Location = System::Drawing::Point(2, 2);
 			this->imageDisplay->Margin = System::Windows::Forms::Padding(2);
 			this->imageDisplay->Name = L"imageDisplay";
-			this->imageDisplay->Size = System::Drawing::Size(651, 514);
+			this->imageDisplay->Size = System::Drawing::Size(652, 514);
 			this->imageDisplay->TabIndex = 6;
 			this->imageDisplay->TabStop = false;
 			this->imageDisplay->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &MainWindow::imageDisplay_MouseDown);
 			this->imageDisplay->MouseUp += gcnew System::Windows::Forms::MouseEventHandler(this, &MainWindow::imageDisplay_MouseUp);
+			// 
+			// ComboBox_ToolSelection
+			// 
+			this->ComboBox_ToolSelection->FormattingEnabled = true;
+			this->ComboBox_ToolSelection->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"Create Rectangle", L"Resize", L"Erase" });
+			this->ComboBox_ToolSelection->Location = System::Drawing::Point(524, 521);
+			this->ComboBox_ToolSelection->Name = L"ComboBox_ToolSelection";
+			this->ComboBox_ToolSelection->Size = System::Drawing::Size(121, 21);
+			this->ComboBox_ToolSelection->TabIndex = 7;
 			// 
 			// MainWindow
 			// 

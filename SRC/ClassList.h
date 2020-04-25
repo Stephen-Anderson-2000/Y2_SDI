@@ -93,7 +93,7 @@ public:
             if (position < count - 2)
             {
                 deletedNode = tempNode->next;
-                tempNode->next = tempNode->next->next;
+                tempNode->next = deletedNode->next;
                 delete deletedNode;
             }
 
@@ -102,7 +102,7 @@ public:
 
                 deletedNode = tempNode->next;
                 tempNode->next = NULL;
-                tail = NULL;
+                tail = tempNode;
                 delete deletedNode;
             }
 

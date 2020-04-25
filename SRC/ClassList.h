@@ -62,7 +62,6 @@ public:
             return tempNode->data;
         }
 
-
     }
 
     void Remove(int position)

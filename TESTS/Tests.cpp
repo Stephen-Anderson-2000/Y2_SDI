@@ -9,33 +9,43 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace TESTS
 {
-	TEST_CLASS(LinkedList)
+	TEST_CLASS(LinkedListTests)
 	{
 	public:
 		TEST_METHOD(EmptyList)
 		{
-
-		}
-
-		TEST_METHOD(OneItem)
-		{
-
-		}
+			LinkedListString myList;
+			Assert::AreEqual(myList.Count(), 0);
+		} // Creates an empty linked list object to see if there are any issues when creating it
 
 		TEST_METHOD(AddItem)
 		{
-
-		}
+			LinkedListString myList;
+			std::string myString = "Hello";
+			myList.Add(myString);
+			Assert::AreEqual(myList.Count(), 1);
+		} // Adds a single item to the empty linked list to see if there are any errors when doing so
 
 		TEST_METHOD(RemoveLastItem)
 		{
-
-		}
+			LinkedListString myList;
+			std::string myString = "Hello";
+			myList.Add(myString);
+			// get count
+			myList.Remove(1);
+			// assert that the count is not equal here
+		} 
 
 		// Remove the second item from a list of three
 		TEST_METHOD(RemoveMiddleItem)
 		{
-
+			LinkedListString myList;
+			std::string myString = "Hello";
+			myList.Add(myString);
+			myString = "lovely";
+			myList.Add(myString);
+			myString = "world";
+			myList.Add(myString);
 		}
 
 		TEST_METHOD(RemoveFirstItem)
@@ -71,7 +81,7 @@ namespace TESTS
 		}
 	};
 
-	TEST_CLASS(Searching)
+	TEST_CLASS(SearchingTests)
 	{
 	public:
 		TEST_METHOD(EmptyList)
@@ -122,7 +132,7 @@ namespace TESTS
 		}
 	};
 
-	TEST_CLASS(SortingByName)
+	TEST_CLASS(SortingByNameTests)
 	{
 	public:
 		TEST_METHOD(EmptyList)
@@ -172,7 +182,7 @@ namespace TESTS
 		}
 	};
 
-	TEST_CLASS(SortingByDate)
+	TEST_CLASS(SortingByDateTests)
 	{
 	public:
 		TEST_METHOD(EmptyList)

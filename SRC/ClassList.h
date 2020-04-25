@@ -22,6 +22,11 @@ public:
         count = 0;
     }
 
+    int Count()
+    {
+        return count;
+    }
+
     void Add(string newData)
     {
         Node* tempNode = new Node;
@@ -44,7 +49,7 @@ public:
     string At(int position)
     {
         if (head == NULL || position < 0 || position >= count) {
-            return;
+            return "";
         }
 
         else

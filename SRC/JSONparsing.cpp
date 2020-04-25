@@ -1,7 +1,9 @@
 #include <string>
 #include <fstream>
+#include <iostream>
 #include "json.hpp"
 #include "GUI.h"
+#include "Classlist.h"
 
 using namespace std;
 using json = nlohmann::json;
@@ -31,5 +33,7 @@ void SaveJson() {
 				file["annotatedImages"][file["imageCount"] - 1]["shapes"].push_back({ {"label", tempString}, {"point1", {Point1X, Point1Y}}, {"point2", {Point2X, Point2Y}} });
 			}
 		}
+		ofstream writeFile("file.json");
+		writeFile << file << endl;
 	}
 }

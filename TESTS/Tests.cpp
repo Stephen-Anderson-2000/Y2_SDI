@@ -16,7 +16,9 @@ namespace TESTS
 		TEST_METHOD(EmptyList)
 		{
 			LinkedListString myList;
-			Assert::AreEqual(0, myList.Count());
+
+			// Checks the length of the list to show the object exists
+			Assert::AreEqual(0, myList.Count()); 
 		} // Creates an empty linked list object to see if there are any issues when creating it
 
 		TEST_METHOD(AddItem)
@@ -24,16 +26,21 @@ namespace TESTS
 			LinkedListString myList;
 			std::string myString = "Hello";
 			myList.Add(myString);
-			Assert::AreEqual(1, myList.Count());
+
+			// Checks the length of the linkedlist to make sure that one item has been added
+			Assert::AreEqual(1, myList.Count()); 
 		} // Adds a single item to the empty linked list to see if there are any errors when doing so
 
 		TEST_METHOD(RemoveLastItem)
 		{
 			LinkedListString myList;
 			std::string myString = "Hello";
+
 			myList.Add(myString);
 			int firstCount = myList.Count();
 			myList.Remove(0);
+
+			Assert::AreNotEqual(firstCount, myList.Count());
 			Assert::AreEqual(0, myList.Count());
 		} // Checks that it can remove the last and only item from the list
 
@@ -60,6 +67,28 @@ namespace TESTS
 			myList.Remove(1);
 			Assert::AreEqual(myString1, myList.At(0));
 			Assert::AreEqual(myString3, myList.At(1));
+		} // Removes the second item from a list of three and checks that the remaining two items shift and can be accessed
+
+		TEST_METHOD(RemoveMiddleItemListOfFive)
+		{
+			LinkedListString myList;
+			std::string myString1 = "The";
+			std::string myString2 = "quick";
+			std::string myString3 = "brown";
+			std::string myString4 = "fox";
+			std::string myString5 = "jumped";
+
+			myList.Add(myString1);
+			myList.Add(myString2);
+			myList.Add(myString3);
+			myList.Add(myString4);
+			myList.Add(myString5);
+
+			myList.Remove(3);
+			Assert::AreEqual(myString1, myList.At(0));
+			Assert::AreEqual(myString2, myList.At(1));
+			Assert::AreEqual(myString4, myList.At(2));
+			Assert::AreEqual(myString5, myList.At(3));
 		} // Removes the second item from a list of three and checks that the remaining two items shift and can be accessed
 
 		TEST_METHOD(RemoveAllItems)
@@ -119,7 +148,7 @@ namespace TESTS
 		}
 
 		// Done with a list of 100 items
-		TEST_METHOD(RemoveAndAddAllItems)
+		TEST_METHOD(RemoveAndAddHalfItems)
 		{
 			ifstream myFile("Test Resources/100 Words.txt");
 			LinkedListString myList;
@@ -137,16 +166,38 @@ namespace TESTS
 			{
 				myList.Add(myArray[i]);
 			}
-			for (int i = 0; i < 100; i++)
+			for (int i = 50; i < 100; i++)
 			{
 				myArray2[i] = myList.At(0);
 				myList.Remove(0);
 			}
-			for (int i = 0; i < 100; i++)
+			for (int i = 50; i < 100; i++)
 			{
-				myList.Add(myArray[i]);
+				myList.Add(myArray2[i]);
 			}
-			Assert::AreEqual(myArray[50], myArray2[50]);
+			Assert::AreEqual(myArray[75], myArray2[75]);
+			Assert::AreEqual(100, myList.Count());
+		}
+
+		TEST_METHOD(OutOfRange)
+		{
+			LinkedListString myList;
+			std::string myString = myList.At(5);
+			std::string emptyString = "";
+			Assert::AreEqual(emptyString, myString);
+		}
+
+		TEST_METHOD(AccessDeletedValue)
+		{
+			LinkedListString myList;
+			std::string myString1 = "Hello";
+			std::string myString2 = "world";
+			myList.Add(myString1);
+			myList.Add(myString2);
+			myList.Remove(1);
+			std::string myString3 = myList.At(1);
+			std::string emptyString = "";
+			Assert::AreEqual(emptyString, myString3);
 		}
 
 	};

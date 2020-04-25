@@ -207,6 +207,7 @@ namespace SDIMaster
 
 	System::Void MainWindow::RenderAnnotations(int imageIndex)
 	{
+		GUI::boxCanvas = imageDisplay->CreateGraphics();
 		imageDisplay->BackgroundImage = GUI::loadedImages[GUI::drawnImage]->imageID;
 		GUI::boxCanvas->Clear(Color::Black);
 

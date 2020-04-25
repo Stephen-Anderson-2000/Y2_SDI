@@ -77,6 +77,7 @@ public:
             deletedNode = head;
             head = head->next;
             delete deletedNode;
+            count -= 1;
             return;
         }
 
@@ -94,6 +95,7 @@ public:
                 deletedNode = tempNode->next;
                 tempNode->next = deletedNode->next;
                 delete deletedNode;
+                count -= 1;
             }
 
             else
@@ -103,6 +105,7 @@ public:
                 tempNode->next = NULL;
                 tail = tempNode;
                 delete deletedNode;
+                count -= 1;
             }
 
             return;

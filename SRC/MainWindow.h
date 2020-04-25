@@ -641,7 +641,6 @@ namespace SDIMaster
 			this->MinimumSize = System::Drawing::Size(995, 575);
 			this->Name = L"MainWindow";
 			this->Text = L"MainWindow";
-			this->Load += gcnew System::EventHandler(this, &MainWindow::MainWindow_Load);
 			this->splitContainer1->Panel1->ResumeLayout(false);
 			this->splitContainer1->Panel2->ResumeLayout(false);
 			this->splitContainer1->Panel2->PerformLayout();
@@ -817,10 +816,6 @@ namespace SDIMaster
 		SortClassPane("B");
 		RenderAnnotations(GUI::drawnImage);
 		ListAnnotations();
-	}
-
-	private: System::Void MainWindow_Load(System::Object^ sender, System::EventArgs^ e) {
-		GUI::boxCanvas = imageDisplay->CreateGraphics();
 	}
 
 	private: System::Void buttonRemoveAnnotation_Click(System::Object^ sender, System::EventArgs^ e) {

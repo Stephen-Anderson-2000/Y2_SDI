@@ -8,13 +8,13 @@ struct Node
     Node* next;
 };
 
-class LinkedList
+class LinkedListString
 {
 private:
     Node* head;
     Node* tail;
 public:
-    LinkedList()
+    LinkedListString()
     {
         head = NULL;
         tail = NULL;

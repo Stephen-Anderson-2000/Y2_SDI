@@ -171,9 +171,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="ClassList.h" />
     <ClInclude Include="SRC\Annotation.h" />
     <ClInclude Include="SRC\AnnotationFile.h" />
+    <ClInclude Include="SRC\ClassList.h" />
     <ClInclude Include="SRC\GlobalImageList.h" />
     <ClInclude Include="SRC\GUI.h" />
     <ClInclude Include="SRC\ImageData.h" />

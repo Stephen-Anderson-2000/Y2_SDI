@@ -48,10 +48,10 @@
     <ClInclude Include="SRC\json.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ClassList.h">
+    <ClInclude Include="SRC\PositionCalculation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SRC\PositionCalculation.h">
+    <ClInclude Include="SRC\ClassList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

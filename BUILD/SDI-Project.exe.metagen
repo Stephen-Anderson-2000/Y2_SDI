@@ -97,6 +97,7 @@ Class GUI: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
     System.String imageSearchTerm : Public, Static
     System.String labelSearchTerm : Public, Static
     System.Drawing.Graphics boxCanvas : Public, Static
+    System.String annotationFilePath : Public, Static
     Single imageScale : Public, Static
     Int32 xOffset : Public, Static
     Int32 yOffset : Public, Static

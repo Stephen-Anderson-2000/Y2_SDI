@@ -173,11 +173,11 @@ namespace SDIMaster
 			this->groupBox3 = (gcnew System::Windows::Forms::GroupBox());
 			this->buttonRemoveAnnotation = (gcnew System::Windows::Forms::Button());
 			this->GroupBox_Annotations = (gcnew System::Windows::Forms::ListBox());
+			this->Label_AnnotationCount = (gcnew System::Windows::Forms::Label());
+			this->Button_SaveAnnotations = (gcnew System::Windows::Forms::Button());
+			this->Button_LoadAnnotations = (gcnew System::Windows::Forms::Button());
 			this->ComboBox_ToolSelection = (gcnew System::Windows::Forms::ComboBox());
 			this->imageDisplay = (gcnew System::Windows::Forms::PictureBox());
-			this->Button_LoadAnnotations = (gcnew System::Windows::Forms::Button());
-			this->Button_SaveAnnotations = (gcnew System::Windows::Forms::Button());
-			this->Label_AnnotationCount = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->splitContainer1))->BeginInit();
 			this->splitContainer1->Panel1->SuspendLayout();
 			this->splitContainer1->Panel2->SuspendLayout();
@@ -217,7 +217,7 @@ namespace SDIMaster
 			this->splitContainer1->Panel2->Controls->Add(this->Button_LoadAnnotations);
 			this->splitContainer1->Panel2->Controls->Add(this->ComboBox_ToolSelection);
 			this->splitContainer1->Panel2->Controls->Add(this->imageDisplay);
-			this->splitContainer1->Size = System::Drawing::Size(977, 642);
+			this->splitContainer1->Size = System::Drawing::Size(979, 642);
 			this->splitContainer1->SplitterDistance = 317;
 			this->splitContainer1->SplitterWidth = 3;
 			this->splitContainer1->TabIndex = 0;
@@ -574,11 +574,43 @@ namespace SDIMaster
 			this->GroupBox_Annotations->Size = System::Drawing::Size(311, 147);
 			this->GroupBox_Annotations->TabIndex = 0;
 			// 
+			// Label_AnnotationCount
+			// 
+			this->Label_AnnotationCount->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
+			this->Label_AnnotationCount->AutoSize = true;
+			this->Label_AnnotationCount->Location = System::Drawing::Point(13, 521);
+			this->Label_AnnotationCount->Name = L"Label_AnnotationCount";
+			this->Label_AnnotationCount->Size = System::Drawing::Size(35, 13);
+			this->Label_AnnotationCount->TabIndex = 10;
+			this->Label_AnnotationCount->Text = L"label5";
+			// 
+			// Button_SaveAnnotations
+			// 
+			this->Button_SaveAnnotations->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
+			this->Button_SaveAnnotations->Location = System::Drawing::Point(13, 607);
+			this->Button_SaveAnnotations->Name = L"Button_SaveAnnotations";
+			this->Button_SaveAnnotations->Size = System::Drawing::Size(102, 23);
+			this->Button_SaveAnnotations->TabIndex = 9;
+			this->Button_SaveAnnotations->Text = L"Save Annotations";
+			this->Button_SaveAnnotations->UseVisualStyleBackColor = true;
+			this->Button_SaveAnnotations->Click += gcnew System::EventHandler(this, &MainWindow::Button_SaveAnnotations_Click);
+			// 
+			// Button_LoadAnnotations
+			// 
+			this->Button_LoadAnnotations->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
+			this->Button_LoadAnnotations->Location = System::Drawing::Point(13, 578);
+			this->Button_LoadAnnotations->Name = L"Button_LoadAnnotations";
+			this->Button_LoadAnnotations->Size = System::Drawing::Size(102, 23);
+			this->Button_LoadAnnotations->TabIndex = 8;
+			this->Button_LoadAnnotations->Text = L"Load Annotations";
+			this->Button_LoadAnnotations->UseVisualStyleBackColor = true;
+			// 
 			// ComboBox_ToolSelection
 			// 
+			this->ComboBox_ToolSelection->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
 			this->ComboBox_ToolSelection->FormattingEnabled = true;
 			this->ComboBox_ToolSelection->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"Create Rectangle", L"Resize", L"Erase" });
-			this->ComboBox_ToolSelection->Location = System::Drawing::Point(524, 521);
+			this->ComboBox_ToolSelection->Location = System::Drawing::Point(526, 521);
 			this->ComboBox_ToolSelection->Name = L"ComboBox_ToolSelection";
 			this->ComboBox_ToolSelection->Size = System::Drawing::Size(121, 21);
 			this->ComboBox_ToolSelection->TabIndex = 7;
@@ -593,47 +625,20 @@ namespace SDIMaster
 			this->imageDisplay->Location = System::Drawing::Point(2, 2);
 			this->imageDisplay->Margin = System::Windows::Forms::Padding(2);
 			this->imageDisplay->Name = L"imageDisplay";
-			this->imageDisplay->Size = System::Drawing::Size(653, 514);
+			this->imageDisplay->Size = System::Drawing::Size(656, 514);
 			this->imageDisplay->TabIndex = 6;
 			this->imageDisplay->TabStop = false;
 			this->imageDisplay->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &MainWindow::imageDisplay_MouseDown);
 			this->imageDisplay->MouseUp += gcnew System::Windows::Forms::MouseEventHandler(this, &MainWindow::imageDisplay_MouseUp);
 			// 
-			// Button_LoadAnnotations
-			// 
-			this->Button_LoadAnnotations->Location = System::Drawing::Point(13, 578);
-			this->Button_LoadAnnotations->Name = L"Button_LoadAnnotations";
-			this->Button_LoadAnnotations->Size = System::Drawing::Size(102, 23);
-			this->Button_LoadAnnotations->TabIndex = 8;
-			this->Button_LoadAnnotations->Text = L"Load Annotations";
-			this->Button_LoadAnnotations->UseVisualStyleBackColor = true;
-			// 
-			// Button_SaveAnnotations
-			// 
-			this->Button_SaveAnnotations->Location = System::Drawing::Point(13, 607);
-			this->Button_SaveAnnotations->Name = L"Button_SaveAnnotations";
-			this->Button_SaveAnnotations->Size = System::Drawing::Size(102, 23);
-			this->Button_SaveAnnotations->TabIndex = 9;
-			this->Button_SaveAnnotations->Text = L"Save Annotations";
-			this->Button_SaveAnnotations->UseVisualStyleBackColor = true;
-			this->Button_SaveAnnotations->Click += gcnew System::EventHandler(this, &MainWindow::Button_SaveAnnotations_Click);
-			// 
-			// Label_AnnotationCount
-			// 
-			this->Label_AnnotationCount->AutoSize = true;
-			this->Label_AnnotationCount->Location = System::Drawing::Point(13, 521);
-			this->Label_AnnotationCount->Name = L"Label_AnnotationCount";
-			this->Label_AnnotationCount->Size = System::Drawing::Size(35, 13);
-			this->Label_AnnotationCount->TabIndex = 10;
-			this->Label_AnnotationCount->Text = L"label5";
-			// 
 			// MainWindow
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(977, 642);
+			this->ClientSize = System::Drawing::Size(979, 642);
 			this->Controls->Add(this->splitContainer1);
 			this->Margin = System::Windows::Forms::Padding(2);
+			this->MinimumSize = System::Drawing::Size(995, 575);
 			this->Name = L"MainWindow";
 			this->Text = L"MainWindow";
 			this->Load += gcnew System::EventHandler(this, &MainWindow::MainWindow_Load);

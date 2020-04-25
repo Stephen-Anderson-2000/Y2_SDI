@@ -28,7 +28,24 @@ namespace TESTS
 
 		}
 
-		TEST_METHOD(RemoveItem)
+		TEST_METHOD(RemoveLastItem)
+		{
+
+		}
+
+		// Remove the second item from a list of three
+		TEST_METHOD(RemoveMiddleItem)
+		{
+
+		}
+
+		TEST_METHOD(RemoveFirstItem)
+		{
+
+		}
+
+		// Remove the only item that is in the list
+		TEST_METHOD(RemoveAllItems)
 		{
 
 		}
@@ -38,12 +55,18 @@ namespace TESTS
 
 		}
 
-		TEST_METHOD(RemoveAllItems)
+		TEST_METHOD(OneThousandItems)
 		{
 
 		}
 
-		TEST_METHOD(RemoveAddAllItems)
+		// Done with a list of 100 items
+		TEST_METHOD(RemoveAndAddAllItems)
+		{
+
+		}
+
+		TEST_METHOD(AddingInvalidType)
 		{
 
 		}
@@ -79,17 +102,22 @@ namespace TESTS
 		}
 
 		// Tests when the *input* is all capital letters
-		TEST_METHOD(AllUpperCaseLetters)
+		TEST_METHOD(AllUppercaseLetters)
 		{
 
 		}
 
-		TEST_METHOD(AllLowerCaseLetters)
+		TEST_METHOD(AllLowercaseLetters)
 		{
 
 		}
 
 		TEST_METHOD(IncludesNumbers)
+		{
+
+		}
+
+		TEST_METHOD(IncludesSpecialCharacters)
 		{
 
 		}
@@ -138,6 +166,11 @@ namespace TESTS
 		{
 
 		}
+
+		TEST_METHOD(OneHundredItems)
+		{
+
+		}
 	};
 
 	TEST_CLASS(SortingByDate)
@@ -149,6 +182,21 @@ namespace TESTS
 		}
 
 		TEST_METHOD(OneItem)
+		{
+
+		}
+
+		TEST_METHOD(NewestFirst)
+		{
+
+		}
+
+		TEST_METHOD(OldestFirst)
+		{
+
+		}
+
+		TEST_METHOD(OneHundredItems)
 		{
 
 		}

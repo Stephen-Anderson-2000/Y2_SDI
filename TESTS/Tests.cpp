@@ -37,10 +37,9 @@ namespace TESTS
 			std::string myString = "Hello";
 
 			myList.Add(myString);
-			int firstCount = myList.Count();
 			myList.Remove(0);
 
-			Assert::AreNotEqual(firstCount, myList.Count());
+			// Looks at the length of the list to see if the item has been removed
 			Assert::AreEqual(0, myList.Count());
 		} // Checks that it can remove the last and only item from the list
 
@@ -49,22 +48,31 @@ namespace TESTS
 			LinkedListString myList;
 			std::string myString1 = "Hello";
 			std::string myString2 = "world";
+
 			myList.Add(myString1);
 			myList.Add(myString2);
+
 			myList.Remove(0);
+
+			// Checks to see that the second item moves to the first slot
 			Assert::AreEqual(myString2, myList.At(0));
 		} // Checks that removing the first item shifts the second one to the start
 
-		TEST_METHOD(RemoveMiddleItem)
+		TEST_METHOD(RemoveMiddleItemListOfThree)
 		{
 			LinkedListString myList;
 			std::string myString1 = "Hello";
 			std::string myString2 = "lovely";
 			std::string myString3 = "world";
+
 			myList.Add(myString1);
 			myList.Add(myString2);
 			myList.Add(myString3);
+
+			// Removes the second element - "lovely"
 			myList.Remove(1);
+
+			// Confirms that "Hello" and "world" are still accessible
 			Assert::AreEqual(myString1, myList.At(0));
 			Assert::AreEqual(myString3, myList.At(1));
 		} // Removes the second item from a list of three and checks that the remaining two items shift and can be accessed
@@ -84,26 +92,55 @@ namespace TESTS
 			myList.Add(myString4);
 			myList.Add(myString5);
 
-			myList.Remove(3);
+			// Removes the third item from the list
+			myList.Remove(2);
+
 			Assert::AreEqual(myString1, myList.At(0));
 			Assert::AreEqual(myString2, myList.At(1));
 			Assert::AreEqual(myString4, myList.At(2));
 			Assert::AreEqual(myString5, myList.At(3));
 		} // Removes the second item from a list of three and checks that the remaining two items shift and can be accessed
 
-		TEST_METHOD(RemoveAllItems)
+		TEST_METHOD(RemoveAllItemsReverse)
 		{
 			LinkedListString myList;
 			std::string myString1 = "Hello";
 			std::string myString2 = "lovely";
 			std::string myString3 = "world";
+
 			myList.Add(myString1);
 			myList.Add(myString2);
 			myList.Add(myString3);
+
+			// Iterates through each item from back to front and removes it
 			for (int i = myList.Count(); i >= 0; i--)
 			{
 				myList.Remove(i);
 			}
+
+			// Checks the number of items in the list to confirm they have been removed
+			Assert::AreEqual(0, myList.Count());
+		} // Removes all three items to check that they are removed correctly
+
+		TEST_METHOD(RemoveAllItemsForwards)
+		{
+			LinkedListString myList;
+			std::string myString1 = "Hello";
+			std::string myString2 = "lovely";
+			std::string myString3 = "world";
+
+			myList.Add(myString1);
+			myList.Add(myString2);
+			myList.Add(myString3);
+
+			int count = myList.Count();
+			// Iterates through each item
+			for (int i = 0; i < count; i++)
+			{
+				myList.Remove(0);
+			}
+
+			// Checks the number of items in the list to confirm they have been removed
 			Assert::AreEqual(0, myList.Count());
 		} // Removes all three items to check that they are removed correctly
 
@@ -187,14 +224,27 @@ namespace TESTS
 			Assert::AreEqual(emptyString, myString);
 		}
 
-		TEST_METHOD(AccessDeletedValue)
+		TEST_METHOD(AccessDeletedFirstValue)
+		{
+			LinkedListString myList;
+			std::string myString1 = "Hello";
+			myList.Add(myString1);
+			myList.Remove(0);
+			std::string myString2 = myList.At(0);
+			std::string emptyString = "";
+			Assert::AreEqual(emptyString, myString2);
+		}
+
+		TEST_METHOD(AccessDeletedSecondValue)
 		{
 			LinkedListString myList;
 			std::string myString1 = "Hello";
 			std::string myString2 = "world";
+
 			myList.Add(myString1);
 			myList.Add(myString2);
 			myList.Remove(1);
+
 			std::string myString3 = myList.At(1);
 			std::string emptyString = "";
 			Assert::AreEqual(emptyString, myString3);

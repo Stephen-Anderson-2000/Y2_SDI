@@ -38,21 +38,6 @@ Assembly System.Windows.Presentation, Version=4.0.0.0, Culture=neutral, PublicKe
 	hash=None, flags=None
 Assembly System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
 	hash=None, flags=None
-Class imageData: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
-    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
-  Fields:
-    System.Drawing.Bitmap srcImage : Public
-    System.Collections.Generic.List`1[System.Collections.Generic.List`1[System.Int32]] boxList : Public
-    System.Collections.Generic.List`1[System.String] boxNameList : Public
-    System.Collections.Generic.List`1[System.String] labelList : Public
-    System.String fileName : Public
-Class GlobalList.GlobalClass: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
-    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
-  Fields:
-    System.Collections.Generic.List`1[imageData] loadedImages IsByValue : Public, Static, InitOnly
-    System.String imageKeyword : Public, Static
-    System.String labelKeyword : Public, Static
-    System.String boxKeyword : Public, Static
 Class Annotation: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Fields:
@@ -103,6 +88,7 @@ Class GUI: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
     System.Collections.Generic.List`1[ImageFile] loadedImages : Public, Static
     System.Collections.Generic.List`1[Annotation] annotations : Public, Static
     System.ValueType mouseDownLocation Point IsBoxed : Public, Static
+    Int32 cornerSelected : Public, Static
     System.Collections.Generic.List`1[System.Int32] imageIndices : Public, Static
     System.Collections.Generic.List`1[System.Int32] labelIndices : Public, Static
     System.Collections.Generic.List`1[System.String] labelNames : Public, Static
@@ -119,6 +105,21 @@ Class GUI: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
     LoadImageToCanvas(Int32): PrivateScope, Public, Static, HideBySig
     CreateLabel(String): PrivateScope, Public, Static, HideBySig
     DrawImage(): PrivateScope, Public, Static, HideBySig
+Class imageData: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.Drawing.Bitmap srcImage : Public
+    System.Collections.Generic.List`1[System.Collections.Generic.List`1[System.Int32]] boxList : Public
+    System.Collections.Generic.List`1[System.String] boxNameList : Public
+    System.Collections.Generic.List`1[System.String] labelList : Public
+    System.String fileName : Public
+Class GlobalList.GlobalClass: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.Collections.Generic.List`1[imageData] loadedImages IsByValue : Public, Static, InitOnly
+    System.String imageKeyword : Public, Static
+    System.String labelKeyword : Public, Static
+    System.String boxKeyword : Public, Static
 Class SDIMaster.MainWindow: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName

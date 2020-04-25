@@ -6,6 +6,7 @@
 #include "Annotation.h"
 #include "AnnotationFile.h"
 #include "ImageFile.h"
+#include "PositionCalculation.h"
 #include "GUI.h"
 #include <fstream>
 
@@ -20,9 +21,20 @@ using namespace System::IO;
 using namespace SDIMaster;
 using namespace GlobalList;
 using namespace std;
+using namespace PositionCalculation;
 
 namespace SDIMaster
 {
+	int CalculatePos(int position, int offset, float imageScale) {
+		int newPos = floor(float(position) * imageScale + float(offset));
+		return newPos;
+	}
+
+	int CalculatePosInverse(int position, int offset, float imageScale) {
+		int newPos = floor(float(position - float(offset)) / imageScale);
+		return newPos;
+	}
+
 	System::Void MainWindow::BrowseFolder() {
 		System::String^ folderPath;
 		FolderBrowserDialog^ folderBrowserDialog = gcnew FolderBrowserDialog;
@@ -223,15 +235,6 @@ namespace SDIMaster
 		}
 
 	}
-
-	int MainWindow::CalculatePos(int position, int offset, float imageScale) {
-		int newPos = floor(float(position) * imageScale + float(offset));
-		return newPos;
-	}
-
-	int MainWindow::CalculatePosInverse(int position, int offset, float imageScale) {
-		int newPos = floor(float(position - float(offset)) / imageScale);
-		return newPos;
-	}
+	
 
 }

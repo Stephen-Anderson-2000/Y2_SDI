@@ -7,6 +7,8 @@
 #include "AnnotationFile.h"
 #include "ImageFile.h"
 #include "GUI.h"
+#include "JSONparsing.h"
+#include "PositionCalculation.h"
 
 
 namespace SDIMaster
@@ -20,6 +22,7 @@ namespace SDIMaster
 	using namespace System::Data;
 	using namespace System::Drawing;
 	using namespace GlobalList;
+	using namespace PositionCalculation;
 
 	/// <summary>
 	/// Summary for MainWindow
@@ -118,6 +121,9 @@ namespace SDIMaster
 	private: System::Windows::Forms::Label^ label3;
 	private: System::Windows::Forms::TextBox^ TextBox_SearchClasses;
 	private: System::Windows::Forms::ComboBox^ ComboBox_ToolSelection;
+	private: System::Windows::Forms::Button^ Button_SaveAnnotations;
+	private: System::Windows::Forms::Button^ Button_LoadAnnotations;
+	private: System::Windows::Forms::Label^ Label_AnnotationCount;
 
 
 
@@ -167,8 +173,11 @@ namespace SDIMaster
 			this->groupBox3 = (gcnew System::Windows::Forms::GroupBox());
 			this->buttonRemoveAnnotation = (gcnew System::Windows::Forms::Button());
 			this->GroupBox_Annotations = (gcnew System::Windows::Forms::ListBox());
-			this->imageDisplay = (gcnew System::Windows::Forms::PictureBox());
 			this->ComboBox_ToolSelection = (gcnew System::Windows::Forms::ComboBox());
+			this->imageDisplay = (gcnew System::Windows::Forms::PictureBox());
+			this->Button_LoadAnnotations = (gcnew System::Windows::Forms::Button());
+			this->Button_SaveAnnotations = (gcnew System::Windows::Forms::Button());
+			this->Label_AnnotationCount = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->splitContainer1))->BeginInit();
 			this->splitContainer1->Panel1->SuspendLayout();
 			this->splitContainer1->Panel2->SuspendLayout();
@@ -203,6 +212,9 @@ namespace SDIMaster
 			// 
 			// splitContainer1.Panel2
 			// 
+			this->splitContainer1->Panel2->Controls->Add(this->Label_AnnotationCount);
+			this->splitContainer1->Panel2->Controls->Add(this->Button_SaveAnnotations);
+			this->splitContainer1->Panel2->Controls->Add(this->Button_LoadAnnotations);
 			this->splitContainer1->Panel2->Controls->Add(this->ComboBox_ToolSelection);
 			this->splitContainer1->Panel2->Controls->Add(this->imageDisplay);
 			this->splitContainer1->Size = System::Drawing::Size(977, 642);
@@ -562,6 +574,15 @@ namespace SDIMaster
 			this->GroupBox_Annotations->Size = System::Drawing::Size(311, 147);
 			this->GroupBox_Annotations->TabIndex = 0;
 			// 
+			// ComboBox_ToolSelection
+			// 
+			this->ComboBox_ToolSelection->FormattingEnabled = true;
+			this->ComboBox_ToolSelection->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"Create Rectangle", L"Resize", L"Erase" });
+			this->ComboBox_ToolSelection->Location = System::Drawing::Point(524, 521);
+			this->ComboBox_ToolSelection->Name = L"ComboBox_ToolSelection";
+			this->ComboBox_ToolSelection->Size = System::Drawing::Size(121, 21);
+			this->ComboBox_ToolSelection->TabIndex = 7;
+			// 
 			// imageDisplay
 			// 
 			this->imageDisplay->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
@@ -572,20 +593,39 @@ namespace SDIMaster
 			this->imageDisplay->Location = System::Drawing::Point(2, 2);
 			this->imageDisplay->Margin = System::Windows::Forms::Padding(2);
 			this->imageDisplay->Name = L"imageDisplay";
-			this->imageDisplay->Size = System::Drawing::Size(652, 514);
+			this->imageDisplay->Size = System::Drawing::Size(653, 514);
 			this->imageDisplay->TabIndex = 6;
 			this->imageDisplay->TabStop = false;
 			this->imageDisplay->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &MainWindow::imageDisplay_MouseDown);
 			this->imageDisplay->MouseUp += gcnew System::Windows::Forms::MouseEventHandler(this, &MainWindow::imageDisplay_MouseUp);
 			// 
-			// ComboBox_ToolSelection
+			// Button_LoadAnnotations
 			// 
-			this->ComboBox_ToolSelection->FormattingEnabled = true;
-			this->ComboBox_ToolSelection->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"Create Rectangle", L"Resize", L"Erase" });
-			this->ComboBox_ToolSelection->Location = System::Drawing::Point(524, 521);
-			this->ComboBox_ToolSelection->Name = L"ComboBox_ToolSelection";
-			this->ComboBox_ToolSelection->Size = System::Drawing::Size(121, 21);
-			this->ComboBox_ToolSelection->TabIndex = 7;
+			this->Button_LoadAnnotations->Location = System::Drawing::Point(13, 578);
+			this->Button_LoadAnnotations->Name = L"Button_LoadAnnotations";
+			this->Button_LoadAnnotations->Size = System::Drawing::Size(102, 23);
+			this->Button_LoadAnnotations->TabIndex = 8;
+			this->Button_LoadAnnotations->Text = L"Load Annotations";
+			this->Button_LoadAnnotations->UseVisualStyleBackColor = true;
+			// 
+			// Button_SaveAnnotations
+			// 
+			this->Button_SaveAnnotations->Location = System::Drawing::Point(13, 607);
+			this->Button_SaveAnnotations->Name = L"Button_SaveAnnotations";
+			this->Button_SaveAnnotations->Size = System::Drawing::Size(102, 23);
+			this->Button_SaveAnnotations->TabIndex = 9;
+			this->Button_SaveAnnotations->Text = L"Save Annotations";
+			this->Button_SaveAnnotations->UseVisualStyleBackColor = true;
+			this->Button_SaveAnnotations->Click += gcnew System::EventHandler(this, &MainWindow::Button_SaveAnnotations_Click);
+			// 
+			// Label_AnnotationCount
+			// 
+			this->Label_AnnotationCount->AutoSize = true;
+			this->Label_AnnotationCount->Location = System::Drawing::Point(13, 521);
+			this->Label_AnnotationCount->Name = L"Label_AnnotationCount";
+			this->Label_AnnotationCount->Size = System::Drawing::Size(35, 13);
+			this->Label_AnnotationCount->TabIndex = 10;
+			this->Label_AnnotationCount->Text = L"label5";
 			// 
 			// MainWindow
 			// 
@@ -599,6 +639,7 @@ namespace SDIMaster
 			this->Load += gcnew System::EventHandler(this, &MainWindow::MainWindow_Load);
 			this->splitContainer1->Panel1->ResumeLayout(false);
 			this->splitContainer1->Panel2->ResumeLayout(false);
+			this->splitContainer1->Panel2->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->splitContainer1))->EndInit();
 			this->splitContainer1->ResumeLayout(false);
 			this->splitContainer2->Panel1->ResumeLayout(false);
@@ -668,13 +709,6 @@ namespace SDIMaster
 
 	protected: System::Void RenderAnnotations(int);
 			 //Render currently loaded image and annotation
-
-
-			 ///Calculate point relative to image, for rendering
-	protected: int CalculatePos(int, int, float);
-
-			 ///Calculate point relative to image, for placement
-	protected: int CalculatePosInverse(int, int, float);
 
 	protected: System::Void ListAnnotations();
 
@@ -801,6 +835,9 @@ namespace SDIMaster
 		GUI::labelSearchTerm = TextBox_SearchClasses->Text;
 		SortClassPane("A");
 	}
-	};
+	private: System::Void Button_SaveAnnotations_Click(System::Object^ sender, System::EventArgs^ e) {
+		SaveJson();
+	}
+};
 
 }

@@ -117,6 +117,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies />
+      <SubSystem>NotSet</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug (Without TESTS)|Win32'">
@@ -167,18 +168,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Downloads\json.hpp" />
-    <ClInclude Include="JSONparsing.h" />
-    <ClInclude Include="ResizeAnnotation.h" />
+    <ClInclude Include="ClassList.h" />
     <ClInclude Include="SRC\Annotation.h" />
     <ClInclude Include="SRC\AnnotationFile.h" />
     <ClInclude Include="SRC\GlobalImageList.h" />
     <ClInclude Include="SRC\GUI.h" />
     <ClInclude Include="SRC\ImageData.h" />
     <ClInclude Include="SRC\ImageFile.h" />
+    <ClInclude Include="SRC\json.hpp" />
+    <ClInclude Include="SRC\JSONparsing.h" />
     <ClInclude Include="SRC\MainWindow.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="SRC\PositionCalculation.h" />
+    <ClInclude Include="SRC\ResizeAnnotation.h" />
     <ClInclude Include="SRC\SortAndSearch.h" />
   </ItemGroup>
   <ItemGroup>
@@ -201,8 +204,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="SRC\JSONparsing.cpp" />
     <ClCompile Include="SRC\Main.cpp" />
     <ClCompile Include="SRC\MainWindow.cpp" />
+    <ClCompile Include="SRC\PositionCalculation.cpp" />
     <ClCompile Include="SRC\SortAndSearch.cpp" />
   </ItemGroup>
   <ItemGroup>

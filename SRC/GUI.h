@@ -18,6 +18,7 @@ public:
 	static List<ImageFile^>^ loadedImages = gcnew List<ImageFile^>;
 	static List<Annotation^>^ annotations = gcnew List<Annotation^>;
 	static Point^ mouseDownLocation = gcnew Point;
+	static int cornerSelected;
 	static List<int>^ imageIndices = gcnew List<int>;
 	static List<int>^ labelIndices = gcnew List<int>;
 	static List<String^>^ labelNames = gcnew List<String^>;

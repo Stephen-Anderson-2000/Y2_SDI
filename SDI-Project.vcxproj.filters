@@ -39,13 +39,19 @@
     <ClInclude Include="SRC\SortAndSearch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="JSONparsing.h">
+    <ClInclude Include="SRC\ResizeAnnotation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Downloads\json.hpp">
+    <ClInclude Include="SRC\JSONparsing.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ResizeAnnotation.h">
+    <ClInclude Include="SRC\json.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SRC\PositionCalculation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -57,6 +63,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SRC\SortAndSearch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SRC\JSONparsing.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SRC\PositionCalculation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -35,8 +35,11 @@ void SaveJson() {
 				int Point1Y = GUI::loadedImages[i]->annotationFiles[0]->annotationsPolygonal[j]->vertices[1];
 				int Point2X = GUI::loadedImages[i]->annotationFiles[0]->annotationsPolygonal[j]->vertices[2];
 				int Point2Y = GUI::loadedImages[i]->annotationFiles[0]->annotationsPolygonal[j]->vertices[3];
-				file["annotatedImages"][imageCount]["shapes"][j] = json::object();
-				file["annotatedImages"][file["imageCount"] - 1]["shapes"].push_back({ {"label", tempString}, {"point1", {Point1X, Point1Y}}, {"point2", {Point2X, Point2Y}} });
+				auto jsonObject = json::object();
+				jsonObject["label"] = tempString;
+				jsonObject["point1"] = { Point1X, Point1Y };
+				jsonObject["point2"] = { Point2X, Point2Y };
+				file["annotatedImages"][imageCount]["shapes"].push_back(jsonObject);
 			}
 			imageCount += 1;
 		}

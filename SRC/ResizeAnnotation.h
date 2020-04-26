@@ -1,5 +1,6 @@
 #pragma once
 #include "GUI.h"
+#include "PositionCalculation.h"
 
 using namespace System;
 using namespace System::Drawing;

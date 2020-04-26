@@ -604,13 +604,14 @@ namespace SDIMaster
 			this->Button_LoadAnnotations->TabIndex = 8;
 			this->Button_LoadAnnotations->Text = L"Load Annotations";
 			this->Button_LoadAnnotations->UseVisualStyleBackColor = true;
+			this->Button_LoadAnnotations->Click += gcnew System::EventHandler(this, &MainWindow::Button_LoadAnnotations_Click);
 			// 
 			// ComboBox_ToolSelection
 			// 
 			this->ComboBox_ToolSelection->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
 			this->ComboBox_ToolSelection->FormattingEnabled = true;
 			this->ComboBox_ToolSelection->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"Create Rectangle", L"Resize", L"Erase" });
-			this->ComboBox_ToolSelection->Location = System::Drawing::Point(526, 521);
+			this->ComboBox_ToolSelection->Location = System::Drawing::Point(527, 521);
 			this->ComboBox_ToolSelection->Name = L"ComboBox_ToolSelection";
 			this->ComboBox_ToolSelection->Size = System::Drawing::Size(121, 21);
 			this->ComboBox_ToolSelection->TabIndex = 7;
@@ -625,7 +626,7 @@ namespace SDIMaster
 			this->imageDisplay->Location = System::Drawing::Point(2, 2);
 			this->imageDisplay->Margin = System::Windows::Forms::Padding(2);
 			this->imageDisplay->Name = L"imageDisplay";
-			this->imageDisplay->Size = System::Drawing::Size(656, 514);
+			this->imageDisplay->Size = System::Drawing::Size(657, 514);
 			this->imageDisplay->TabIndex = 6;
 			this->imageDisplay->TabStop = false;
 			this->imageDisplay->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &MainWindow::imageDisplay_MouseDown);
@@ -836,7 +837,11 @@ namespace SDIMaster
 		SortClassPane("A");
 	}
 	private: System::Void Button_SaveAnnotations_Click(System::Object^ sender, System::EventArgs^ e) {
-		SaveJson();
+		SaveJson("file.json");
+	}
+
+	private: System::Void Button_LoadAnnotations_Click(System::Object^ sender, System::EventArgs^ e) {
+		LoadJson("file.json");
 	}
 };
 

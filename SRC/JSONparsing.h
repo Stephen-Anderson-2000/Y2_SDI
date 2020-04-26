@@ -8,4 +8,6 @@ using namespace std;
 
 string SystemToStdString(String^);
 
-void SaveJson();
+void SaveJson(string);
+
+void LoadJson(string);

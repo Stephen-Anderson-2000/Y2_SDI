@@ -669,7 +669,11 @@ namespace TESTS
 			myList.Add(myString3);
 			myList.Add(myString4);
 			myList.Add(myString5);
+			correctResult.Add(myString1);
+			correctResult.Add(myString2);
 			correctResult.Add(myString3);
+			correctResult.Add(myString4);
+			correctResult.Add(myString5);
 
 			// Searches for an empty string and returns a linked list object
 			searchedList = myList.Search("");

@@ -122,8 +122,22 @@ public:
 
     LinkedListString Search(string term)
     {
-        //Linear search
         LinkedListString tempList;
+        std::string tempString;
+        if (term != "")
+        {
+            for (int i = 0; i < count; i++) {
+                tempString = this->At(i);
+                if (tempString.find(term) != std::string::npos)
+                {
+                    tempList.Add(tempString);
+                }
+            }
+        }
+        else
+        {
+            tempList = *this;
+        }
         return tempList;
     }
 

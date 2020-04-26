@@ -95,6 +95,7 @@ namespace TESTS
 			// Removes the third item from the list
 			myList.Remove(2);
 
+			// Confirms that "The", "quick", "fox" and "jumped" are still accessible
 			Assert::AreEqual(myString1, myList.At(0));
 			Assert::AreEqual(myString2, myList.At(1));
 			Assert::AreEqual(myString4, myList.At(2));
@@ -134,7 +135,7 @@ namespace TESTS
 			myList.Add(myString3);
 
 			int count = myList.Count();
-			// Iterates through each item
+			// Iterates through each item and removes it, making the next shift to the head each time
 			for (int i = 0; i < count; i++)
 			{
 				myList.Remove(0);
@@ -149,6 +150,8 @@ namespace TESTS
 			ifstream myFile("Test Resources/100 Words.txt");
 			LinkedListString myList;
 			std::string myArray[100];
+
+			// Loads a list of strings from a text file
 			if (myFile.is_open())
 			{
 				for (int i = 0; i < 100; i++)
@@ -157,18 +160,30 @@ namespace TESTS
 				}
 				myFile.close();
 			}
+
+			// Adds the loaded text items to the list
 			for (int i = 0; i < 100; i++)
 			{
 				myList.Add(myArray[i]);
 			}
+
+			// Checks that there are 100 items in the list
 			Assert::AreEqual(100, myList.Count());
-		}
+
+			// Iterates through each item and checks that the order is kept and no data is corrupted
+			for (int i = 0; i < 100; i++)
+			{
+				Assert::AreEqual(myArray[i], myList.At(i));
+			}
+		} // Checks to see if the object can store 100 items without issue
 
 		TEST_METHOD(TenThousandItems)
 		{
 			ifstream myFile("Test Resources/10000 Words.txt");
 			LinkedListString myList;
 			std::string myArray[10000];
+
+			// Loads a list of strings from a text file
 			if (myFile.is_open())
 			{
 				for (int i = 0; i < 10000; i++)
@@ -177,20 +192,31 @@ namespace TESTS
 				}
 				myFile.close();
 			}
+
+			// Adds the loaded items to the list
 			for (int i = 0; i < 10000; i++)
 			{
 				myList.Add(myArray[i]);
 			}
-			Assert::AreEqual(10000, myList.Count());
-		}
 
-		// Done with a list of 100 items
+			// Checks that there are 10000 items in the list
+			Assert::AreEqual(10000, myList.Count());
+
+			// Iterates through each item and checks that the order is kept and no data is corrupted
+			for (int i = 0; i < 10000; i++)
+			{
+				Assert::AreEqual(myArray[i], myList.At(i));
+			}
+		} // Checks to see if the object can store 10000 items without issue
+
 		TEST_METHOD(RemoveAndAddHalfItems)
 		{
 			ifstream myFile("Test Resources/100 Words.txt");
 			LinkedListString myList;
 			std::string myArray[100];
-			std::string myArray2[100];
+			std::string myArray2[50];
+
+			// Loads a list of strings from a text file
 			if (myFile.is_open())
 			{
 				for (int i = 0; i < 100; i++)
@@ -199,41 +225,60 @@ namespace TESTS
 				}
 				myFile.close();
 			}
+
+			// Adds the loaded items to the list
 			for (int i = 0; i < 100; i++)
 			{
 				myList.Add(myArray[i]);
 			}
-			for (int i = 50; i < 100; i++)
+
+			// Copies the last 50 items from the list into an array then removes them from the list
+			for (int i = 0; i < 50; i++)
 			{
-				myArray2[i] = myList.At(0);
+				myArray2[i] = myList.At(50);
 				myList.Remove(0);
 			}
-			for (int i = 50; i < 100; i++)
+
+			// Loops through the secondary array and adds the values back to the list
+			for (int i = 0; i < 50; i++)
 			{
 				myList.Add(myArray2[i]);
 			}
-			Assert::AreEqual(myArray[75], myArray2[75]);
+
+			// Compares the items at the same index to check if the order is kept
+			// then checks that there are still exactly 100 items in the list
+			for (int i = 0; i < 100; i++)
+			{
+				Assert::AreEqual(myArray[i], myList.At(i));
+			}
 			Assert::AreEqual(100, myList.Count());
-		}
+		} // Checks to see what happens if items are removed and added back to the list
 
 		TEST_METHOD(OutOfRange)
 		{
 			LinkedListString myList;
 			std::string myString = myList.At(5);
 			std::string emptyString = "";
+
 			Assert::AreEqual(emptyString, myString);
-		}
+		} // Attempts to access an invalid entry
 
 		TEST_METHOD(AccessDeletedFirstValue)
 		{
 			LinkedListString myList;
 			std::string myString1 = "Hello";
+			
+			// Adds then removes the first item
 			myList.Add(myString1);
 			myList.Remove(0);
+
+			// Attempts to fetch data from the now deleted value
 			std::string myString2 = myList.At(0);
+
+			// Checks to see if the exception is handled properly
 			std::string emptyString = "";
 			Assert::AreEqual(emptyString, myString2);
-		}
+		} // Attempts to access a single item after it has been deleted
 
 		TEST_METHOD(AccessDeletedSecondValue)
 		{
@@ -243,9 +288,14 @@ namespace TESTS
 
 			myList.Add(myString1);
 			myList.Add(myString2);
+
+			// Removes the second item from the list
 			myList.Remove(1);
 
+			// Attempts to fetch data from the now deleted value
 			std::string myString3 = myList.At(1);
+
+			// Checks to see if the exception is handled properly
 			std::string emptyString = "";
 			Assert::AreEqual(emptyString, myString3);
 		}

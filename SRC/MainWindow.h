@@ -439,7 +439,7 @@ private: System::ComponentModel::IContainer^ components;
 			// TextBox_SearchClasses
 			// 
 			this->TextBox_SearchClasses->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
-			this->TextBox_SearchClasses->Location = System::Drawing::Point(363, 183);
+			this->TextBox_SearchClasses->Location = System::Drawing::Point(147, 183);
 			this->TextBox_SearchClasses->Name = L"TextBox_SearchClasses";
 			this->TextBox_SearchClasses->Size = System::Drawing::Size(161, 20);
 			this->TextBox_SearchClasses->TabIndex = 7;
@@ -449,8 +449,8 @@ private: System::ComponentModel::IContainer^ components;
 			// 
 			this->ComboBox_SortClasses->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
 			this->ComboBox_SortClasses->FormattingEnabled = true;
-			this->ComboBox_SortClasses->Items->AddRange(gcnew cli::array< System::Object^  >(4) { L"Name ⯅", L"Name ⯆", L"Date ⯅", L"Date ⯆" });
-			this->ComboBox_SortClasses->Location = System::Drawing::Point(548, 160);
+			this->ComboBox_SortClasses->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Name ⯅", L"Name ⯆" });
+			this->ComboBox_SortClasses->Location = System::Drawing::Point(214, 157);
 			this->ComboBox_SortClasses->Name = L"ComboBox_SortClasses";
 			this->ComboBox_SortClasses->Size = System::Drawing::Size(94, 21);
 			this->ComboBox_SortClasses->TabIndex = 7;
@@ -711,7 +711,7 @@ private: System::ComponentModel::IContainer^ components;
 			this->ComboBox_ToolSelection->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
 			this->ComboBox_ToolSelection->FormattingEnabled = true;
 			this->ComboBox_ToolSelection->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Create Rectangle", L"Resize" });
-			this->ComboBox_ToolSelection->Location = System::Drawing::Point(547, 521);
+			this->ComboBox_ToolSelection->Location = System::Drawing::Point(548, 521);
 			this->ComboBox_ToolSelection->Name = L"ComboBox_ToolSelection";
 			this->ComboBox_ToolSelection->Size = System::Drawing::Size(105, 21);
 			this->ComboBox_ToolSelection->TabIndex = 7;
@@ -726,7 +726,7 @@ private: System::ComponentModel::IContainer^ components;
 			this->imageDisplay->Location = System::Drawing::Point(2, 2);
 			this->imageDisplay->Margin = System::Windows::Forms::Padding(2);
 			this->imageDisplay->Name = L"imageDisplay";
-			this->imageDisplay->Size = System::Drawing::Size(677, 514);
+			this->imageDisplay->Size = System::Drawing::Size(678, 514);
 			this->imageDisplay->TabIndex = 6;
 			this->imageDisplay->TabStop = false;
 			this->imageDisplay->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &MainWindow::imageDisplay_MouseDown);

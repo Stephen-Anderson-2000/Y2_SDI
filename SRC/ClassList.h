@@ -112,5 +112,19 @@ public:
         }
     }
 
+    LinkedListString Sort(int order)
+    {
+        //Order 0 = Regular / Ascending, 1 = Reverse / Descending
+        //bubble sort
+
+    }
+
+    LinkedListString Search(string term)
+    {
+        //Linear search
+    }
+
+
+
 
 };

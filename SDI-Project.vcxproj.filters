@@ -71,6 +71,9 @@
     <ClCompile Include="SRC\PositionCalculation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SRC\ResizeAnnotation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="SRC\MainWindow.resx">

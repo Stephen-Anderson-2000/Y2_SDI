@@ -211,6 +211,7 @@
     <ClCompile Include="SRC\Main.cpp" />
     <ClCompile Include="SRC\MainWindow.cpp" />
     <ClCompile Include="SRC\PositionCalculation.cpp" />
+    <ClCompile Include="SRC\ResizeAnnotation.cpp" />
     <ClCompile Include="SRC\SortAndSearch.cpp" />
   </ItemGroup>
   <ItemGroup>

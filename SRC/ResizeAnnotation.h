@@ -4,10 +4,12 @@
 
 using namespace System;
 using namespace System::Drawing;
+using namespace PositionCalculation;
 
+bool CheckInRange(int, int, int);
 
-int FindSelectedAnnotation(Point mousePosition) {
-	for (int i = 0; i < GUI::loadedImages[GUI::drawnImage]->annotationFiles[0]->annotationsPolygonal->Count; i++) {
-		//int 
-	}
-}
+void FindSelectedAnnotation(Point^);
+
+void ResizeAnnotation(Point^);
+
+void QuickResizeAnnotation(int, int, int);

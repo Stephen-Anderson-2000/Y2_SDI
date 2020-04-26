@@ -9,6 +9,7 @@
 #include "GUI.h"
 #include "JSONparsing.h"
 #include "PositionCalculation.h"
+#include "ResizeAnnotation.h"
 
 
 namespace SDIMaster
@@ -124,6 +125,13 @@ namespace SDIMaster
 	private: System::Windows::Forms::Button^ Button_SaveAnnotations;
 	private: System::Windows::Forms::Button^ Button_LoadAnnotations;
 	private: System::Windows::Forms::Label^ Label_AnnotationCount;
+	private: System::Windows::Forms::Label^ label5;
+	private: System::Windows::Forms::NumericUpDown^ NumericBox_YScale;
+	private: System::Windows::Forms::NumericUpDown^ NumericBox_XScale;
+	private: System::Windows::Forms::Label^ label6;
+	private: System::Windows::Forms::NumericUpDown^ NumericBox_YScale2;
+	private: System::Windows::Forms::NumericUpDown^ NumericBox_XScale2;
+private: System::Windows::Forms::Button^ Button_ResizeConfirm;
 
 
 
@@ -171,6 +179,13 @@ namespace SDIMaster
 			this->GroupBox_Classes = (gcnew System::Windows::Forms::ListBox());
 			this->tableLayoutPanel3 = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->groupBox3 = (gcnew System::Windows::Forms::GroupBox());
+			this->Button_ResizeConfirm = (gcnew System::Windows::Forms::Button());
+			this->NumericBox_YScale2 = (gcnew System::Windows::Forms::NumericUpDown());
+			this->NumericBox_XScale2 = (gcnew System::Windows::Forms::NumericUpDown());
+			this->NumericBox_YScale = (gcnew System::Windows::Forms::NumericUpDown());
+			this->NumericBox_XScale = (gcnew System::Windows::Forms::NumericUpDown());
+			this->label6 = (gcnew System::Windows::Forms::Label());
+			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->buttonRemoveAnnotation = (gcnew System::Windows::Forms::Button());
 			this->GroupBox_Annotations = (gcnew System::Windows::Forms::ListBox());
 			this->Label_AnnotationCount = (gcnew System::Windows::Forms::Label());
@@ -196,6 +211,10 @@ namespace SDIMaster
 			this->classescontainer->SuspendLayout();
 			this->tableLayoutPanel3->SuspendLayout();
 			this->groupBox3->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->NumericBox_YScale2))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->NumericBox_XScale2))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->NumericBox_YScale))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->NumericBox_XScale))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imageDisplay))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -413,7 +432,7 @@ namespace SDIMaster
 			// TextBox_SearchClasses
 			// 
 			this->TextBox_SearchClasses->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
-			this->TextBox_SearchClasses->Location = System::Drawing::Point(150, 187);
+			this->TextBox_SearchClasses->Location = System::Drawing::Point(150, 183);
 			this->TextBox_SearchClasses->Name = L"TextBox_SearchClasses";
 			this->TextBox_SearchClasses->Size = System::Drawing::Size(161, 20);
 			this->TextBox_SearchClasses->TabIndex = 7;
@@ -424,7 +443,7 @@ namespace SDIMaster
 			this->ComboBox_SortClasses->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
 			this->ComboBox_SortClasses->FormattingEnabled = true;
 			this->ComboBox_SortClasses->Items->AddRange(gcnew cli::array< System::Object^  >(4) { L"Name ⯅", L"Name ⯆", L"Date ⯅", L"Date ⯆" });
-			this->ComboBox_SortClasses->Location = System::Drawing::Point(217, 160);
+			this->ComboBox_SortClasses->Location = System::Drawing::Point(335, 160);
 			this->ComboBox_SortClasses->Name = L"ComboBox_SortClasses";
 			this->ComboBox_SortClasses->Size = System::Drawing::Size(94, 21);
 			this->ComboBox_SortClasses->TabIndex = 7;
@@ -453,6 +472,7 @@ namespace SDIMaster
 			// 
 			this->Label_NamesPath->AutoSize = true;
 			this->Label_NamesPath->Location = System::Drawing::Point(5, 23);
+			this->Label_NamesPath->MaximumSize = System::Drawing::Size(190, 0);
 			this->Label_NamesPath->Name = L"Label_NamesPath";
 			this->Label_NamesPath->Size = System::Drawing::Size(32, 13);
 			this->Label_NamesPath->TabIndex = 7;
@@ -470,7 +490,7 @@ namespace SDIMaster
 			// 
 			this->Button_RemoveClass->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
 			this->Button_RemoveClass->AutoSize = true;
-			this->Button_RemoveClass->Location = System::Drawing::Point(220, 132);
+			this->Button_RemoveClass->Location = System::Drawing::Point(338, 132);
 			this->Button_RemoveClass->Margin = System::Windows::Forms::Padding(2);
 			this->Button_RemoveClass->Name = L"Button_RemoveClass";
 			this->Button_RemoveClass->Size = System::Drawing::Size(91, 23);
@@ -483,7 +503,7 @@ namespace SDIMaster
 			// 
 			this->Button_AddClass->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
 			this->Button_AddClass->AutoSize = true;
-			this->Button_AddClass->Location = System::Drawing::Point(132, 132);
+			this->Button_AddClass->Location = System::Drawing::Point(225, 132);
 			this->Button_AddClass->Margin = System::Windows::Forms::Padding(2);
 			this->Button_AddClass->Name = L"Button_AddClass";
 			this->Button_AddClass->Size = System::Drawing::Size(84, 23);
@@ -496,7 +516,7 @@ namespace SDIMaster
 			// 
 			this->Button_LoadClasses->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->Button_LoadClasses->AutoSize = true;
-			this->Button_LoadClasses->Location = System::Drawing::Point(199, 13);
+			this->Button_LoadClasses->Location = System::Drawing::Point(202, 17);
 			this->Button_LoadClasses->Margin = System::Windows::Forms::Padding(2);
 			this->Button_LoadClasses->Name = L"Button_LoadClasses";
 			this->Button_LoadClasses->Size = System::Drawing::Size(110, 23);
@@ -514,7 +534,7 @@ namespace SDIMaster
 			this->GroupBox_Classes->Location = System::Drawing::Point(4, 45);
 			this->GroupBox_Classes->Margin = System::Windows::Forms::Padding(2);
 			this->GroupBox_Classes->Name = L"GroupBox_Classes";
-			this->GroupBox_Classes->Size = System::Drawing::Size(308, 82);
+			this->GroupBox_Classes->Size = System::Drawing::Size(426, 82);
 			this->GroupBox_Classes->TabIndex = 0;
 			// 
 			// tableLayoutPanel3
@@ -537,6 +557,13 @@ namespace SDIMaster
 			// 
 			// groupBox3
 			// 
+			this->groupBox3->Controls->Add(this->Button_ResizeConfirm);
+			this->groupBox3->Controls->Add(this->NumericBox_YScale2);
+			this->groupBox3->Controls->Add(this->NumericBox_XScale2);
+			this->groupBox3->Controls->Add(this->NumericBox_YScale);
+			this->groupBox3->Controls->Add(this->NumericBox_XScale);
+			this->groupBox3->Controls->Add(this->label6);
+			this->groupBox3->Controls->Add(this->label5);
 			this->groupBox3->Controls->Add(this->buttonRemoveAnnotation);
 			this->groupBox3->Controls->Add(this->GroupBox_Annotations);
 			this->groupBox3->Dock = System::Windows::Forms::DockStyle::Fill;
@@ -549,11 +576,76 @@ namespace SDIMaster
 			this->groupBox3->TabStop = false;
 			this->groupBox3->Text = L"Annotations";
 			// 
+			// Button_ResizeConfirm
+			// 
+			this->Button_ResizeConfirm->Location = System::Drawing::Point(193, 173);
+			this->Button_ResizeConfirm->Name = L"Button_ResizeConfirm";
+			this->Button_ResizeConfirm->Size = System::Drawing::Size(119, 23);
+			this->Button_ResizeConfirm->TabIndex = 12;
+			this->Button_ResizeConfirm->Text = L"Resize Annotation";
+			this->Button_ResizeConfirm->UseVisualStyleBackColor = true;
+			this->Button_ResizeConfirm->Click += gcnew System::EventHandler(this, &MainWindow::Button_ResizeConfirm_Click);
+			// 
+			// NumericBox_YScale2
+			// 
+			this->NumericBox_YScale2->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
+			this->NumericBox_YScale2->Location = System::Drawing::Point(109, 204);
+			this->NumericBox_YScale2->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 999999, 0, 0, 0 });
+			this->NumericBox_YScale2->Name = L"NumericBox_YScale2";
+			this->NumericBox_YScale2->Size = System::Drawing::Size(41, 20);
+			this->NumericBox_YScale2->TabIndex = 11;
+			// 
+			// NumericBox_XScale2
+			// 
+			this->NumericBox_XScale2->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
+			this->NumericBox_XScale2->Location = System::Drawing::Point(11, 204);
+			this->NumericBox_XScale2->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 999999, 0, 0, 0 });
+			this->NumericBox_XScale2->Name = L"NumericBox_XScale2";
+			this->NumericBox_XScale2->Size = System::Drawing::Size(41, 20);
+			this->NumericBox_XScale2->TabIndex = 10;
+			// 
+			// NumericBox_YScale
+			// 
+			this->NumericBox_YScale->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
+			this->NumericBox_YScale->Location = System::Drawing::Point(109, 182);
+			this->NumericBox_YScale->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 999999, 0, 0, 0 });
+			this->NumericBox_YScale->Name = L"NumericBox_YScale";
+			this->NumericBox_YScale->Size = System::Drawing::Size(41, 20);
+			this->NumericBox_YScale->TabIndex = 9;
+			// 
+			// NumericBox_XScale
+			// 
+			this->NumericBox_XScale->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
+			this->NumericBox_XScale->Location = System::Drawing::Point(11, 182);
+			this->NumericBox_XScale->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 999999, 0, 0, 0 });
+			this->NumericBox_XScale->Name = L"NumericBox_XScale";
+			this->NumericBox_XScale->Size = System::Drawing::Size(41, 20);
+			this->NumericBox_XScale->TabIndex = 8;
+			this->NumericBox_XScale->ValueChanged += gcnew System::EventHandler(this, &MainWindow::NumericBox_XScale_ValueChanged);
+			// 
+			// label6
+			// 
+			this->label6->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
+			this->label6->Location = System::Drawing::Point(106, 167);
+			this->label6->Name = L"label6";
+			this->label6->Size = System::Drawing::Size(59, 20);
+			this->label6->TabIndex = 7;
+			this->label6->Text = L"Y Scale";
+			// 
+			// label5
+			// 
+			this->label5->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
+			this->label5->Location = System::Drawing::Point(10, 166);
+			this->label5->Name = L"label5";
+			this->label5->Size = System::Drawing::Size(59, 20);
+			this->label5->TabIndex = 0;
+			this->label5->Text = L"X Scale";
+			// 
 			// buttonRemoveAnnotation
 			// 
 			this->buttonRemoveAnnotation->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
 			this->buttonRemoveAnnotation->AutoSize = true;
-			this->buttonRemoveAnnotation->Location = System::Drawing::Point(192, 171);
+			this->buttonRemoveAnnotation->Location = System::Drawing::Point(193, 201);
 			this->buttonRemoveAnnotation->Margin = System::Windows::Forms::Padding(2);
 			this->buttonRemoveAnnotation->Name = L"buttonRemoveAnnotation";
 			this->buttonRemoveAnnotation->Size = System::Drawing::Size(120, 23);
@@ -573,6 +665,7 @@ namespace SDIMaster
 			this->GroupBox_Annotations->Name = L"GroupBox_Annotations";
 			this->GroupBox_Annotations->Size = System::Drawing::Size(311, 147);
 			this->GroupBox_Annotations->TabIndex = 0;
+			this->GroupBox_Annotations->SelectedIndexChanged += gcnew System::EventHandler(this, &MainWindow::GroupBox_Annotations_SelectedIndexChanged);
 			// 
 			// Label_AnnotationCount
 			// 
@@ -611,7 +704,7 @@ namespace SDIMaster
 			this->ComboBox_ToolSelection->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
 			this->ComboBox_ToolSelection->FormattingEnabled = true;
 			this->ComboBox_ToolSelection->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"Create Rectangle", L"Resize", L"Erase" });
-			this->ComboBox_ToolSelection->Location = System::Drawing::Point(527, 521);
+			this->ComboBox_ToolSelection->Location = System::Drawing::Point(537, 521);
 			this->ComboBox_ToolSelection->Name = L"ComboBox_ToolSelection";
 			this->ComboBox_ToolSelection->Size = System::Drawing::Size(121, 21);
 			this->ComboBox_ToolSelection->TabIndex = 7;
@@ -626,7 +719,7 @@ namespace SDIMaster
 			this->imageDisplay->Location = System::Drawing::Point(2, 2);
 			this->imageDisplay->Margin = System::Windows::Forms::Padding(2);
 			this->imageDisplay->Name = L"imageDisplay";
-			this->imageDisplay->Size = System::Drawing::Size(657, 514);
+			this->imageDisplay->Size = System::Drawing::Size(667, 514);
 			this->imageDisplay->TabIndex = 6;
 			this->imageDisplay->TabStop = false;
 			this->imageDisplay->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &MainWindow::imageDisplay_MouseDown);
@@ -642,6 +735,7 @@ namespace SDIMaster
 			this->MinimumSize = System::Drawing::Size(995, 575);
 			this->Name = L"MainWindow";
 			this->Text = L"MainWindow";
+			this->Load += gcnew System::EventHandler(this, &MainWindow::MainWindow_Load);
 			this->splitContainer1->Panel1->ResumeLayout(false);
 			this->splitContainer1->Panel2->ResumeLayout(false);
 			this->splitContainer1->Panel2->PerformLayout();
@@ -664,6 +758,10 @@ namespace SDIMaster
 			this->tableLayoutPanel3->ResumeLayout(false);
 			this->groupBox3->ResumeLayout(false);
 			this->groupBox3->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->NumericBox_YScale2))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->NumericBox_XScale2))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->NumericBox_YScale))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->NumericBox_XScale))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imageDisplay))->EndInit();
 			this->ResumeLayout(false);
 
@@ -732,18 +830,24 @@ namespace SDIMaster
 
 	private: System::Void imageDisplay_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e)
 	{
-		if (GUI::loadedImages->Count > 0 && GUI::labelNames->Count > 0 && GroupBox_Classes->SelectedIndex >= 0) {
-			GUI::mouseDownLocation = e->Location;
+		if (ComboBox_ToolSelection->SelectedIndex == 0)
+		{
+			if (GUI::loadedImages->Count > 0 && GUI::labelNames->Count > 0 && GroupBox_Classes->SelectedIndex >= 0) {
+				GUI::mouseDownLocation = e->Location;
 
-			if (GUI::loadedImages->Count == 0)
-			{
-				GUI::loadedImages->Add(gcnew ImageFile);
-			}
+				if (GUI::loadedImages->Count == 0)
+				{
+					GUI::loadedImages->Add(gcnew ImageFile);
+				}
 
-			if (GUI::loadedImages[GUI::drawnImage]->annotationFiles->Count == 0)
-			{
-				GUI::loadedImages[GUI::drawnImage]->annotationFiles->Add(gcnew AnnotationFile);
+				if (GUI::loadedImages[GUI::drawnImage]->annotationFiles->Count == 0)
+				{
+					GUI::loadedImages[GUI::drawnImage]->annotationFiles->Add(gcnew AnnotationFile);
+				}
 			}
+		}
+		else {
+			FindSelectedAnnotation(e->Location);
 		}
 	}
 
@@ -755,33 +859,42 @@ namespace SDIMaster
 			Point^ mouseDownLocation = GUI::mouseDownLocation;
 			int mouseUpX = mouseDownLocation->X;
 			int mouseUpY = mouseDownLocation->Y;
-			PolygonalAnnotation^ tempAnnotation = gcnew PolygonalAnnotation;
-			tempVertices->Add(0);
-			tempVertices->Add(0);
-			tempVertices->Add(0);
-			tempVertices->Add(0);
-			if (mouseUpX <= mouseUpLocation.X) {
-				tempVertices[0] = (CalculatePosInverse(mouseUpX, GUI::xOffset, GUI::imageScale));
-				tempVertices[2] = (CalculatePosInverse(mouseUpLocation.X, GUI::xOffset, GUI::imageScale));
-			}
-			else {
-				tempVertices[2] = (CalculatePosInverse(mouseUpX, GUI::xOffset, GUI::imageScale));
-				tempVertices[0] = (CalculatePosInverse(mouseUpLocation.X, GUI::xOffset, GUI::imageScale));
-			}
+			if (ComboBox_ToolSelection->SelectedIndex == 0) 
+			{
+				PolygonalAnnotation^ tempAnnotation = gcnew PolygonalAnnotation;
+				tempVertices->Add(0);
+				tempVertices->Add(0);
+				tempVertices->Add(0);
+				tempVertices->Add(0);
+				if (mouseUpX <= mouseUpLocation.X) {
+					tempVertices[0] = (CalculatePosInverse(mouseUpX, GUI::xOffset, GUI::imageScale));
+					tempVertices[2] = (CalculatePosInverse(mouseUpLocation.X, GUI::xOffset, GUI::imageScale));
+				}
+				else {
+					tempVertices[2] = (CalculatePosInverse(mouseUpX, GUI::xOffset, GUI::imageScale));
+					tempVertices[0] = (CalculatePosInverse(mouseUpLocation.X, GUI::xOffset, GUI::imageScale));
+				}
 
-			if (mouseUpY <= mouseUpLocation.Y) {
-				tempVertices[1] = (CalculatePosInverse(mouseUpY, GUI::yOffset, GUI::imageScale));
-				tempVertices[3] = (CalculatePosInverse(mouseUpLocation.Y, GUI::yOffset, GUI::imageScale));
+				if (mouseUpY <= mouseUpLocation.Y) {
+					tempVertices[1] = (CalculatePosInverse(mouseUpY, GUI::yOffset, GUI::imageScale));
+					tempVertices[3] = (CalculatePosInverse(mouseUpLocation.Y, GUI::yOffset, GUI::imageScale));
+				}
+				else {
+					tempVertices[3] = (CalculatePosInverse(mouseUpY, GUI::yOffset, GUI::imageScale));
+					tempVertices[1] = (CalculatePosInverse(mouseUpLocation.Y, GUI::yOffset, GUI::imageScale));
+				}
+				tempAnnotation->vertices = tempVertices;
+				tempAnnotation->label = GUI::labelNames[GUI::labelIndices[GroupBox_Classes->SelectedIndex]];
+				GUI::loadedImages[GUI::drawnImage]->annotationFiles[0]->annotationsPolygonal->Add(tempAnnotation);
+				RenderAnnotations(GUI::drawnImage);
+				ListAnnotations();
 			}
-			else {
-				tempVertices[3] = (CalculatePosInverse(mouseUpY, GUI::yOffset, GUI::imageScale));
-				tempVertices[1] = (CalculatePosInverse(mouseUpLocation.Y, GUI::yOffset, GUI::imageScale));
+			else 
+			{
+				ResizeAnnotation(e->Location);
+				RenderAnnotations(GUI::drawnImage);
+				ListAnnotations();
 			}
-			tempAnnotation->vertices = tempVertices;
-			tempAnnotation->label = GUI::labelNames[GUI::labelIndices[GroupBox_Classes->SelectedIndex]];
-			GUI::loadedImages[GUI::drawnImage]->annotationFiles[0]->annotationsPolygonal->Add(tempAnnotation);
-			RenderAnnotations(GUI::drawnImage);
-			ListAnnotations();
 		}
 	}
 
@@ -842,6 +955,35 @@ namespace SDIMaster
 
 	private: System::Void Button_LoadAnnotations_Click(System::Object^ sender, System::EventArgs^ e) {
 		LoadJson("file.json");
+	}
+	private: System::Void MainWindow_Load(System::Object^ sender, System::EventArgs^ e) {
+		ComboBox_ToolSelection->SelectedIndex = 0;
+	}
+
+	private: System::Void GroupBox_Annotations_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+		NumericBox_XScale->Value = GUI::loadedImages[GUI::drawnImage]->annotationFiles[0]->annotationsPolygonal[GroupBox_Annotations->SelectedIndex]->vertices[0];
+		NumericBox_YScale->Value = GUI::loadedImages[GUI::drawnImage]->annotationFiles[0]->annotationsPolygonal[GroupBox_Annotations->SelectedIndex]->vertices[2];
+		NumericBox_XScale2->Value = GUI::loadedImages[GUI::drawnImage]->annotationFiles[0]->annotationsPolygonal[GroupBox_Annotations->SelectedIndex]->vertices[1];
+		NumericBox_YScale2->Value = GUI::loadedImages[GUI::drawnImage]->annotationFiles[0]->annotationsPolygonal[GroupBox_Annotations->SelectedIndex]->vertices[3];
+	}
+
+	private: System::Void NumericBox_XScale_ValueChanged(System::Object^ sender, System::EventArgs^ e)
+	{
+		//QuickResizeAnnotation(GroupBox_Annotations->SelectedIndex, 0, Decimal::ToInt32(NumericBox_XScale->Value));
+		//RenderAnnotations(GUI::drawnImage);
+		//ListAnnotations();
+	}
+
+	private: System::Void Button_ResizeConfirm_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (GroupBox_Annotations->SelectedIndex >= 0)
+		{
+		QuickResizeAnnotation(GroupBox_Annotations->SelectedIndex, 0, Decimal::ToInt32(NumericBox_XScale->Value));
+		QuickResizeAnnotation(GroupBox_Annotations->SelectedIndex, 2, Decimal::ToInt32(NumericBox_YScale->Value));
+		QuickResizeAnnotation(GroupBox_Annotations->SelectedIndex, 1, Decimal::ToInt32(NumericBox_XScale2->Value));
+		QuickResizeAnnotation(GroupBox_Annotations->SelectedIndex, 3, Decimal::ToInt32(NumericBox_YScale2->Value));
+		RenderAnnotations(GUI::drawnImage);
+		ListAnnotations();
+		}
 	}
 };
 

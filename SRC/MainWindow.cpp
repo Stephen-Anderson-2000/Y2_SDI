@@ -25,16 +25,6 @@ using namespace PositionCalculation;
 
 namespace SDIMaster
 {
-	int CalculatePos(int position, int offset, float imageScale) {
-		int newPos = floor(float(position) * imageScale + float(offset));
-		return newPos;
-	}
-
-	int CalculatePosInverse(int position, int offset, float imageScale) {
-		int newPos = floor(float(position - float(offset)) / imageScale);
-		return newPos;
-	}
-
 	System::Void MainWindow::BrowseFolder() {
 		System::String^ folderPath;
 		FolderBrowserDialog^ folderBrowserDialog = gcnew FolderBrowserDialog;

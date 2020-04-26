@@ -88,7 +88,9 @@ Class GUI: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
     System.Collections.Generic.List`1[ImageFile] loadedImages : Public, Static
     System.Collections.Generic.List`1[Annotation] annotations : Public, Static
     System.ValueType mouseDownLocation Point IsBoxed : Public, Static
-    Int32 cornerSelected : Public, Static
+    Int32 xCornerSelected : Public, Static
+    Int32 yCornerSelected : Public, Static
+    Int32 annotationToResize : Public, Static
     System.Collections.Generic.List`1[System.Int32] imageIndices : Public, Static
     System.Collections.Generic.List`1[System.Int32] labelIndices : Public, Static
     System.Collections.Generic.List`1[System.String] labelNames : Public, Static

@@ -35,6 +35,10 @@ namespace SDIMaster
 		return newPos;
 	}
 
+	/** Opens the file browsing dialog. This will be used
+	 *  to allow a folder containing images to be loaded
+	 *  using the default Windows file browser.
+	 */
 	System::Void MainWindow::BrowseFolder() {
 		System::String^ folderPath;
 		FolderBrowserDialog^ folderBrowserDialog = gcnew FolderBrowserDialog;
@@ -47,6 +51,12 @@ namespace SDIMaster
 		}
 	}
 
+	/** Loads the contents of the selected folder into the GUI. 
+	 *  In the case of this application, the images to be annotated
+	 *  will be loaded into the GUI, and can in theory load an 
+	 *  unlimited amount of images, depending on the user's
+	 *  installed memory.
+	 */
 	System::Void MainWindow::LoadFolder(String^ folderPath)
 	{
 		cli::array<System::String^>^ fileArray = System::IO::Directory::GetFiles(folderPath);
@@ -59,6 +69,11 @@ namespace SDIMaster
 		}
 	}
 
+	/** Adds the current image to the GUI. The image
+	 *  name will be added to the list on the left panel,
+	 *  and the image itself will be drawn to the canvas
+	 *  when clicked.
+	 */
 	System::Void MainWindow::AddImage(String^ filePath)
 	{
 		FileInfo^ tempFileInfo = gcnew FileInfo(filePath);
@@ -71,11 +86,18 @@ namespace SDIMaster
 		GUI::LoadImageToList(tempImage);
 	}
 
+	/** Clears the images currently loaded from memory.
+	 */
 	System::Void MainWindow::ClearImages()
 	{
 		GUI::loadedImages->Clear();
 	}
 
+	/** Opens the file browsing dialog for selecting a file.
+	 *  This will be used for selecting a .names file for the
+	 *  classification of different annotations using the default
+	 *  Windows file browser.
+	 */
 	System::Void MainWindow::BrowseFile() {
 		System::String^ namesPath;
 		OpenFileDialog^ openFileDialog = gcnew OpenFileDialog;
@@ -95,6 +117,11 @@ namespace SDIMaster
 		}
 	}
 
+	/** Reads through the .names file and loads them to the panel. 
+	 *  This utilises StreamReader for opening and loading the
+	 *  .names file to display all relevant classes found into
+	 *  the user interface.
+	 */
 	System::Void MainWindow::LoadClasses(String^ filePath) {
 		StreamReader^ nameFile = gcnew StreamReader(filePath);
 		String^ line;
@@ -105,23 +132,40 @@ namespace SDIMaster
 		nameFile->Close();
 	}
 
+	/** Clears the classes currently loaded from memory.
+	 */
 	System::Void MainWindow::ClearClasses()
 	{
 		GUI::labelNames->Clear();
 		GUI::labelIndices->Clear();
 	}
 
+	/** Allows the user to add a new classification. 
+	 *  This function will be called when the user clicks
+	 *  the 'Add Class' button after typing in a name for
+	 *  the class. This will then be added to the GUI.
+	 */
 	System::Void MainWindow::AddClass(String^ className) {
 		GUI::labelNames->Add(className);
 		WriteClass(className);
 	}
 
+	/** Writes the previously added class to the .names file.
+	 *  Makes use of file handling to do so, and will add the 
+	 *  class to a new line in the .names file.
+	 */
 	System::Void MainWindow::WriteClass(String^ className) {
 		StreamWriter^ nameFile = gcnew StreamWriter(GUI::labelFile, true);
 		nameFile->WriteLine(className);
 		nameFile->Close();
 	}
 
+	/** Removes a class from the GUI and .names file.
+	 *  When the user clicks on a class in the GUI,
+	 *  they can then click the 'Remove Class' button
+	 *  removing it from both the GUI panel and the 
+	 *  .names file.
+	 */
 	System::Void MainWindow::RemoveClass(int classIndex) {
 		StreamWriter^ nameFile = gcnew StreamWriter(GUI::labelFile);
 		String^ className = GUI::labelNames[classIndex];

@@ -9,6 +9,9 @@
 using namespace std;
 using json = nlohmann::json;
 
+
+/** Converts system string to std::string.
+	 */
 string SystemToStdString(String^ inputString) {
 	char* cstr = (char*)(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(inputString)).ToPointer();
 	string convertedString = cstr;
@@ -16,6 +19,10 @@ string SystemToStdString(String^ inputString) {
 	return convertedString;
 }
 
+
+/** Formats and exports the current annotation
+	*data as JSON.
+	 */
 void SaveJson(string filePath) 
 {
 	json file;
@@ -51,7 +58,8 @@ void SaveJson(string filePath)
 	writeFile.close();
 }
 
-
+/** Loads a JSON / .annotations file and parses the data.
+	 */
 void LoadJson(string filePath)
 {
 	ifstream reader(filePath);

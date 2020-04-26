@@ -25,6 +25,36 @@ using namespace PositionCalculation;
 
 namespace SDIMaster
 {
+
+	/** Selects and passes back a location to save a file.
+	 *  In the case of this application, the file saved using
+	 *  this feature will be the .annotations file (formatted
+	 *  as json).
+	 */
+	System::String^ MainWindow::SaveFile(String^ filter) 
+	{
+		System::String^ namesPath = "";
+		SaveFileDialog^ saveFileDialog = gcnew SaveFileDialog;
+		{
+			saveFileDialog->InitialDirectory = "c:\\";
+			saveFileDialog->Filter = filter;
+			saveFileDialog->FilterIndex = 0;
+			saveFileDialog->RestoreDirectory = true;
+			if (saveFileDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+			{
+				//Get the path of specified file
+				namesPath = saveFileDialog->FileName;
+				return namesPath;
+			}
+		}
+	}
+
+	/** Loads the contents of the selected folder into the GUI.
+	 *  In the case of this application, the images to be annotated
+	 *  will be loaded into the GUI, and can in theory load an
+	 *  unlimited amount of images, depending on the user's
+	 *  installed memory.
+	 */
 	System::Void MainWindow::BrowseFolder() {
 		System::String^ folderPath;
 		FolderBrowserDialog^ folderBrowserDialog = gcnew FolderBrowserDialog;
@@ -85,7 +115,7 @@ namespace SDIMaster
 	 *  Windows file browser.
 	 */
 	System::String^ MainWindow::BrowseFile(String^ filter) {
-		System::String^ namesPath;
+		System::String^ namesPath = "";
 		OpenFileDialog^ openFileDialog = gcnew OpenFileDialog;
 		{
 			openFileDialog->InitialDirectory = "c:\\";
@@ -256,18 +286,8 @@ namespace SDIMaster
 		}
 	}
 
-	System::Void MainWindow::AddPolygonalAnnotation(int imageIndex, List<int>^ vertices, String^ label) {
-		GUI::loadedImages[imageIndex]->annotationFiles[0]->createPolygonalAnnotation(label, vertices);
-	}
-
-	System::Void MainWindow::ResizePolygonalAnnotation(int imageIndex, int annotationIndex, List<int>^ vertices) {
-		GUI::loadedImages[imageIndex]->annotationFiles[0]->annotationsPolygonal[annotationIndex]->vertices = vertices;
-	}
-
-	System::Void MainWindow::RenamePolygonalAnnotation(int imageIndex, int annotationIndex, String^ name) {
-		GUI::loadedImages[imageIndex]->annotationFiles[0]->annotationsPolygonal[annotationIndex]->label = name;
-	}
-
+	/** Removes a rectangular annotation.
+	 */
 	System::Void MainWindow::RemovePolygonalAnnotation(int imageIndex, int annotationIndex) {
 		GUI::loadedImages[imageIndex]->annotationFiles[0]->annotationsPolygonal->RemoveAt(annotationIndex);
 	}
@@ -299,9 +319,17 @@ namespace SDIMaster
 		GUI::boxCanvas->DrawImage(imageDisplay->BackgroundImage, float(GUI::xOffset), float(GUI::yOffset), float(imageDisplay->BackgroundImage->Width) * GUI::imageScale, float(imageDisplay->BackgroundImage->Height) * GUI::imageScale);
 		//Draw boxes
 		Color boxColour = Color::FromArgb(128, 255, 0, 0);
+		Color boxColourSelected = Color::FromArgb(128, 0, 0, 255);
 		Pen^ boxBrush = gcnew Pen(boxColour, 2);
+		Pen^ boxBrushSelected = gcnew Pen(boxColourSelected, 2);
 		for (int i = 0; i < GUI::loadedImages[imageIndex]->annotationFiles[0]->annotationsPolygonal->Count; i++)
 		{
+			Pen^ boxBrushCurrent = boxBrush;
+			if (i == GroupBox_Annotations->SelectedIndex)
+			{
+				Pen^ boxBrushCurrent = boxBrushSelected;
+
+			}
 			List<int>^ coordinates = GUI::loadedImages[GUI::drawnImage]->annotationFiles[0]->annotationsPolygonal[i]->vertices;
 			Rectangle polygonalAnnotation = Rectangle(CalculatePos(coordinates[0], GUI::xOffset, GUI::imageScale), CalculatePos(coordinates[1], GUI::yOffset, GUI::imageScale), CalculatePos(coordinates[2], GUI::xOffset, GUI::imageScale) - CalculatePos(coordinates[0], GUI::xOffset, GUI::imageScale), CalculatePos(coordinates[3], GUI::yOffset, GUI::imageScale) - CalculatePos(coordinates[1], GUI::yOffset, GUI::imageScale));
 			GUI::boxCanvas->DrawRectangle(boxBrush, polygonalAnnotation);

@@ -6,6 +6,9 @@ using namespace System;
 using namespace System::Drawing;
 using namespace PositionCalculation;
 
+
+/** Checks a given value is within a given range of another value.
+	 */
 bool CheckInRange(int range, int targetPos, int mousePos)
 {
 	int leftBoundary = targetPos - range;
@@ -20,6 +23,8 @@ bool CheckInRange(int range, int targetPos, int mousePos)
 	}
 }
 
+/** Finds any corner the mouse pointer is clicked on.
+	 */
 void FindSelectedAnnotation(Point^ mousePosition) {
 	const int selectionRange = 5;
 	for (int i = 0; i < GUI::loadedImages[GUI::drawnImage]->annotationFiles[0]->annotationsPolygonal->Count; i++) {
@@ -41,6 +46,8 @@ void FindSelectedAnnotation(Point^ mousePosition) {
 	}
 }
 
+/** Resizes an annotation to fit the current mouse position (called on mouse up)
+	 */
 void ResizeAnnotation(Point^ mousePosition)
 {
 	GUI::loadedImages[GUI::drawnImage]->annotationFiles[0]->annotationsPolygonal[GUI::annotationToResize]->vertices[GUI::xCornerSelected] = CalculatePosInverse(mousePosition->X, GUI::xOffset, GUI::imageScale);

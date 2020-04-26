@@ -780,6 +780,9 @@ private: System::ComponentModel::IContainer^ components;
 		}
 #pragma endregion
 
+	protected: System::String^ SaveFile(String^);
+			 //Open a file dialogue to save a file
+
 	protected: System::Void BrowseFolder();
 			 //Browse for a folder of images
 
@@ -810,17 +813,8 @@ private: System::ComponentModel::IContainer^ components;
 	protected: System::Void WriteClass(String^);
 			 //Append a class to the file
 
-	protected: System::Void AddPolygonalAnnotation(int, List<int>^, String^);
-			 //Create a square annotation
-
 	protected: System::Void RemovePolygonalAnnotation(int, int);
 			 //Remove a square annotation
-
-	protected: System::Void ResizePolygonalAnnotation(int, int, List<int>^);
-			 //Resize a square annotation
-
-	protected: System::Void RenamePolygonalAnnotation(int, int, String^);
-			 //Change the label of a polygonal annotation
 
 	protected: System::Void RenderAnnotations(int);
 			 //Render currently loaded image and annotation
@@ -978,16 +972,24 @@ private: System::ComponentModel::IContainer^ components;
 		SortClassPane("A");
 	}
 	private: System::Void Button_SaveAnnotations_Click(System::Object^ sender, System::EventArgs^ e) {
-		SaveJson("file.json");
-		GUI::annotationFilePath = "file.json";
-		Label_AnnotationPath->Text = GUI::annotationFilePath;
+		String^ filePath = SaveFile(".ANNOTATIONS file (*.annotations)|*.annotations");
+		if (filePath != "")
+		{
+			SaveJson(SystemToStdString(filePath));
+			GUI::annotationFilePath = filePath;
+			Label_AnnotationPath->Text = GUI::annotationFilePath;
+		}
 	}
 
 	private: System::Void Button_LoadAnnotations_Click(System::Object^ sender, System::EventArgs^ e) {
-		String^ filePath = BrowseFile(".JSON file (*.json)|*.json");
-		LoadJson(SystemToStdString(filePath));
-		GUI::annotationFilePath = filePath;
-		Label_AnnotationPath->Text = "Path: " + GUI::annotationFilePath;
+		String^ filePath = BrowseFile(".ANNOTATIONS file (*.annotations)|*.annotations");
+		if (filePath != "") 
+		{
+			LoadJson(SystemToStdString(filePath));
+			GUI::annotationFilePath = filePath;
+			Label_AnnotationPath->Text = "Path: " + GUI::annotationFilePath;
+		}
+		
 	}
 	private: System::Void MainWindow_Load(System::Object^ sender, System::EventArgs^ e) {
 		ComboBox_ToolSelection->SelectedIndex = 0;
@@ -999,6 +1001,7 @@ private: System::ComponentModel::IContainer^ components;
 		NumericBox_YScale->Value = GUI::loadedImages[GUI::drawnImage]->annotationFiles[0]->annotationsPolygonal[GroupBox_Annotations->SelectedIndex]->vertices[2];
 		NumericBox_XScale2->Value = GUI::loadedImages[GUI::drawnImage]->annotationFiles[0]->annotationsPolygonal[GroupBox_Annotations->SelectedIndex]->vertices[1];
 		NumericBox_YScale2->Value = GUI::loadedImages[GUI::drawnImage]->annotationFiles[0]->annotationsPolygonal[GroupBox_Annotations->SelectedIndex]->vertices[3];
+		RenderAnnotations(GUI::drawnImage);
 	}
 
 	private: System::Void Button_ResizeConfirm_Click(System::Object^ sender, System::EventArgs^ e) {

@@ -28,7 +28,7 @@ namespace TESTS
 			myList.Add(myString);
 
 			// Checks the length of the linkedlist to make sure that one item has been added
-			Assert::AreEqual(1, myList.Count()); 
+			Assert::AreEqual(myString, myList.At(0)); 
 		} // Adds a single item to the empty linked list to see if there are any errors when doing so
 
 		TEST_METHOD(RemoveOnlyItem)
@@ -47,15 +47,20 @@ namespace TESTS
 		{
 			LinkedListString myList;
 			std::string myString1 = "Hello";
-			std::string myString2 = "world";
+			std::string myString2 = "beautiful";
+			std::string myString3 = "world";
 
 			myList.Add(myString1);
 			myList.Add(myString2);
+			myList.Add(myString3);
 
+			// Removes the first item ("Hello") from the list
 			myList.Remove(0);
 
 			// Checks to see that the second item moves to the first slot
+			// and that the third item moves to the second slot
 			Assert::AreEqual(myString2, myList.At(0));
+			Assert::AreEqual(myString3, myList.At(1));
 		} // Checks that removing the first item shifts the second one to the start
 
 		TEST_METHOD(RemoveMiddleItemListOfThree)
@@ -76,6 +81,26 @@ namespace TESTS
 			Assert::AreEqual(myString1, myList.At(0));
 			Assert::AreEqual(myString3, myList.At(1));
 		} // Removes the second item from a list of three and checks that the remaining two items shift and can be accessed
+
+		TEST_METHOD(RemoveSecondItemListOfFour)
+		{
+			LinkedListString myList;
+			std::string myString1 = "Hello";
+			std::string myString2 = "there";
+			std::string myString3 = "lovely";
+			std::string myString4 = "world";
+
+			myList.Add(myString1);
+			myList.Add(myString2);
+			myList.Add(myString3);
+			myList.Add(myString4);
+
+			myList.Remove(1);
+
+			Assert::AreEqual(myString1, myList.At(0));
+			Assert::AreEqual(myString3, myList.At(1));
+			Assert::AreEqual(myString4, myList.At(2));
+		}
 
 		TEST_METHOD(RemoveMiddleItemListOfFive)
 		{
@@ -263,7 +288,7 @@ namespace TESTS
 			Assert::AreEqual(emptyString, myString);
 		} // Attempts to access an invalid entry
 
-		TEST_METHOD(AccessDeletedFirstValue)
+		TEST_METHOD(AccessDeletedOnlyValue)
 		{
 			LinkedListString myList;
 			std::string myString1 = "Hello";
@@ -280,24 +305,26 @@ namespace TESTS
 			Assert::AreEqual(emptyString, myString2);
 		} // Attempts to access a single item after it has been deleted
 
-		TEST_METHOD(AccessDeletedSecondValue)
+		TEST_METHOD(AccessDeletedLastValue)
 		{
 			LinkedListString myList;
 			std::string myString1 = "Hello";
-			std::string myString2 = "world";
+			std::string myString2 = "lovely";
+			std::string myString3 = "world";
 
 			myList.Add(myString1);
 			myList.Add(myString2);
+			myList.Add(myString3);
 
 			// Removes the second item from the list
-			myList.Remove(1);
+			myList.Remove(2);
 
 			// Attempts to fetch data from the now deleted value
-			std::string myString3 = myList.At(1);
+			std::string myString4 = myList.At(2);
 
 			// Checks to see if the exception is handled properly
 			std::string emptyString = "";
-			Assert::AreEqual(emptyString, myString3);
+			Assert::AreEqual(emptyString, myString4);
 		}
 
 	};

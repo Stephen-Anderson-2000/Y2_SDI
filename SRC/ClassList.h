@@ -116,9 +116,29 @@ public:
     {
         //Order 0 = Regular / Ascending, 1 = Reverse / Descending
         //bubble sort
-        
-        LinkedListString tempList;
-        return tempList;
+        int n = count;
+        bool swap = true;
+        string tempString;
+        while (swap) {
+            Node* firstNode = new Node(*head);
+            //binky
+            Node* secondNode = firstNode->next;
+            swap = false;
+            for (int i = 0; i < n; i++) {
+                if (firstNode->data.compare(secondNode->data) > 0) {
+                    tempString = firstNode->data;
+                    firstNode->data = secondNode->data;
+                    secondNode->data = tempString;
+                }
+                if (secondNode->next == NULL) 
+                {
+                    break;
+                }
+                firstNode = firstNode->next;
+                secondNode = secondNode->next;
+            }
+        }
+        return * this;
     }
 
     LinkedListString Search(string term)

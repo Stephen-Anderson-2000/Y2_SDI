@@ -341,11 +341,12 @@ private: System::Windows::Forms::Button^ Button_ResizeConfirm;
 			// 
 			this->Combobox_SortImages->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
 			this->Combobox_SortImages->FormattingEnabled = true;
-			this->Combobox_SortImages->Items->AddRange(gcnew cli::array< System::Object^  >(4) { L"Name ⯅", L"Name ⯆", L"Date ⯅", L"Date ⯆" });
+			this->Combobox_SortImages->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Name ⯅", L"Name ⯆" });
 			this->Combobox_SortImages->Location = System::Drawing::Point(218, 127);
 			this->Combobox_SortImages->Name = L"Combobox_SortImages";
 			this->Combobox_SortImages->Size = System::Drawing::Size(94, 21);
 			this->Combobox_SortImages->TabIndex = 2;
+			this->Combobox_SortImages->SelectedIndexChanged += gcnew System::EventHandler(this, &MainWindow::Combobox_SortImages_SelectedIndexChanged);
 			// 
 			// Label_FolderPath
 			// 
@@ -693,7 +694,7 @@ private: System::Windows::Forms::Button^ Button_ResizeConfirm;
 			this->ComboBox_ToolSelection->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
 			this->ComboBox_ToolSelection->FormattingEnabled = true;
 			this->ComboBox_ToolSelection->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"Create Rectangle", L"Resize", L"Erase" });
-			this->ComboBox_ToolSelection->Location = System::Drawing::Point(539, 521);
+			this->ComboBox_ToolSelection->Location = System::Drawing::Point(541, 521);
 			this->ComboBox_ToolSelection->Name = L"ComboBox_ToolSelection";
 			this->ComboBox_ToolSelection->Size = System::Drawing::Size(121, 21);
 			this->ComboBox_ToolSelection->TabIndex = 7;
@@ -708,7 +709,7 @@ private: System::Windows::Forms::Button^ Button_ResizeConfirm;
 			this->imageDisplay->Location = System::Drawing::Point(2, 2);
 			this->imageDisplay->Margin = System::Windows::Forms::Padding(2);
 			this->imageDisplay->Name = L"imageDisplay";
-			this->imageDisplay->Size = System::Drawing::Size(669, 514);
+			this->imageDisplay->Size = System::Drawing::Size(671, 514);
 			this->imageDisplay->TabIndex = 6;
 			this->imageDisplay->TabStop = false;
 			this->imageDisplay->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &MainWindow::imageDisplay_MouseDown);
@@ -889,7 +890,14 @@ private: System::Windows::Forms::Button^ Button_ResizeConfirm;
 
 	private: System::Void Button_ChangeDir_Click(System::Object^ sender, System::EventArgs^ e) {
 		BrowseFolder();
-		SortImageByName("A");
+		if (Combobox_SortImages->SelectedIndex == 0)
+		{
+			SortImageByName("ASCENDING");
+		}
+		else
+		{
+			SortImageByName("DESCENDING");
+		}
 		Label_FolderPath->Text = "Path: " + GUI::workingFolderPath;
 	}
 
@@ -930,7 +938,14 @@ private: System::Windows::Forms::Button^ Button_ResizeConfirm;
 
 	private: System::Void TextBox_SearchImages_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 		GUI::imageSearchTerm = TextBox_SearchImages->Text;
-		SortImageByName("A");
+		if (Combobox_SortImages->SelectedIndex == 0)
+		{
+			SortImageByName("ASCENDING");
+		}
+		else
+		{
+			SortImageByName("DESCENDING");
+		}
 	}
 
 	private: System::Void TextBox_SearchClasses_TextChanged(System::Object^ sender, System::EventArgs^ e) {
@@ -971,6 +986,18 @@ private: System::Windows::Forms::Button^ Button_ResizeConfirm;
 		QuickResizeAnnotation(GroupBox_Annotations->SelectedIndex, 3, Decimal::ToInt32(NumericBox_YScale2->Value));
 		RenderAnnotations(GUI::drawnImage);
 		ListAnnotations();
+		}
+	}
+
+
+	private: System::Void Combobox_SortImages_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+		if (Combobox_SortImages->SelectedIndex == 0)
+		{
+			SortImageByName("ASCENDING");
+		}
+		else
+		{
+			SortImageByName("DESCENDING");
 		}
 	}
 };

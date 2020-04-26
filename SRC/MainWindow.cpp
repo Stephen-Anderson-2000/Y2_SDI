@@ -186,8 +186,31 @@ namespace SDIMaster
 			if (GUI::loadedImages[i]->displayFileName->Contains(GUI::imageSearchTerm))
 			{
 				GUI::imageIndices->Add(i);
-				GroupBox_Images->Items->Add(GUI::loadedImages[i]->displayFileName);
 			}
+		}
+
+		int n = GUI::imageIndices->Count;
+		bool swap = true;
+		int tempIndex;
+		while (swap) {
+			swap = false;
+			for (int i = 1; i < n; i++) {
+				if (System::String::Compare(GUI::loadedImages[GUI::imageIndices[i - 1]]->displayFileName, GUI::loadedImages[GUI::imageIndices[i]]->displayFileName) > 0) {
+					tempIndex = GUI::imageIndices[i];
+					GUI::imageIndices[i - 1] = GUI::imageIndices[i];
+					GUI::imageIndices[i - 1] = tempIndex;
+					swap = true;
+				}
+			}
+		}
+		if (order == "DESCENDING") 
+		{
+			GUI::imageIndices->Reverse();
+		}
+
+		for (int i = 0; i < GUI::imageIndices->Count; i++) 
+		{
+			GroupBox_Images->Items->Add(GUI::loadedImages[GUI::imageIndices[i]]->displayFileName);
 		}
 	}
 

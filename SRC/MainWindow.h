@@ -124,7 +124,8 @@ namespace SDIMaster
 	private: System::Windows::Forms::ComboBox^ ComboBox_ToolSelection;
 	private: System::Windows::Forms::Button^ Button_SaveAnnotations;
 	private: System::Windows::Forms::Button^ Button_LoadAnnotations;
-	private: System::Windows::Forms::Label^ Label_AnnotationCount;
+	private: System::Windows::Forms::Label^ Label_AnnotationPath;
+
 	private: System::Windows::Forms::Label^ label5;
 	private: System::Windows::Forms::NumericUpDown^ NumericBox_YScale;
 	private: System::Windows::Forms::NumericUpDown^ NumericBox_XScale;
@@ -132,6 +133,8 @@ namespace SDIMaster
 	private: System::Windows::Forms::NumericUpDown^ NumericBox_YScale2;
 	private: System::Windows::Forms::NumericUpDown^ NumericBox_XScale2;
 private: System::Windows::Forms::Button^ Button_ResizeConfirm;
+private: System::Windows::Forms::Timer^ Timer_AutosaveTimer;
+private: System::ComponentModel::IContainer^ components;
 
 
 
@@ -144,7 +147,7 @@ private: System::Windows::Forms::Button^ Button_ResizeConfirm;
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		System::ComponentModel::Container^ components;
+
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -153,6 +156,7 @@ private: System::Windows::Forms::Button^ Button_ResizeConfirm;
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			this->components = (gcnew System::ComponentModel::Container());
 			this->splitContainer1 = (gcnew System::Windows::Forms::SplitContainer());
 			this->splitContainer2 = (gcnew System::Windows::Forms::SplitContainer());
 			this->tableLayoutPanel2 = (gcnew System::Windows::Forms::TableLayoutPanel());
@@ -187,11 +191,12 @@ private: System::Windows::Forms::Button^ Button_ResizeConfirm;
 			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->buttonRemoveAnnotation = (gcnew System::Windows::Forms::Button());
 			this->GroupBox_Annotations = (gcnew System::Windows::Forms::ListBox());
-			this->Label_AnnotationCount = (gcnew System::Windows::Forms::Label());
+			this->Label_AnnotationPath = (gcnew System::Windows::Forms::Label());
 			this->Button_SaveAnnotations = (gcnew System::Windows::Forms::Button());
 			this->Button_LoadAnnotations = (gcnew System::Windows::Forms::Button());
 			this->ComboBox_ToolSelection = (gcnew System::Windows::Forms::ComboBox());
 			this->imageDisplay = (gcnew System::Windows::Forms::PictureBox());
+			this->Timer_AutosaveTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->splitContainer1))->BeginInit();
 			this->splitContainer1->Panel1->SuspendLayout();
 			this->splitContainer1->Panel2->SuspendLayout();
@@ -230,7 +235,7 @@ private: System::Windows::Forms::Button^ Button_ResizeConfirm;
 			// 
 			// splitContainer1.Panel2
 			// 
-			this->splitContainer1->Panel2->Controls->Add(this->Label_AnnotationCount);
+			this->splitContainer1->Panel2->Controls->Add(this->Label_AnnotationPath);
 			this->splitContainer1->Panel2->Controls->Add(this->Button_SaveAnnotations);
 			this->splitContainer1->Panel2->Controls->Add(this->Button_LoadAnnotations);
 			this->splitContainer1->Panel2->Controls->Add(this->ComboBox_ToolSelection);
@@ -611,7 +616,6 @@ private: System::Windows::Forms::Button^ Button_ResizeConfirm;
 			this->NumericBox_XScale->Name = L"NumericBox_XScale";
 			this->NumericBox_XScale->Size = System::Drawing::Size(41, 20);
 			this->NumericBox_XScale->TabIndex = 8;
-			this->NumericBox_XScale->ValueChanged += gcnew System::EventHandler(this, &MainWindow::NumericBox_XScale_ValueChanged);
 			// 
 			// label6
 			// 
@@ -657,20 +661,20 @@ private: System::Windows::Forms::Button^ Button_ResizeConfirm;
 			this->GroupBox_Annotations->TabIndex = 0;
 			this->GroupBox_Annotations->SelectedIndexChanged += gcnew System::EventHandler(this, &MainWindow::GroupBox_Annotations_SelectedIndexChanged);
 			// 
-			// Label_AnnotationCount
+			// Label_AnnotationPath
 			// 
-			this->Label_AnnotationCount->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
-			this->Label_AnnotationCount->AutoSize = true;
-			this->Label_AnnotationCount->Location = System::Drawing::Point(13, 521);
-			this->Label_AnnotationCount->Name = L"Label_AnnotationCount";
-			this->Label_AnnotationCount->Size = System::Drawing::Size(35, 13);
-			this->Label_AnnotationCount->TabIndex = 10;
-			this->Label_AnnotationCount->Text = L"label5";
+			this->Label_AnnotationPath->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
+			this->Label_AnnotationPath->AutoSize = true;
+			this->Label_AnnotationPath->Location = System::Drawing::Point(13, 521);
+			this->Label_AnnotationPath->Name = L"Label_AnnotationPath";
+			this->Label_AnnotationPath->Size = System::Drawing::Size(32, 13);
+			this->Label_AnnotationPath->TabIndex = 10;
+			this->Label_AnnotationPath->Text = L"Path:";
 			// 
 			// Button_SaveAnnotations
 			// 
 			this->Button_SaveAnnotations->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
-			this->Button_SaveAnnotations->Location = System::Drawing::Point(13, 607);
+			this->Button_SaveAnnotations->Location = System::Drawing::Point(13, 601);
 			this->Button_SaveAnnotations->Name = L"Button_SaveAnnotations";
 			this->Button_SaveAnnotations->Size = System::Drawing::Size(102, 23);
 			this->Button_SaveAnnotations->TabIndex = 9;
@@ -681,7 +685,7 @@ private: System::Windows::Forms::Button^ Button_ResizeConfirm;
 			// Button_LoadAnnotations
 			// 
 			this->Button_LoadAnnotations->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
-			this->Button_LoadAnnotations->Location = System::Drawing::Point(13, 578);
+			this->Button_LoadAnnotations->Location = System::Drawing::Point(13, 572);
 			this->Button_LoadAnnotations->Name = L"Button_LoadAnnotations";
 			this->Button_LoadAnnotations->Size = System::Drawing::Size(102, 23);
 			this->Button_LoadAnnotations->TabIndex = 8;
@@ -693,10 +697,10 @@ private: System::Windows::Forms::Button^ Button_ResizeConfirm;
 			// 
 			this->ComboBox_ToolSelection->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
 			this->ComboBox_ToolSelection->FormattingEnabled = true;
-			this->ComboBox_ToolSelection->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"Create Rectangle", L"Resize", L"Erase" });
-			this->ComboBox_ToolSelection->Location = System::Drawing::Point(541, 521);
+			this->ComboBox_ToolSelection->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Create Rectangle", L"Resize" });
+			this->ComboBox_ToolSelection->Location = System::Drawing::Point(543, 521);
 			this->ComboBox_ToolSelection->Name = L"ComboBox_ToolSelection";
-			this->ComboBox_ToolSelection->Size = System::Drawing::Size(121, 21);
+			this->ComboBox_ToolSelection->Size = System::Drawing::Size(105, 21);
 			this->ComboBox_ToolSelection->TabIndex = 7;
 			// 
 			// imageDisplay
@@ -709,11 +713,16 @@ private: System::Windows::Forms::Button^ Button_ResizeConfirm;
 			this->imageDisplay->Location = System::Drawing::Point(2, 2);
 			this->imageDisplay->Margin = System::Windows::Forms::Padding(2);
 			this->imageDisplay->Name = L"imageDisplay";
-			this->imageDisplay->Size = System::Drawing::Size(671, 514);
+			this->imageDisplay->Size = System::Drawing::Size(673, 514);
 			this->imageDisplay->TabIndex = 6;
 			this->imageDisplay->TabStop = false;
 			this->imageDisplay->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &MainWindow::imageDisplay_MouseDown);
 			this->imageDisplay->MouseUp += gcnew System::Windows::Forms::MouseEventHandler(this, &MainWindow::imageDisplay_MouseUp);
+			// 
+			// Timer_AutosaveTimer
+			// 
+			this->Timer_AutosaveTimer->Interval = (60 * 1000);
+			this->Timer_AutosaveTimer->Tick += gcnew System::EventHandler(this, &MainWindow::Timer_AutosaveTimer_Tick);
 			// 
 			// MainWindow
 			// 
@@ -767,7 +776,7 @@ private: System::Windows::Forms::Button^ Button_ResizeConfirm;
 	protected: System::Void AddImage(String^);
 			 //Create a new image object and add it to the list
 
-	protected: System::Void BrowseFile();
+	protected: System::String^ BrowseFile(String^);
 			 //Browse for a single file (classes only)
 
 	protected: System::Void ClearImages();
@@ -902,7 +911,10 @@ private: System::Windows::Forms::Button^ Button_ResizeConfirm;
 	}
 
 	private: System::Void Button_LoadClasses_Click(System::Object^ sender, System::EventArgs^ e) {
-		BrowseFile();
+		String^ namesPath = gcnew String(BrowseFile(".names file (*.names)|*.names"));
+		GUI::labelFile = namesPath;
+		ClearClasses();
+		LoadClasses(namesPath);
 		SortClassPane("B");
 	}
 	private: System::Void GroupBox_Images_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
@@ -954,13 +966,19 @@ private: System::Windows::Forms::Button^ Button_ResizeConfirm;
 	}
 	private: System::Void Button_SaveAnnotations_Click(System::Object^ sender, System::EventArgs^ e) {
 		SaveJson("file.json");
+		GUI::annotationFilePath = "file.json";
+		Label_AnnotationPath->Text = GUI::annotationFilePath;
 	}
 
 	private: System::Void Button_LoadAnnotations_Click(System::Object^ sender, System::EventArgs^ e) {
-		LoadJson("file.json");
+		String^ filePath = BrowseFile(".JSOON file (*.json)|*.json");
+		LoadJson(SystemToStdString(filePath));
+		GUI::annotationFilePath = filePath;
+		Label_AnnotationPath->Text = GUI::annotationFilePath;
 	}
 	private: System::Void MainWindow_Load(System::Object^ sender, System::EventArgs^ e) {
 		ComboBox_ToolSelection->SelectedIndex = 0;
+		Timer_AutosaveTimer->Start();
 	}
 
 	private: System::Void GroupBox_Annotations_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
@@ -968,13 +986,6 @@ private: System::Windows::Forms::Button^ Button_ResizeConfirm;
 		NumericBox_YScale->Value = GUI::loadedImages[GUI::drawnImage]->annotationFiles[0]->annotationsPolygonal[GroupBox_Annotations->SelectedIndex]->vertices[2];
 		NumericBox_XScale2->Value = GUI::loadedImages[GUI::drawnImage]->annotationFiles[0]->annotationsPolygonal[GroupBox_Annotations->SelectedIndex]->vertices[1];
 		NumericBox_YScale2->Value = GUI::loadedImages[GUI::drawnImage]->annotationFiles[0]->annotationsPolygonal[GroupBox_Annotations->SelectedIndex]->vertices[3];
-	}
-
-	private: System::Void NumericBox_XScale_ValueChanged(System::Object^ sender, System::EventArgs^ e)
-	{
-		//QuickResizeAnnotation(GroupBox_Annotations->SelectedIndex, 0, Decimal::ToInt32(NumericBox_XScale->Value));
-		//RenderAnnotations(GUI::drawnImage);
-		//ListAnnotations();
 	}
 
 	private: System::Void Button_ResizeConfirm_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -998,6 +1009,13 @@ private: System::Windows::Forms::Button^ Button_ResizeConfirm;
 		else
 		{
 			SortImageByName("DESCENDING");
+		}
+	}
+
+	private: System::Void Timer_AutosaveTimer_Tick(System::Object^ sender, System::EventArgs^ e) {
+		if (GUI::annotationFilePath != "") {
+			SaveJson(SystemToStdString(GUI::annotationFilePath));
+			Timer_AutosaveTimer->Interval = (60 * 1000); //60 seconds
 		}
 	}
 };

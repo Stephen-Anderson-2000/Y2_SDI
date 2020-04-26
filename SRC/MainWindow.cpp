@@ -25,16 +25,6 @@ using namespace PositionCalculation;
 
 namespace SDIMaster
 {
-	int CalculatePos(int position, int offset, float imageScale) {
-		int newPos = floor(float(position) * imageScale + float(offset));
-		return newPos;
-	}
-
-	int CalculatePosInverse(int position, int offset, float imageScale) {
-		int newPos = floor(float(position - float(offset)) / imageScale);
-		return newPos;
-	}
-
 	/** Opens the file browsing dialog. This will be used
 	 *  to allow a folder containing images to be loaded
 	 *  using the default Windows file browser.
@@ -188,6 +178,10 @@ namespace SDIMaster
 		nameFile->Close();
 	}
 
+	/** Sorts the images by name. Uses the implementation
+	 *  found in SortAndSearch.cpp, allowing the images to 
+	 *  be sorted ascending or descending by name.
+	 */
 	System::Void MainWindow::SortImageByName(String^ order) {
 		GUI::imageIndices->Clear();
 		GroupBox_Images->Items->Clear();
@@ -201,6 +195,10 @@ namespace SDIMaster
 		}
 	}
 
+	/** Sorts the image by date. Uses the implementation
+	 *  found in SortAndSearch.cpp, allowing the images to
+	 *  be sorted ascending or descending by date.
+	 */
 	System::Void MainWindow::SortImageByDate(String^ order) {
 		GUI::imageIndices->Clear();
 		//sort
@@ -209,6 +207,10 @@ namespace SDIMaster
 		}
 	}
 
+	/** Sorts the class pane by name. Uses the implementation
+	 *  found in SortAndSearch.cpp, allowing the images to be
+	 *  sorted ascending or descending by name.
+	 */
 	System::Void MainWindow::SortClassPane(String^ order) {
 		GUI::labelIndices->Clear();
 		GroupBox_Classes->Items->Clear();
@@ -222,6 +224,10 @@ namespace SDIMaster
 		}
 	}
 
+	/**  List all current annotations in the GUI. Shows
+	 *   all annotations, whether loaded from a file or
+	 *   created in the current session.
+	 */
 	System::Void MainWindow::ListAnnotations() {
 		GroupBox_Annotations->Items->Clear();
 		//sort
@@ -249,6 +255,11 @@ namespace SDIMaster
 		GUI::loadedImages[imageIndex]->annotationFiles[0]->annotationsPolygonal->RemoveAt(annotationIndex);
 	}
 
+	/** Draws all current annotations to the screen.
+	 *  Adds the annotations to the current image in the canvas
+	 *  including both annotations drawn in the current session
+	 *  and loaded from the .names file.
+	 */
 	System::Void MainWindow::RenderAnnotations(int imageIndex)
 	{
 		GUI::boxCanvas = imageDisplay->CreateGraphics();
@@ -278,8 +289,5 @@ namespace SDIMaster
 			Rectangle polygonalAnnotation = Rectangle(CalculatePos(coordinates[0], GUI::xOffset, GUI::imageScale), CalculatePos(coordinates[1], GUI::yOffset, GUI::imageScale), CalculatePos(coordinates[2], GUI::xOffset, GUI::imageScale) - CalculatePos(coordinates[0], GUI::xOffset, GUI::imageScale), CalculatePos(coordinates[3], GUI::yOffset, GUI::imageScale) - CalculatePos(coordinates[1], GUI::yOffset, GUI::imageScale));
 			GUI::boxCanvas->DrawRectangle(boxBrush, polygonalAnnotation);
 		}
-
 	}
-	
-
 }

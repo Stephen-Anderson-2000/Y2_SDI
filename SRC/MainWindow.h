@@ -116,7 +116,7 @@ namespace SDIMaster
 	private: System::Windows::Forms::TextBox^ TextBox_SearchImages;
 
 	private: System::Windows::Forms::Label^ label2;
-	private: System::Windows::Forms::Label^ Label_NamesPath;
+
 	private: System::Windows::Forms::ComboBox^ ComboBox_SortClasses;
 	private: System::Windows::Forms::Label^ label4;
 	private: System::Windows::Forms::Label^ label3;
@@ -171,7 +171,6 @@ private: System::Windows::Forms::Button^ Button_ResizeConfirm;
 			this->ComboBox_SortClasses = (gcnew System::Windows::Forms::ComboBox());
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
-			this->Label_NamesPath = (gcnew System::Windows::Forms::Label());
 			this->TextBox_ClassName = (gcnew System::Windows::Forms::TextBox());
 			this->Button_RemoveClass = (gcnew System::Windows::Forms::Button());
 			this->Button_AddClass = (gcnew System::Windows::Forms::Button());
@@ -413,7 +412,6 @@ private: System::Windows::Forms::Button^ Button_ResizeConfirm;
 			this->classescontainer->Controls->Add(this->ComboBox_SortClasses);
 			this->classescontainer->Controls->Add(this->label4);
 			this->classescontainer->Controls->Add(this->label3);
-			this->classescontainer->Controls->Add(this->Label_NamesPath);
 			this->classescontainer->Controls->Add(this->TextBox_ClassName);
 			this->classescontainer->Controls->Add(this->Button_RemoveClass);
 			this->classescontainer->Controls->Add(this->Button_AddClass);
@@ -467,16 +465,6 @@ private: System::Windows::Forms::Button^ Button_ResizeConfirm;
 			this->label3->Size = System::Drawing::Size(29, 13);
 			this->label3->TabIndex = 8;
 			this->label3->Text = L"Sort:";
-			// 
-			// Label_NamesPath
-			// 
-			this->Label_NamesPath->AutoSize = true;
-			this->Label_NamesPath->Location = System::Drawing::Point(5, 23);
-			this->Label_NamesPath->MaximumSize = System::Drawing::Size(190, 0);
-			this->Label_NamesPath->Name = L"Label_NamesPath";
-			this->Label_NamesPath->Size = System::Drawing::Size(32, 13);
-			this->Label_NamesPath->TabIndex = 7;
-			this->Label_NamesPath->Text = L"Path:";
 			// 
 			// TextBox_ClassName
 			// 
@@ -578,6 +566,7 @@ private: System::Windows::Forms::Button^ Button_ResizeConfirm;
 			// 
 			// Button_ResizeConfirm
 			// 
+			this->Button_ResizeConfirm->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
 			this->Button_ResizeConfirm->Location = System::Drawing::Point(193, 173);
 			this->Button_ResizeConfirm->Name = L"Button_ResizeConfirm";
 			this->Button_ResizeConfirm->Size = System::Drawing::Size(119, 23);
@@ -704,7 +693,7 @@ private: System::Windows::Forms::Button^ Button_ResizeConfirm;
 			this->ComboBox_ToolSelection->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
 			this->ComboBox_ToolSelection->FormattingEnabled = true;
 			this->ComboBox_ToolSelection->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"Create Rectangle", L"Resize", L"Erase" });
-			this->ComboBox_ToolSelection->Location = System::Drawing::Point(537, 521);
+			this->ComboBox_ToolSelection->Location = System::Drawing::Point(539, 521);
 			this->ComboBox_ToolSelection->Name = L"ComboBox_ToolSelection";
 			this->ComboBox_ToolSelection->Size = System::Drawing::Size(121, 21);
 			this->ComboBox_ToolSelection->TabIndex = 7;
@@ -719,7 +708,7 @@ private: System::Windows::Forms::Button^ Button_ResizeConfirm;
 			this->imageDisplay->Location = System::Drawing::Point(2, 2);
 			this->imageDisplay->Margin = System::Windows::Forms::Padding(2);
 			this->imageDisplay->Name = L"imageDisplay";
-			this->imageDisplay->Size = System::Drawing::Size(667, 514);
+			this->imageDisplay->Size = System::Drawing::Size(669, 514);
 			this->imageDisplay->TabIndex = 6;
 			this->imageDisplay->TabStop = false;
 			this->imageDisplay->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &MainWindow::imageDisplay_MouseDown);
@@ -907,7 +896,6 @@ private: System::Windows::Forms::Button^ Button_ResizeConfirm;
 	private: System::Void Button_LoadClasses_Click(System::Object^ sender, System::EventArgs^ e) {
 		BrowseFile();
 		SortClassPane("B");
-		Label_NamesPath->Text = "Path: " + GUI::labelFile;
 	}
 	private: System::Void GroupBox_Images_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
 		if (GroupBox_Images->SelectedIndex > -1) {

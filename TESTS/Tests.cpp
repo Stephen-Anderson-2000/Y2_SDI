@@ -6,6 +6,8 @@
 #include <fstream>
 #include <string>
 
+#include <Windows.h>
+
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace TESTS
@@ -95,12 +97,14 @@ namespace TESTS
 			myList.Add(myString3);
 			myList.Add(myString4);
 
+			// Removes the second element "there"
 			myList.Remove(1);
 
+			// Confirms that "Hello", "lovely" and "world" are still accessible
 			Assert::AreEqual(myString1, myList.At(0));
 			Assert::AreEqual(myString3, myList.At(1));
 			Assert::AreEqual(myString4, myList.At(2));
-		}
+		} // Removes the second item from a list of four to help diagnose the exception that occurs
 
 		TEST_METHOD(RemoveMiddleItemListOfFive)
 		{
@@ -172,16 +176,18 @@ namespace TESTS
 
 		TEST_METHOD(OneHundredItems)
 		{
-			ifstream myFile("Test Resources/100 Words.txt");
+			ifstream myFile("../../TESTS/Test Resources/100 Items.txt");
 			LinkedListString myList;
 			std::string myArray[100];
 
 			// Loads a list of strings from a text file
 			if (myFile.is_open())
 			{
-				for (int i = 0; i < 100; i++)
+				int i = 0;
+				while (!myFile.eof())
 				{
-					myFile >> myArray[i];
+					getline(myFile, myArray[i]);
+					i++;
 				}
 				myFile.close();
 			}
@@ -204,16 +210,18 @@ namespace TESTS
 
 		TEST_METHOD(TenThousandItems)
 		{
-			ifstream myFile("Test Resources/10000 Words.txt");
+			ifstream myFile("../../TESTS/Test Resources/10000 Items.txt");
 			LinkedListString myList;
 			std::string myArray[10000];
 
 			// Loads a list of strings from a text file
 			if (myFile.is_open())
 			{
-				for (int i = 0; i < 10000; i++)
+				int i = 0;
+				while (!myFile.eof())
 				{
-					myFile >> myArray[i];
+					getline(myFile, myArray[i]);
+					i++;
 				}
 				myFile.close();
 			}
@@ -236,7 +244,7 @@ namespace TESTS
 
 		TEST_METHOD(RemoveAndAddHalfItems)
 		{
-			ifstream myFile("Test Resources/100 Words.txt");
+			ifstream myFile("../../TESTS/Test Resources/100 Items.txt");
 			LinkedListString myList;
 			std::string myArray[100];
 			std::string myArray2[50];
@@ -244,39 +252,41 @@ namespace TESTS
 			// Loads a list of strings from a text file
 			if (myFile.is_open())
 			{
-				for (int i = 0; i < 100; i++)
+				int i = 0;
+				while (!myFile.eof())
 				{
-					myFile >> myArray[i];
+					getline(myFile, myArray[i]);
+					myList.Add(myArray[i]);
+					i++;
 				}
 				myFile.close();
-			}
-
-			// Adds the loaded items to the list
-			for (int i = 0; i < 100; i++)
-			{
-				myList.Add(myArray[i]);
 			}
 
 			// Copies the last 50 items from the list into an array then removes them from the list
 			for (int i = 0; i < 50; i++)
 			{
-				myArray2[i] = myList.At(50);
-				myList.Remove(0);
+				myArray2[i] = myList.At(50 + i);
+				
 			}
-
+			while (myList.Count() > 50)
+			{
+				myList.Remove(50);
+			}
+			
+			
 			// Loops through the secondary array and adds the values back to the list
 			for (int i = 0; i < 50; i++)
 			{
 				myList.Add(myArray2[i]);
 			}
 
-			// Compares the items at the same index to check if the order is kept
-			// then checks that there are still exactly 100 items in the list
+			// Checks that there are still exactly 100 items in the list
+			// then compares the items at the same index to check if the order is kept
+			Assert::AreEqual(100, myList.Count());
 			for (int i = 0; i < 100; i++)
 			{
 				Assert::AreEqual(myArray[i], myList.At(i));
 			}
-			Assert::AreEqual(100, myList.Count());
 		} // Checks to see what happens if items are removed and added back to the list
 
 		TEST_METHOD(OutOfRange)
@@ -325,7 +335,7 @@ namespace TESTS
 			// Checks to see if the exception is handled properly
 			std::string emptyString = "";
 			Assert::AreEqual(emptyString, myString4);
-		}
+		} // Attempts to access the last item in a list after it has been deleted
 
 	};
 
@@ -336,230 +346,374 @@ namespace TESTS
 		{
 			LinkedListString myList;
 			LinkedListString searchedList;
-			std::string searchTerm = "test";
+			LinkedListString correctResult;
 
-			searchedList = myList.Search(searchTerm);
-
-			for (int i = 0; i < 1; i++)
+			// Searches the list which should return another (empty) LinkedListString object
+			searchedList = myList.Search("test");
+			
+			// Checks that the size of the resulting list is correct before comparing each value in order
+			Assert::AreEqual(correctResult.Count(), searchedList.Count());
+			for (int i = 0; i < searchedList.Count(); i++)
 			{
-				Assert::AreEqual(myList.At(i), searchedList.At(i));
+				Assert::AreEqual(correctResult.At(i), searchedList.At(i));
 			}
-
-		}
+		} // Searches an empty list to see if any errors or exceptions are thrown
 
 		TEST_METHOD(OnlyItem)
 		{
 			LinkedListString myList;
 			LinkedListString searchedList;
-			std::string searchTerm = "test";
+			LinkedListString correctResult;
+			std::string myString = "test";
 
-			myList.Add(searchTerm);
+			// Adds the string to the linked list objects
+			myList.Add(myString);
+			correctResult.Add(myString);
+		
+			// Searches for the string "test" and returns a linked list object
+			searchedList = myList.Search("test");
 
-			searchedList = myList.Search(searchTerm);
-
-			for (int i = 0; i < 1; i++)
+			// Checks that the size of the resulting list is correct before comparing each value in order
+			Assert::AreEqual(correctResult.Count(), searchedList.Count());
+			for (int i = 0; i < searchedList.Count(); i++)
 			{
-				Assert::AreEqual(myList.At(i), searchedList.At(i));
+				Assert::AreEqual(correctResult.At(i), searchedList.At(i));
 			}
+		} // Searches a list containing a single item, that item should then be returned
 
-		}
-
-		// Next tests require >= 5 items in their list
 		TEST_METHOD(CompleteMatch)
 		{
 			LinkedListString myList;
 			LinkedListString searchedList;
+			LinkedListString correctResult;
 			std::string myString1 = "What";
 			std::string myString2 = "a";
 			std::string myString3 = "beautiful";
 			std::string myString4 = "day";
 			std::string myString5 = "today";
 
+			// Adds the relevant strings to the linked list objects
 			myList.Add(myString1);
 			myList.Add(myString2);
 			myList.Add(myString3);
 			myList.Add(myString4);
 			myList.Add(myString5);
+			correctResult.Add(myString3);
 
-			std::string searchTerm = "beautiful";
-		}
+			// Searches for the string "beautiful" and returns a linked list object
+			searchedList = myList.Search("beautiful");
+
+			// Checks that the size of the resulting list is correct before comparing each value in order
+			Assert::AreEqual(correctResult.Count(), searchedList.Count());
+			for (int i = 0; i < searchedList.Count(); i++)
+			{
+				Assert::AreEqual(correctResult.At(i), searchedList.At(i));
+			}
+		} // Searches a list containing five items for a completely matching search term
 
 		TEST_METHOD(PartialMatch)
 		{
 			LinkedListString myList;
 			LinkedListString searchedList;
+			LinkedListString correctResult;
 			std::string myString1 = "What";
 			std::string myString2 = "a";
 			std::string myString3 = "beautiful";
 			std::string myString4 = "day";
 			std::string myString5 = "today";
 
+			// Adds the relevant strings to the linked list objects
 			myList.Add(myString1);
 			myList.Add(myString2);
 			myList.Add(myString3);
 			myList.Add(myString4);
 			myList.Add(myString5);
+			correctResult.Add(myString3);
 
-			std::string searchTerm = "ut";
-		}
+			// Searches for the string "ut" and returns a linked list object
+			searchedList = myList.Search("ut");
+
+			// Checks that the size of the resulting list is correct before comparing each value in order
+			Assert::AreEqual(correctResult.Count(), searchedList.Count());
+			for (int i = 0; i < searchedList.Count(); i++)
+			{
+				Assert::AreEqual(correctResult.At(i), searchedList.At(i));
+			}
+		} // Searches a list containing five items for a partially matching search term
 
 		TEST_METHOD(MultipleMatches)
 		{
 			LinkedListString myList;
 			LinkedListString searchedList;
+			LinkedListString correctResult;
 			std::string myString1 = "What";
 			std::string myString2 = "a";
 			std::string myString3 = "lovely";
 			std::string myString4 = "lovely";
 			std::string myString5 = "day";
 
+			// Adds the relevant strings to the linked list objects
 			myList.Add(myString1);
 			myList.Add(myString2);
 			myList.Add(myString3);
 			myList.Add(myString4);
 			myList.Add(myString5);
+			correctResult.Add(myString3);
+			correctResult.Add(myString4);
 
-			std::string searchTerm = "lovely";
-		}
+			// Searches for the string "lovely" and returns a linked list object
+			searchedList = myList.Search("lovely");
+
+			// Checks that the size of the resulting list is correct before comparing each value in order
+			Assert::AreEqual(correctResult.Count(), searchedList.Count());
+			for (int i = 0; i < searchedList.Count(); i++)
+			{
+				Assert::AreEqual(correctResult.At(i), searchedList.At(i));
+			}
+		} // Searches for a string that is repeated; a linked list with both items should be returned
 
 		TEST_METHOD(AllUppercaseLetters)
 		{
 			LinkedListString myList;
 			LinkedListString searchedList;
+			LinkedListString correctResult;
 			std::string myString1 = "What";
 			std::string myString2 = "a";
 			std::string myString3 = "beautiful";
 			std::string myString4 = "day";
 			std::string myString5 = "today";
 
+			// Adds the relevant strings to the linked list objects
 			myList.Add(myString1);
 			myList.Add(myString2);
 			myList.Add(myString3);
 			myList.Add(myString4);
 			myList.Add(myString5);
+			correctResult.Add(myString1);
 
-			std::string searchTerm = "WHAT";
-		}
+			// Searches for the string "WHAT" and returns a linked list object
+			searchedList = myList.Search("WHAT");
+
+			// Checks that the size of the resulting list is correct before comparing each value in order
+			Assert::AreEqual(correctResult.Count(), searchedList.Count());
+			for (int i = 0; i < searchedList.Count(); i++)
+			{
+				Assert::AreEqual(correctResult.At(i), searchedList.At(i));
+			}
+		} // Searches for a string using all upper case characters - cases should be ignored
 
 		TEST_METHOD(AllLowercaseLetters)
 		{
 			LinkedListString myList;
 			LinkedListString searchedList;
+			LinkedListString correctResult;
 			std::string myString1 = "What";
 			std::string myString2 = "a";
 			std::string myString3 = "beautiful";
 			std::string myString4 = "day";
 			std::string myString5 = "today";
 
+			// Adds the relevant strings to the linked list objects
 			myList.Add(myString1);
 			myList.Add(myString2);
 			myList.Add(myString3);
 			myList.Add(myString4);
 			myList.Add(myString5);
+			correctResult.Add(myString1);
 
-			std::string searchTerm = "what";
-		}
+			// Searches for the string "what" and returns a linked list object
+			searchedList = myList.Search("what");
+
+			// Checks that the size of the resulting list is correct before comparing each value in order
+			Assert::AreEqual(correctResult.Count(), searchedList.Count());
+			for (int i = 0; i < searchedList.Count(); i++)
+			{
+				Assert::AreEqual(correctResult.At(i), searchedList.At(i));
+			}
+		} // Searches for a string using all lower case characters - cases should be ignored
 
 		TEST_METHOD(IncludesNumbers)
 		{
 			LinkedListString myList;
 			LinkedListString searchedList;
+			LinkedListString correctResult;
 			std::string myString1 = "What";
 			std::string myString2 = "a";
 			std::string myString3 = "beaut1ful";
 			std::string myString4 = "day";
 			std::string myString5 = "2day";
 
+			// Adds the relevant strings to the linked list objects
 			myList.Add(myString1);
 			myList.Add(myString2);
 			myList.Add(myString3);
 			myList.Add(myString4);
 			myList.Add(myString5);
+			correctResult.Add(myString5);
 
-			std::string searchTerm = "2day";
-		}
+			// Searches for the string "2day" and returns a linked list object
+			searchedList = myList.Search("2day");
+
+			// Checks that the size of the resulting list is correct before comparing each value in order
+			Assert::AreEqual(correctResult.Count(), searchedList.Count());
+			for (int i = 0; i < searchedList.Count(); i++)
+			{
+				Assert::AreEqual(correctResult.At(i), searchedList.At(i));
+			} 
+		} // Searches for a completely matching string that includes an integer in it
 
 		TEST_METHOD(PartialMatchIncludesNumbers)
 		{
 			LinkedListString myList;
 			LinkedListString searchedList;
+			LinkedListString correctResult;
 			std::string myString1 = "What";
 			std::string myString2 = "a";
 			std::string myString3 = "beaut1ful";
 			std::string myString4 = "day";
 			std::string myString5 = "2day";
 
+			// Adds the relevant strings to the linked list objects
 			myList.Add(myString1);
 			myList.Add(myString2);
 			myList.Add(myString3);
 			myList.Add(myString4);
 			myList.Add(myString5);
+			correctResult.Add(myString3);
 
-			std::string searchTerm = "1";
-		}
+			// Searches for the string "1" and returns a linked list object
+			searchedList = myList.Search("1");
+
+			// Checks that the size of the resulting list is correct before comparing each value in order
+			Assert::AreEqual(correctResult.Count(), searchedList.Count());
+			for (int i = 0; i < searchedList.Count(); i++)
+			{
+				Assert::AreEqual(correctResult.At(i), searchedList.At(i));
+			}
+		} // Searches for a partially matching string that includes an integer in it
 
 		TEST_METHOD(IncludesSpecialCharacters)
 		{
 			LinkedListString myList;
 			LinkedListString searchedList;
+			LinkedListString correctResult;
 			std::string myString1 = "It's";
 			std::string myString2 = "a";
 			std::string myString3 = "very *nice*";
 			std::string myString4 = "day";
 			std::string myString5 = "today";
 
+			// Adds the relevant strings to the linked list objects
 			myList.Add(myString1);
 			myList.Add(myString2);
 			myList.Add(myString3);
 			myList.Add(myString4);
 			myList.Add(myString5);
+			correctResult.Add(myString3);
 
-			std::string searchTerm = "very *nice*";
-		}
+			// Searches for the string "very *nice*" and returns a linked list object
+			searchedList = myList.Search("very *nice*");
+
+			// Checks that the size of the resulting list is correct before comparing each value in order
+			Assert::AreEqual(correctResult.Count(), searchedList.Count());
+			for (int i = 0; i < searchedList.Count(); i++)
+			{
+				Assert::AreEqual(correctResult.At(i), searchedList.At(i));
+			}
+		} // Searches for a completely matching string that contains non alphanumeric characters
 
 		TEST_METHOD(PartialMatchIncludesSpecialCharacters)
 		{
 			LinkedListString myList;
 			LinkedListString searchedList;
+			LinkedListString correctResult;
 			std::string myString1 = "It's";
 			std::string myString2 = "a";
 			std::string myString3 = "very *nice*";
 			std::string myString4 = "day";
 			std::string myString5 = "today";
 
+			// Adds the relevant strings to the linked list objects
 			myList.Add(myString1);
 			myList.Add(myString2);
 			myList.Add(myString3);
 			myList.Add(myString4);
 			myList.Add(myString5);
+			correctResult.Add(myString3);
 
-			std::string searchTerm = "nice";
-		}
+			// Searches for the string "nice" and returns a linked list object
+			searchedList = myList.Search("nice");
+
+			// Checks that the size of the resulting list is correct before comparing each value in order
+			Assert::AreEqual(correctResult.Count(), searchedList.Count());
+			for (int i = 0; i < searchedList.Count(); i++)
+			{
+				Assert::AreEqual(correctResult.At(i), searchedList.At(i));
+			}
+		} // Searches for a partially matching string that contains non alphanumeric characters
+
+		TEST_METHOD(SearchingWithEmptyString)
+		{
+			LinkedListString myList;
+			LinkedListString searchedList;
+			LinkedListString correctResult;
+			std::string myString1 = "It's";
+			std::string myString2 = "a";
+			std::string myString3 = "very *nice*";
+			std::string myString4 = "day";
+			std::string myString5 = "today";
+
+			// Adds the relevant strings to the linked list objects
+			myList.Add(myString1);
+			myList.Add(myString2);
+			myList.Add(myString3);
+			myList.Add(myString4);
+			myList.Add(myString5);
+			correctResult.Add(myString3);
+
+			// Searches for an empty string and returns a linked list object
+			searchedList = myList.Search("");
+
+			// Checks that the size of the resulting list is correct before comparing each value in order
+			Assert::AreEqual(correctResult.Count(), searchedList.Count());
+			for (int i = 0; i < searchedList.Count(); i++)
+			{
+				Assert::AreEqual(correctResult.At(i), searchedList.At(i));
+			}
+		} // Searches for an empty string; should return all items
 
 		TEST_METHOD(Search100Items)
 		{
-			ifstream myFile("Test Resources/Unsorted Lists/100 Words.txt");
-			LinkedListString searchedList;
+			// Opens the file that contains the 100 words
+			ifstream myFile("../../TESTS/Test Resources/Unsorted Lists/100 Words.txt");
 			LinkedListString myList;
-			std::string myArray[100];
+			LinkedListString searchedList;
+			LinkedListString correctResult;
 
 			// Loads a list of strings from a text file
 			if (myFile.is_open())
 			{
-				for (int i = 0; i < 100; i++)
+				std::string tempString;
+				while (!myFile.eof())
 				{
-					myFile >> myArray[i];
+					getline(myFile, tempString);
+					myList.Add(tempString);
 				}
 				myFile.close();
 			}
+			// Adds the correct search result to the required linked list object
+			correctResult.Add("passion");
 
-			for (int i = 0; i < 100; i++)
+			// Searches for the string "passions" and returns a linked list object
+			searchedList = myList.Search("passion");
+
+			// Checks that the size of the resulting list is correct before comparing each value in order
+			Assert::AreEqual(correctResult.Count(), searchedList.Count());
+			for (int i = 0; i < searchedList.Count(); i++)
 			{
-				myList.Add(myArray[i]);
+				Assert::AreEqual(correctResult.At(i), searchedList.At(i));
 			}
-
-			std::string searchTerm = "passion";
-		}
+		} // Searches for a matching string from a list of 100 items
 	};
 
 	TEST_CLASS(SortingByNameTests)
@@ -568,163 +722,344 @@ namespace TESTS
 		TEST_METHOD(EmptyList)
 		{
 			LinkedListString myList;
-		}
+			LinkedListString sortedList;
+			LinkedListString correctResult;
+
+			// Sorts the empty list by A-Z and gets the results
+			sortedList = myList.Sort(0);
+
+			// Checks that the size of the resulting list is correct before comparing each value in order
+			Assert::AreEqual(correctResult.Count(), sortedList.Count());
+			for (int i = 0; i < sortedList.Count(); i++)
+			{
+				Assert::AreEqual(correctResult.At(i), sortedList.At(i));
+			}
+		} // Sorts an empty list by A-Z to see if any errors or exceptions occur
 
 		TEST_METHOD(OneItem)
 		{
 			LinkedListString myList;
-			std::string myString1 = "testing";
-		}
+			LinkedListString sortedList;
+			LinkedListString correctResult;
+			std::string myString = "test";
+
+			// Adds the relevant strings to the list objects
+			myList.Add(myString);
+			correctResult.Add(myString);
+
+			// Sorts the list by A-Z and gets the results
+			sortedList = myList.Sort(0);
+
+			// Checks that the size of the resulting list is correct before comparing each value in order
+			Assert::AreEqual(correctResult.Count(), sortedList.Count());
+			for (int i = 0; i < sortedList.Count(); i++)
+			{
+				Assert::AreEqual(correctResult.At(i), sortedList.At(i));
+			}
+		} // Sorts a list of one item to see if the list is returned correctly
 
 		// The next tests require a list of 10 items
 		TEST_METHOD(AToZ)
 		{
-			ifstream myFile("Test Resources/Unsorted Lists/10 Words.txt");
 			LinkedListString myList;
-			std::string myArray[10];
+			LinkedListString sortedList;
+			LinkedListString correctResult;
 
-			// Loads a list of strings from a text file
-			if (myFile.is_open())
+			// Loads a list of unsorted strings from a text file
+			ifstream unsortedFile("../../TESTS/Test Resources/Unsorted Lists/10 Words.txt");
+			if (unsortedFile.is_open())
 			{
-				for (int i = 0; i < 10; i++)
+				std::string tempString;
+				while (!unsortedFile.eof())
 				{
-					myFile >> myArray[i];
+					getline(unsortedFile, tempString);
+					myList.Add(tempString);
 				}
-				myFile.close();
+				unsortedFile.close();
 			}
 
-			for (int i = 0; i < 10; i++)
+			// Loads a list of sorted strings from a text file
+			ifstream sortedFile("../../TESTS/Test Resources/Sorted Lists/10 Words - Sorted.txt");
+			if (sortedFile.is_open())
 			{
-				myList.Add(myArray[i]);
+				std::string tempString;
+				while (!sortedFile.eof())
+				{
+					getline(sortedFile, tempString);
+					correctResult.Add(tempString);
+				}
+				sortedFile.close();
 			}
 
-		}
+			// Sorts the list by A-Z and gets the results
+			sortedList = myList.Sort(0);
+
+			// Checks that the size of the resulting list is correct before comparing each value in order
+			Assert::AreEqual(correctResult.Count(), sortedList.Count());
+			for (int i = 0; i < sortedList.Count(); i++)
+			{
+				Assert::AreEqual(correctResult.At(i), sortedList.At(i));
+			}
+		} // Sorts a list of 10 strings A-Z to check that the function works correctly
 
 		TEST_METHOD(ZToA)
 		{
-			ifstream myFile("Test Resources/Unsorted Lists/10 Words.txt");
 			LinkedListString myList;
-			std::string myArray[10];
+			LinkedListString sortedList;
+			LinkedListString correctResult;
 
-			// Loads a list of strings from a text file
-			if (myFile.is_open())
+			// Loads a list of unsorted strings from a text file
+			ifstream unsortedFile("../../TESTS/Test Resources/Unsorted Lists/10 Words.txt");
+			if (unsortedFile.is_open())
 			{
-				for (int i = 0; i < 10; i++)
+				std::string tempString;
+				while (!unsortedFile.eof())
 				{
-					myFile >> myArray[i];
+					getline(unsortedFile, tempString);
+					myList.Add(tempString);
 				}
-				myFile.close();
+				unsortedFile.close();
 			}
 
-			for (int i = 0; i < 10; i++)
+			// Loads a list of sorted strings from a text file
+			ifstream sortedFile("../../TESTS/Test Resources/Sorted Lists/10 Words - Sorted.txt");
+			if (sortedFile.is_open())
 			{
-				myList.Add(myArray[i]);
+				std::string tempString;
+				while (!sortedFile.eof())
+				{
+					getline(sortedFile, tempString);
+					correctResult.Add(tempString);
+				}
+				sortedFile.close();
 			}
-		}
+
+			// Sorts the list by Z-A and gets the results
+			sortedList = myList.Sort(1);
+
+			// Checks that the size of the resulting list is correct before comparing each value in order
+			// In this instance it iterates through the correctResult object in reverse order
+			Assert::AreEqual(correctResult.Count(), sortedList.Count());
+			for (int i = 0; i < sortedList.Count(); i++)
+			{
+				Assert::AreEqual(correctResult.At(correctResult.Count() - i), sortedList.At(i));
+			}
+		} // Sorts a list of 10 strings Z-A to check that the function works correctly
 
 		TEST_METHOD(ZeroToNine)
 		{
-			ifstream myFile("Test Resources/Unsorted Lists/10 Numbers.txt");
 			LinkedListString myList;
-			std::string myArray[10];
+			LinkedListString sortedList;
+			LinkedListString correctResult;
 
-			// Loads a list of strings from a text file
-			if (myFile.is_open())
+			// Loads a list of unsorted strings from a text file
+			ifstream unsortedFile("../../TESTS/Test Resources/Unsorted Lists/10 Numbers.txt");
+			if (unsortedFile.is_open())
 			{
-				for (int i = 0; i < 10; i++)
+				std::string tempString;
+				while (!unsortedFile.eof())
 				{
-					myFile >> myArray[i];
+					getline(unsortedFile, tempString);
+					myList.Add(tempString);
 				}
-				myFile.close();
+				unsortedFile.close();
 			}
 
-			for (int i = 0; i < 10; i++)
+			// Loads a list of sorted strings from a text file
+			ifstream sortedFile("../../TESTS/Test Resources/Sorted Lists/10 Numbers - Sorted.txt");
+			if (sortedFile.is_open())
 			{
-				myList.Add(myArray[i]);
+				std::string tempString;
+				while (!sortedFile.eof())
+				{
+					getline(sortedFile, tempString);
+					correctResult.Add(tempString);
+				}
+				sortedFile.close();
 			}
-		}
+
+			// Sorts the list by A-Z and gets the results
+			sortedList = myList.Sort(0);
+
+			// Checks that the size of the resulting list is correct before comparing each value in order
+			Assert::AreEqual(correctResult.Count(), sortedList.Count());
+			for (int i = 0; i < sortedList.Count(); i++)
+			{
+				Assert::AreEqual(correctResult.At(i), sortedList.At(i));
+			}
+		} // Sorts a list of 10 number strings A-Z to check that the function works correctly
 
 		TEST_METHOD(NineToZero)
 		{
-			ifstream myFile("Test Resources/Unsorted Lists/10 Numbers.txt");
 			LinkedListString myList;
-			std::string myArray[10];
+			LinkedListString sortedList;
+			LinkedListString correctResult;
 
-			// Loads a list of strings from a text file
-			if (myFile.is_open())
+			// Loads a list of unsorted strings from a text file
+			ifstream unsortedFile("../../TESTS/Test Resources/Unsorted Lists/10 Numbers.txt");
+			if (unsortedFile.is_open())
 			{
-				for (int i = 0; i < 10; i++)
+				std::string tempString;
+				while (!unsortedFile.eof())
 				{
-					myFile >> myArray[i];
+					getline(unsortedFile, tempString);
+					myList.Add(tempString);
 				}
-				myFile.close();
+				unsortedFile.close();
 			}
 
-			for (int i = 0; i < 10; i++)
+			// Loads a list of sorted strings from a text file
+			ifstream sortedFile("../../TESTS/Test Resources/Sorted Lists/10 Numbers - Sorted.txt");
+			if (sortedFile.is_open())
 			{
-				myList.Add(myArray[i]);
+				std::string tempString;
+				while (!sortedFile.eof())
+				{
+					getline(sortedFile, tempString);
+					correctResult.Add(tempString);
+				}
+				sortedFile.close();
 			}
-		}
+
+			// Sorts the list by Z-A and gets the results
+			sortedList = myList.Sort(1);
+
+			// Checks that the size of the resulting list is correct before comparing each value in order
+			// In this instance it iterates through the correctResult object in reverse order
+			Assert::AreEqual(correctResult.Count(), sortedList.Count());
+			for (int i = 0; i < sortedList.Count(); i++)
+			{
+				Assert::AreEqual(correctResult.At(correctResult.Count() - i), sortedList.At(i));
+			}
+		} // Sorts a list of 10 number strings Z-A to check that the function works correctly
 
 		TEST_METHOD(CharactersSeparatedBySpaces)
 		{
-			ifstream myFile("Test Resources/Unsorted Lists/10 Words Separated By Spaces.txt");
 			LinkedListString myList;
-			std::string myArray[10];
+			LinkedListString sortedList;
+			LinkedListString correctResult;
 
-			// Loads a list of strings from a text file
-			if (myFile.is_open())
+			// Loads a list of unsorted strings from a text file
+			ifstream unsortedFile("../../TESTS/Test Resources/Unsorted Lists/10 Words Separated By Spaces.txt");
+			if (unsortedFile.is_open())
 			{
-				for (int i = 0; i < 10; i++)
+				std::string tempString;
+				while (!unsortedFile.eof())
 				{
-					myFile >> myArray[i];
+					getline(unsortedFile, tempString);
+					myList.Add(tempString);
 				}
-				myFile.close();
+				unsortedFile.close();
 			}
 
-			for (int i = 0; i < 10; i++)
+			// Loads a list of sorted strings from a text file
+			ifstream sortedFile("../../TESTS/Test Resources/Sorted Lists/10 Words Separated By Spaces - Sorted.txt");
+			if (sortedFile.is_open())
 			{
-				myList.Add(myArray[i]);
+				std::string tempString;
+				while (!sortedFile.eof())
+				{
+					getline(sortedFile, tempString);
+					correctResult.Add(tempString);
+				}
+				sortedFile.close();
 			}
-		}
+
+			// Sorts the list by A-Z and gets the results
+			sortedList = myList.Sort(0);
+
+			// Checks that the size of the resulting list is correct before comparing each value in order
+			Assert::AreEqual(correctResult.Count(), sortedList.Count());
+			for (int i = 0; i < sortedList.Count(); i++)
+			{
+				Assert::AreEqual(correctResult.At(i), sortedList.At(i));
+			}
+		} // Sorts a list of 10 strings by A-Z where some of the strings are all separated by spaces
 
 		TEST_METHOD(NamesIncludeSymbols)
 		{
+			LinkedListString myList;
+			LinkedListString sortedList;
+			LinkedListString correctResult;
 
-		}
+			// Loads a list of unsorted strings from a text file
+			ifstream unsortedFile("../../TESTS/Test Resources/Unsorted Lists/10 Words With Symbols.txt");
+			if (unsortedFile.is_open())
+			{
+				std::string tempString;
+				while (!unsortedFile.eof())
+				{
+					getline(unsortedFile, tempString);
+					myList.Add(tempString);
+				}
+				unsortedFile.close();
+			}
+
+			// Loads a list of sorted strings from a text file
+			ifstream sortedFile("../../TESTS/Test Resources/Sorted Lists/10 Words With Symbols - Sorted.txt");
+			if (sortedFile.is_open())
+			{
+				std::string tempString;
+				while (!sortedFile.eof())
+				{
+					getline(sortedFile, tempString);
+					correctResult.Add(tempString);
+				}
+				sortedFile.close();
+			}
+
+			// Sorts the list by A-Z and gets the results
+			sortedList = myList.Sort(0);
+
+			// Checks that the size of the resulting list is correct before comparing each value in order
+			Assert::AreEqual(correctResult.Count(), sortedList.Count());
+			for (int i = 0; i < sortedList.Count(); i++)
+			{
+				Assert::AreEqual(correctResult.At(i), sortedList.At(i));
+			}
+		} // Sorts a list of 10 strings by A-Z where some of the strings contain special characters and symbols
 
 		TEST_METHOD(OneHundredItems)
 		{
+			LinkedListString myList;
+			LinkedListString sortedList;
+			LinkedListString correctResult;
 
-		}
-	};
+			// Loads a list of unsorted strings from a text file
+			ifstream unsortedFile("../../TESTS/Test Resources/Unsorted Lists/100 Words.txt");
+			if (unsortedFile.is_open())
+			{
+				std::string tempString;
+				while (!unsortedFile.eof())
+				{
+					getline(unsortedFile, tempString);
+					myList.Add(tempString);
+				}
+				unsortedFile.close();
+			}
 
-	TEST_CLASS(SortingByDateTests)
-	{
-	public:
-		TEST_METHOD(EmptyList)
-		{
+			// Loads a list of sorted strings from a text file
+			ifstream sortedFile("../../TESTS/Test Resources/Sorted Lists/100 Words - Sorted.txt");
+			if (sortedFile.is_open())
+			{
+				std::string tempString;
+				while (!sortedFile.eof())
+				{
+					getline(sortedFile, tempString);
+					correctResult.Add(tempString);
+				}
+				sortedFile.close();
+			}
 
-		}
+			// Sorts the list by A-Z and gets the results
+			sortedList = myList.Sort(0);
 
-		TEST_METHOD(OneItem)
-		{
-
-		}
-
-		TEST_METHOD(NewestFirst)
-		{
-
-		}
-
-		TEST_METHOD(OldestFirst)
-		{
-
-		}
-
-		TEST_METHOD(OneHundredItems)
-		{
-
-		}
+			// Checks that the size of the resulting list is correct before comparing each value in order
+			Assert::AreEqual(correctResult.Count(), sortedList.Count());
+			for (int i = 0; i < sortedList.Count(); i++)
+			{
+				Assert::AreEqual(correctResult.At(i), sortedList.At(i));
+			}
+		} // Sorts a list of 100 items to see how efficient the algorithm is at coping with more items
 	};
 }

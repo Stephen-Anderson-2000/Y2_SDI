@@ -436,7 +436,7 @@ private: System::ComponentModel::IContainer^ components;
 			// TextBox_SearchClasses
 			// 
 			this->TextBox_SearchClasses->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
-			this->TextBox_SearchClasses->Location = System::Drawing::Point(150, 183);
+			this->TextBox_SearchClasses->Location = System::Drawing::Point(363, 183);
 			this->TextBox_SearchClasses->Name = L"TextBox_SearchClasses";
 			this->TextBox_SearchClasses->Size = System::Drawing::Size(161, 20);
 			this->TextBox_SearchClasses->TabIndex = 7;
@@ -447,7 +447,7 @@ private: System::ComponentModel::IContainer^ components;
 			this->ComboBox_SortClasses->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
 			this->ComboBox_SortClasses->FormattingEnabled = true;
 			this->ComboBox_SortClasses->Items->AddRange(gcnew cli::array< System::Object^  >(4) { L"Name ⯅", L"Name ⯆", L"Date ⯅", L"Date ⯆" });
-			this->ComboBox_SortClasses->Location = System::Drawing::Point(335, 160);
+			this->ComboBox_SortClasses->Location = System::Drawing::Point(548, 160);
 			this->ComboBox_SortClasses->Name = L"ComboBox_SortClasses";
 			this->ComboBox_SortClasses->Size = System::Drawing::Size(94, 21);
 			this->ComboBox_SortClasses->TabIndex = 7;
@@ -484,7 +484,7 @@ private: System::ComponentModel::IContainer^ components;
 			// 
 			this->Button_RemoveClass->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
 			this->Button_RemoveClass->AutoSize = true;
-			this->Button_RemoveClass->Location = System::Drawing::Point(338, 132);
+			this->Button_RemoveClass->Location = System::Drawing::Point(220, 129);
 			this->Button_RemoveClass->Margin = System::Windows::Forms::Padding(2);
 			this->Button_RemoveClass->Name = L"Button_RemoveClass";
 			this->Button_RemoveClass->Size = System::Drawing::Size(91, 23);
@@ -497,7 +497,7 @@ private: System::ComponentModel::IContainer^ components;
 			// 
 			this->Button_AddClass->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
 			this->Button_AddClass->AutoSize = true;
-			this->Button_AddClass->Location = System::Drawing::Point(225, 132);
+			this->Button_AddClass->Location = System::Drawing::Point(132, 130);
 			this->Button_AddClass->Margin = System::Windows::Forms::Padding(2);
 			this->Button_AddClass->Name = L"Button_AddClass";
 			this->Button_AddClass->Size = System::Drawing::Size(84, 23);
@@ -510,7 +510,7 @@ private: System::ComponentModel::IContainer^ components;
 			// 
 			this->Button_LoadClasses->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->Button_LoadClasses->AutoSize = true;
-			this->Button_LoadClasses->Location = System::Drawing::Point(202, 17);
+			this->Button_LoadClasses->Location = System::Drawing::Point(415, 17);
 			this->Button_LoadClasses->Margin = System::Windows::Forms::Padding(2);
 			this->Button_LoadClasses->Name = L"Button_LoadClasses";
 			this->Button_LoadClasses->Size = System::Drawing::Size(110, 23);
@@ -528,7 +528,7 @@ private: System::ComponentModel::IContainer^ components;
 			this->GroupBox_Classes->Location = System::Drawing::Point(4, 45);
 			this->GroupBox_Classes->Margin = System::Windows::Forms::Padding(2);
 			this->GroupBox_Classes->Name = L"GroupBox_Classes";
-			this->GroupBox_Classes->Size = System::Drawing::Size(426, 82);
+			this->GroupBox_Classes->Size = System::Drawing::Size(308, 82);
 			this->GroupBox_Classes->TabIndex = 0;
 			// 
 			// tableLayoutPanel3
@@ -698,7 +698,7 @@ private: System::ComponentModel::IContainer^ components;
 			this->ComboBox_ToolSelection->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
 			this->ComboBox_ToolSelection->FormattingEnabled = true;
 			this->ComboBox_ToolSelection->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Create Rectangle", L"Resize" });
-			this->ComboBox_ToolSelection->Location = System::Drawing::Point(543, 521);
+			this->ComboBox_ToolSelection->Location = System::Drawing::Point(545, 521);
 			this->ComboBox_ToolSelection->Name = L"ComboBox_ToolSelection";
 			this->ComboBox_ToolSelection->Size = System::Drawing::Size(105, 21);
 			this->ComboBox_ToolSelection->TabIndex = 7;
@@ -713,7 +713,7 @@ private: System::ComponentModel::IContainer^ components;
 			this->imageDisplay->Location = System::Drawing::Point(2, 2);
 			this->imageDisplay->Margin = System::Windows::Forms::Padding(2);
 			this->imageDisplay->Name = L"imageDisplay";
-			this->imageDisplay->Size = System::Drawing::Size(673, 514);
+			this->imageDisplay->Size = System::Drawing::Size(675, 514);
 			this->imageDisplay->TabIndex = 6;
 			this->imageDisplay->TabStop = false;
 			this->imageDisplay->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &MainWindow::imageDisplay_MouseDown);
@@ -721,7 +721,7 @@ private: System::ComponentModel::IContainer^ components;
 			// 
 			// Timer_AutosaveTimer
 			// 
-			this->Timer_AutosaveTimer->Interval = (60 * 1000);
+			this->Timer_AutosaveTimer->Interval = 60;
 			this->Timer_AutosaveTimer->Tick += gcnew System::EventHandler(this, &MainWindow::Timer_AutosaveTimer_Tick);
 			// 
 			// MainWindow
@@ -974,7 +974,7 @@ private: System::ComponentModel::IContainer^ components;
 		String^ filePath = BrowseFile(".JSOON file (*.json)|*.json");
 		LoadJson(SystemToStdString(filePath));
 		GUI::annotationFilePath = filePath;
-		Label_AnnotationPath->Text = GUI::annotationFilePath;
+		Label_AnnotationPath->Text = "Path: " + GUI::annotationFilePath;
 	}
 	private: System::Void MainWindow_Load(System::Object^ sender, System::EventArgs^ e) {
 		ComboBox_ToolSelection->SelectedIndex = 0;

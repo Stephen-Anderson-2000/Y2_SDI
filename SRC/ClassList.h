@@ -116,15 +116,15 @@ public:
     {
         //Order 0 = Regular / Ascending, 1 = Reverse / Descending
         //bubble sort
-
+        LinkedListString tempList;
+        return tempList;
     }
 
     LinkedListString Search(string term)
     {
         //Linear search
+        LinkedListString tempList;
+        return tempList;
     }
-
-
-
 
 };

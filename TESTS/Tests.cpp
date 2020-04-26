@@ -335,21 +335,40 @@ namespace TESTS
 		TEST_METHOD(EmptyList)
 		{
 			LinkedListString myList;
+			LinkedListString searchedList;
 			std::string searchTerm = "test";
+
+			searchedList = myList.Search(searchTerm);
+
+			for (int i = 0; i < 1; i++)
+			{
+				Assert::AreEqual(myList.At(i), searchedList.At(i));
+			}
+
 		}
 
 		TEST_METHOD(OnlyItem)
 		{
 			LinkedListString myList;
+			LinkedListString searchedList;
 			std::string searchTerm = "test";
 
 			myList.Add(searchTerm);
+
+			searchedList = myList.Search(searchTerm);
+
+			for (int i = 0; i < 1; i++)
+			{
+				Assert::AreEqual(myList.At(i), searchedList.At(i));
+			}
+
 		}
 
 		// Next tests require >= 5 items in their list
 		TEST_METHOD(CompleteMatch)
 		{
 			LinkedListString myList;
+			LinkedListString searchedList;
 			std::string myString1 = "What";
 			std::string myString2 = "a";
 			std::string myString3 = "beautiful";
@@ -368,6 +387,7 @@ namespace TESTS
 		TEST_METHOD(PartialMatch)
 		{
 			LinkedListString myList;
+			LinkedListString searchedList;
 			std::string myString1 = "What";
 			std::string myString2 = "a";
 			std::string myString3 = "beautiful";
@@ -386,6 +406,7 @@ namespace TESTS
 		TEST_METHOD(MultipleMatches)
 		{
 			LinkedListString myList;
+			LinkedListString searchedList;
 			std::string myString1 = "What";
 			std::string myString2 = "a";
 			std::string myString3 = "lovely";
@@ -404,6 +425,7 @@ namespace TESTS
 		TEST_METHOD(AllUppercaseLetters)
 		{
 			LinkedListString myList;
+			LinkedListString searchedList;
 			std::string myString1 = "What";
 			std::string myString2 = "a";
 			std::string myString3 = "beautiful";
@@ -422,6 +444,7 @@ namespace TESTS
 		TEST_METHOD(AllLowercaseLetters)
 		{
 			LinkedListString myList;
+			LinkedListString searchedList;
 			std::string myString1 = "What";
 			std::string myString2 = "a";
 			std::string myString3 = "beautiful";
@@ -440,6 +463,7 @@ namespace TESTS
 		TEST_METHOD(IncludesNumbers)
 		{
 			LinkedListString myList;
+			LinkedListString searchedList;
 			std::string myString1 = "What";
 			std::string myString2 = "a";
 			std::string myString3 = "beaut1ful";
@@ -458,6 +482,7 @@ namespace TESTS
 		TEST_METHOD(PartialMatchIncludesNumbers)
 		{
 			LinkedListString myList;
+			LinkedListString searchedList;
 			std::string myString1 = "What";
 			std::string myString2 = "a";
 			std::string myString3 = "beaut1ful";
@@ -476,6 +501,7 @@ namespace TESTS
 		TEST_METHOD(IncludesSpecialCharacters)
 		{
 			LinkedListString myList;
+			LinkedListString searchedList;
 			std::string myString1 = "It's";
 			std::string myString2 = "a";
 			std::string myString3 = "very *nice*";
@@ -494,6 +520,7 @@ namespace TESTS
 		TEST_METHOD(PartialMatchIncludesSpecialCharacters)
 		{
 			LinkedListString myList;
+			LinkedListString searchedList;
 			std::string myString1 = "It's";
 			std::string myString2 = "a";
 			std::string myString3 = "very *nice*";
@@ -512,6 +539,7 @@ namespace TESTS
 		TEST_METHOD(Search100Items)
 		{
 			ifstream myFile("Test Resources/Unsorted Lists/100 Words.txt");
+			LinkedListString searchedList;
 			LinkedListString myList;
 			std::string myArray[100];
 

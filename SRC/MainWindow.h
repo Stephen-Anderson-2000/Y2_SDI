@@ -134,6 +134,7 @@ namespace SDIMaster
 	private: System::Windows::Forms::NumericUpDown^ NumericBox_XScale2;
 private: System::Windows::Forms::Button^ Button_ResizeConfirm;
 private: System::Windows::Forms::Timer^ Timer_AutosaveTimer;
+private: System::Windows::Forms::Label^ Label_Autosave;
 private: System::ComponentModel::IContainer^ components;
 
 
@@ -191,6 +192,7 @@ private: System::ComponentModel::IContainer^ components;
 			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->buttonRemoveAnnotation = (gcnew System::Windows::Forms::Button());
 			this->GroupBox_Annotations = (gcnew System::Windows::Forms::ListBox());
+			this->Label_Autosave = (gcnew System::Windows::Forms::Label());
 			this->Label_AnnotationPath = (gcnew System::Windows::Forms::Label());
 			this->Button_SaveAnnotations = (gcnew System::Windows::Forms::Button());
 			this->Button_LoadAnnotations = (gcnew System::Windows::Forms::Button());
@@ -235,6 +237,7 @@ private: System::ComponentModel::IContainer^ components;
 			// 
 			// splitContainer1.Panel2
 			// 
+			this->splitContainer1->Panel2->Controls->Add(this->Label_Autosave);
 			this->splitContainer1->Panel2->Controls->Add(this->Label_AnnotationPath);
 			this->splitContainer1->Panel2->Controls->Add(this->Button_SaveAnnotations);
 			this->splitContainer1->Panel2->Controls->Add(this->Button_LoadAnnotations);
@@ -510,7 +513,7 @@ private: System::ComponentModel::IContainer^ components;
 			// 
 			this->Button_LoadClasses->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->Button_LoadClasses->AutoSize = true;
-			this->Button_LoadClasses->Location = System::Drawing::Point(415, 17);
+			this->Button_LoadClasses->Location = System::Drawing::Point(193, 17);
 			this->Button_LoadClasses->Margin = System::Windows::Forms::Padding(2);
 			this->Button_LoadClasses->Name = L"Button_LoadClasses";
 			this->Button_LoadClasses->Size = System::Drawing::Size(110, 23);
@@ -661,6 +664,16 @@ private: System::ComponentModel::IContainer^ components;
 			this->GroupBox_Annotations->TabIndex = 0;
 			this->GroupBox_Annotations->SelectedIndexChanged += gcnew System::EventHandler(this, &MainWindow::GroupBox_Annotations_SelectedIndexChanged);
 			// 
+			// Label_Autosave
+			// 
+			this->Label_Autosave->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
+			this->Label_Autosave->AutoSize = true;
+			this->Label_Autosave->Location = System::Drawing::Point(13, 534);
+			this->Label_Autosave->Name = L"Label_Autosave";
+			this->Label_Autosave->Size = System::Drawing::Size(116, 13);
+			this->Label_Autosave->TabIndex = 11;
+			this->Label_Autosave->Text = L"Last Autosaved: Never";
+			// 
 			// Label_AnnotationPath
 			// 
 			this->Label_AnnotationPath->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
@@ -698,7 +711,7 @@ private: System::ComponentModel::IContainer^ components;
 			this->ComboBox_ToolSelection->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
 			this->ComboBox_ToolSelection->FormattingEnabled = true;
 			this->ComboBox_ToolSelection->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Create Rectangle", L"Resize" });
-			this->ComboBox_ToolSelection->Location = System::Drawing::Point(545, 521);
+			this->ComboBox_ToolSelection->Location = System::Drawing::Point(547, 521);
 			this->ComboBox_ToolSelection->Name = L"ComboBox_ToolSelection";
 			this->ComboBox_ToolSelection->Size = System::Drawing::Size(105, 21);
 			this->ComboBox_ToolSelection->TabIndex = 7;
@@ -713,7 +726,7 @@ private: System::ComponentModel::IContainer^ components;
 			this->imageDisplay->Location = System::Drawing::Point(2, 2);
 			this->imageDisplay->Margin = System::Windows::Forms::Padding(2);
 			this->imageDisplay->Name = L"imageDisplay";
-			this->imageDisplay->Size = System::Drawing::Size(675, 514);
+			this->imageDisplay->Size = System::Drawing::Size(677, 514);
 			this->imageDisplay->TabIndex = 6;
 			this->imageDisplay->TabStop = false;
 			this->imageDisplay->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &MainWindow::imageDisplay_MouseDown);
@@ -971,7 +984,7 @@ private: System::ComponentModel::IContainer^ components;
 	}
 
 	private: System::Void Button_LoadAnnotations_Click(System::Object^ sender, System::EventArgs^ e) {
-		String^ filePath = BrowseFile(".JSOON file (*.json)|*.json");
+		String^ filePath = BrowseFile(".JSON file (*.json)|*.json");
 		LoadJson(SystemToStdString(filePath));
 		GUI::annotationFilePath = filePath;
 		Label_AnnotationPath->Text = "Path: " + GUI::annotationFilePath;
@@ -1016,6 +1029,8 @@ private: System::ComponentModel::IContainer^ components;
 		if (GUI::annotationFilePath != "") {
 			SaveJson(SystemToStdString(GUI::annotationFilePath));
 			Timer_AutosaveTimer->Interval = (60 * 1000); //60 seconds
+			DateTime^ tempTime = DateTime::Now;
+			Label_Autosave->Text = "Last Autosaved: " + tempTime->ToLongTimeString();
 		}
 	}
 };

@@ -84,21 +84,19 @@ namespace SDIMaster
 	 *  classification of different annotations using the default
 	 *  Windows file browser.
 	 */
-	System::Void MainWindow::BrowseFile() {
+	System::String^ MainWindow::BrowseFile(String^ filter) {
 		System::String^ namesPath;
 		OpenFileDialog^ openFileDialog = gcnew OpenFileDialog;
 		{
 			openFileDialog->InitialDirectory = "c:\\";
-			openFileDialog->Filter = ".names file (*.names)|*.names";
+			openFileDialog->Filter = filter;
 			openFileDialog->FilterIndex = 0;
 			openFileDialog->RestoreDirectory = true;
 			if (openFileDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
 			{
 				//Get the path of specified file
 				namesPath = openFileDialog->FileName;
-				GUI::labelFile = namesPath;
-				ClearClasses();
-				LoadClasses(namesPath);
+				return namesPath;
 			}
 		}
 	}

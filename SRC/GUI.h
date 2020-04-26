@@ -29,7 +29,7 @@ public:
 	static String^ imageSearchTerm = "";
 	static String^ labelSearchTerm = "";
 	static Graphics^ boxCanvas;
-	static String^ annotationFilePath;
+	static String^ annotationFilePath = "";
 	static float imageScale;
 	static int xOffset;
 	static int yOffset;

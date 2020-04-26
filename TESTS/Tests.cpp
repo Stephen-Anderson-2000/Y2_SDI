@@ -6,6 +6,8 @@
 #include <fstream>
 #include <string>
 
+#include <Windows.h>
+
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace TESTS
@@ -172,16 +174,18 @@ namespace TESTS
 
 		TEST_METHOD(OneHundredItems)
 		{
-			ifstream myFile("Test Resources/100 Words.txt");
+			ifstream myFile("../../TESTS/Test Resources/100 Items.txt");
 			LinkedListString myList;
 			std::string myArray[100];
 
 			// Loads a list of strings from a text file
 			if (myFile.is_open())
 			{
-				for (int i = 0; i < 100; i++)
+				int i = 0;
+				while (!myFile.eof())
 				{
-					myFile >> myArray[i];
+					getline(myFile, myArray[i]);
+					i++;
 				}
 				myFile.close();
 			}
@@ -204,16 +208,18 @@ namespace TESTS
 
 		TEST_METHOD(TenThousandItems)
 		{
-			ifstream myFile("Test Resources/10000 Words.txt");
+			ifstream myFile("../../TESTS/Test Resources/10000 Items.txt");
 			LinkedListString myList;
 			std::string myArray[10000];
 
 			// Loads a list of strings from a text file
 			if (myFile.is_open())
 			{
-				for (int i = 0; i < 10000; i++)
+				int i = 0;
+				while (!myFile.eof())
 				{
-					myFile >> myArray[i];
+					getline(myFile, myArray[i]);
+					i++;
 				}
 				myFile.close();
 			}
@@ -236,7 +242,7 @@ namespace TESTS
 
 		TEST_METHOD(RemoveAndAddHalfItems)
 		{
-			ifstream myFile("Test Resources/100 Words.txt");
+			ifstream myFile("../../TESTS/Test Resources/100 Items.txt");
 			LinkedListString myList;
 			std::string myArray[100];
 			std::string myArray2[50];
@@ -244,39 +250,42 @@ namespace TESTS
 			// Loads a list of strings from a text file
 			if (myFile.is_open())
 			{
-				for (int i = 0; i < 100; i++)
+				int i = 0;
+				while (!myFile.eof())
 				{
-					myFile >> myArray[i];
+					getline(myFile, myArray[i]);
+					myList.Add(myArray[i]);
+					i++;
 				}
 				myFile.close();
-			}
-
-			// Adds the loaded items to the list
-			for (int i = 0; i < 100; i++)
-			{
-				myList.Add(myArray[i]);
 			}
 
 			// Copies the last 50 items from the list into an array then removes them from the list
 			for (int i = 0; i < 50; i++)
 			{
-				myArray2[i] = myList.At(50);
-				myList.Remove(0);
+				myArray2[i] = myList.At(50 + i);
+				
 			}
-
+			while (myList.Count() > 50)
+			{
+				myList.Remove(50);
+			}
+			
+			
 			// Loops through the secondary array and adds the values back to the list
 			for (int i = 0; i < 50; i++)
 			{
 				myList.Add(myArray2[i]);
 			}
 
-			// Compares the items at the same index to check if the order is kept
-			// then checks that there are still exactly 100 items in the list
+			// Checks that there are still exactly 100 items in the list
+			// then compares the items at the same index to check if the order is kept
+			Assert::AreEqual(100, myList.Count());
 			for (int i = 0; i < 100; i++)
 			{
 				Assert::AreEqual(myArray[i], myList.At(i));
 			}
-			Assert::AreEqual(100, myList.Count());
+			
 		} // Checks to see what happens if items are removed and added back to the list
 
 		TEST_METHOD(OutOfRange)
@@ -336,30 +345,39 @@ namespace TESTS
 		{
 			LinkedListString myList;
 			LinkedListString searchedList;
+			LinkedListString correctResult;
+
 			std::string searchTerm = "test";
 
 			searchedList = myList.Search(searchTerm);
-
-			for (int i = 0; i < 1; i++)
+			
+			if (searchedList.Count() == correctResult.Count())
 			{
-				Assert::AreEqual(myList.At(i), searchedList.At(i));
+				for (int i = 0; i < searchedList.Count(); i++)
+				{
+					Assert::AreEqual(correctResult.At(i), searchedList.At(i));
+				}
 			}
-
 		}
 
 		TEST_METHOD(OnlyItem)
 		{
 			LinkedListString myList;
 			LinkedListString searchedList;
-			std::string searchTerm = "test";
+			LinkedListString correctResult;
+			std::string myString = "test";
 
-			myList.Add(searchTerm);
+			myList.Add(myString);
+
+			std::string searchTerm = "test";
+			correctResult.Add(myString);
 
 			searchedList = myList.Search(searchTerm);
 
-			for (int i = 0; i < 1; i++)
+			Assert::AreEqual(correctResult.Count(), searchedList.Count());
+			for (int i = 0; i < searchedList.Count(); i++)
 			{
-				Assert::AreEqual(myList.At(i), searchedList.At(i));
+				Assert::AreEqual(correctResult.At(i), searchedList.At(i));
 			}
 
 		}
@@ -369,6 +387,7 @@ namespace TESTS
 		{
 			LinkedListString myList;
 			LinkedListString searchedList;
+			LinkedListString correctResult;
 			std::string myString1 = "What";
 			std::string myString2 = "a";
 			std::string myString3 = "beautiful";
@@ -382,12 +401,22 @@ namespace TESTS
 			myList.Add(myString5);
 
 			std::string searchTerm = "beautiful";
+			correctResult.Add(myString3);
+
+			searchedList = myList.Search(searchTerm);
+
+			Assert::AreEqual(correctResult.Count(), searchedList.Count());
+			for (int i = 0; i < searchedList.Count(); i++)
+			{
+				Assert::AreEqual(correctResult.At(i), searchedList.At(i));
+			}
 		}
 
 		TEST_METHOD(PartialMatch)
 		{
 			LinkedListString myList;
 			LinkedListString searchedList;
+			LinkedListString correctResult;
 			std::string myString1 = "What";
 			std::string myString2 = "a";
 			std::string myString3 = "beautiful";
@@ -401,12 +430,22 @@ namespace TESTS
 			myList.Add(myString5);
 
 			std::string searchTerm = "ut";
+			correctResult.Add(myString3);
+
+			searchedList = myList.Search(searchTerm);
+
+			Assert::AreEqual(correctResult.Count(), searchedList.Count());
+			for (int i = 0; i < searchedList.Count(); i++)
+			{
+				Assert::AreEqual(correctResult.At(i), searchedList.At(i));
+			}
 		}
 
 		TEST_METHOD(MultipleMatches)
 		{
 			LinkedListString myList;
 			LinkedListString searchedList;
+			LinkedListString correctResult;
 			std::string myString1 = "What";
 			std::string myString2 = "a";
 			std::string myString3 = "lovely";
@@ -420,12 +459,24 @@ namespace TESTS
 			myList.Add(myString5);
 
 			std::string searchTerm = "lovely";
+
+			correctResult.Add(myString3);
+			correctResult.Add(myString4);
+
+			searchedList = myList.Search(searchTerm);
+
+			Assert::AreEqual(correctResult.Count(), searchedList.Count());
+			for (int i = 0; i < searchedList.Count(); i++)
+			{
+				Assert::AreEqual(correctResult.At(i), searchedList.At(i));
+			}
 		}
 
 		TEST_METHOD(AllUppercaseLetters)
 		{
 			LinkedListString myList;
 			LinkedListString searchedList;
+			LinkedListString correctResult;
 			std::string myString1 = "What";
 			std::string myString2 = "a";
 			std::string myString3 = "beautiful";
@@ -439,12 +490,22 @@ namespace TESTS
 			myList.Add(myString5);
 
 			std::string searchTerm = "WHAT";
+			correctResult.Add(myString1);
+
+			searchedList = myList.Search(searchTerm);
+
+			Assert::AreEqual(correctResult.Count(), searchedList.Count());
+			for (int i = 0; i < searchedList.Count(); i++)
+			{
+				Assert::AreEqual(correctResult.At(i), searchedList.At(i));
+			}
 		}
 
 		TEST_METHOD(AllLowercaseLetters)
 		{
 			LinkedListString myList;
 			LinkedListString searchedList;
+			LinkedListString correctResult;
 			std::string myString1 = "What";
 			std::string myString2 = "a";
 			std::string myString3 = "beautiful";
@@ -458,12 +519,22 @@ namespace TESTS
 			myList.Add(myString5);
 
 			std::string searchTerm = "what";
+			correctResult.Add(myString1);
+
+			searchedList = myList.Search(searchTerm);
+
+			Assert::AreEqual(correctResult.Count(), searchedList.Count());
+			for (int i = 0; i < searchedList.Count(); i++)
+			{
+				Assert::AreEqual(correctResult.At(i), searchedList.At(i));
+			}
 		}
 
 		TEST_METHOD(IncludesNumbers)
 		{
 			LinkedListString myList;
 			LinkedListString searchedList;
+			LinkedListString correctResult;
 			std::string myString1 = "What";
 			std::string myString2 = "a";
 			std::string myString3 = "beaut1ful";
@@ -477,12 +548,22 @@ namespace TESTS
 			myList.Add(myString5);
 
 			std::string searchTerm = "2day";
+			correctResult.Add(myString5);
+
+			searchedList = myList.Search(searchTerm);
+
+			Assert::AreEqual(correctResult.Count(), searchedList.Count());
+			for (int i = 0; i < searchedList.Count(); i++)
+			{
+				Assert::AreEqual(correctResult.At(i), searchedList.At(i));
+			}
 		}
 
 		TEST_METHOD(PartialMatchIncludesNumbers)
 		{
 			LinkedListString myList;
 			LinkedListString searchedList;
+			LinkedListString correctResult;
 			std::string myString1 = "What";
 			std::string myString2 = "a";
 			std::string myString3 = "beaut1ful";
@@ -496,12 +577,22 @@ namespace TESTS
 			myList.Add(myString5);
 
 			std::string searchTerm = "1";
+			correctResult.Add(myString3);
+
+			searchedList = myList.Search(searchTerm);
+
+			Assert::AreEqual(correctResult.Count(), searchedList.Count());
+			for (int i = 0; i < searchedList.Count(); i++)
+			{
+				Assert::AreEqual(correctResult.At(i), searchedList.At(i));
+			}
 		}
 
 		TEST_METHOD(IncludesSpecialCharacters)
 		{
 			LinkedListString myList;
 			LinkedListString searchedList;
+			LinkedListString correctResult;
 			std::string myString1 = "It's";
 			std::string myString2 = "a";
 			std::string myString3 = "very *nice*";
@@ -515,12 +606,22 @@ namespace TESTS
 			myList.Add(myString5);
 
 			std::string searchTerm = "very *nice*";
+			correctResult.Add(myString3);
+
+			searchedList = myList.Search(searchTerm);
+
+			Assert::AreEqual(correctResult.Count(), searchedList.Count());
+			for (int i = 0; i < searchedList.Count(); i++)
+			{
+				Assert::AreEqual(correctResult.At(i), searchedList.At(i));
+			}
 		}
 
 		TEST_METHOD(PartialMatchIncludesSpecialCharacters)
 		{
 			LinkedListString myList;
 			LinkedListString searchedList;
+			LinkedListString correctResult;
 			std::string myString1 = "It's";
 			std::string myString2 = "a";
 			std::string myString3 = "very *nice*";
@@ -534,21 +635,33 @@ namespace TESTS
 			myList.Add(myString5);
 
 			std::string searchTerm = "nice";
+			correctResult.Add(myString3);
+
+			searchedList = myList.Search(searchTerm);
+
+			Assert::AreEqual(correctResult.Count(), searchedList.Count());
+			for (int i = 0; i < searchedList.Count(); i++)
+			{
+				Assert::AreEqual(correctResult.At(i), searchedList.At(i));
+			}
 		}
 
 		TEST_METHOD(Search100Items)
 		{
-			ifstream myFile("Test Resources/Unsorted Lists/100 Words.txt");
-			LinkedListString searchedList;
+			ifstream myFile("../../TESTS/Test Resources/Unsorted Lists/100 Words.txt");
 			LinkedListString myList;
+			LinkedListString searchedList;
+			LinkedListString correctResult;
 			std::string myArray[100];
 
 			// Loads a list of strings from a text file
 			if (myFile.is_open())
 			{
-				for (int i = 0; i < 100; i++)
+				int i = 0;
+				while (!myFile.eof())
 				{
-					myFile >> myArray[i];
+					getline(myFile, myArray[i]);
+					i++;
 				}
 				myFile.close();
 			}
@@ -559,6 +672,13 @@ namespace TESTS
 			}
 
 			std::string searchTerm = "passion";
+			correctResult.Add(myArray[57]);
+
+			Assert::AreEqual(correctResult.Count(), searchedList.Count());
+			for (int i = 0; i < searchedList.Count(); i++)
+			{
+				Assert::AreEqual(correctResult.At(i), searchedList.At(i));
+			}
 		}
 	};
 
@@ -568,134 +688,317 @@ namespace TESTS
 		TEST_METHOD(EmptyList)
 		{
 			LinkedListString myList;
+			LinkedListString sortedList;
+			LinkedListString correctResult;
+
+			sortedList = myList.Sort(0);
+
+			Assert::AreEqual(correctResult.Count(), sortedList.Count());
+			for (int i = 0; i < sortedList.Count(); i++)
+			{
+				Assert::AreEqual(correctResult.At(i), sortedList.At(i));
+			}
 		}
 
 		TEST_METHOD(OneItem)
 		{
 			LinkedListString myList;
-			std::string myString1 = "testing";
+			LinkedListString sortedList;
+			LinkedListString correctResult;
+			std::string myString = "test";
+
+			myList.Add(myString);
+
+			sortedList = myList.Sort(0);
+
+			correctResult.Add(myString);
+
+			Assert::AreEqual(correctResult.Count(), sortedList.Count());
+			for (int i = 0; i < sortedList.Count(); i++)
+			{
+				Assert::AreEqual(correctResult.At(i), sortedList.At(i));
+			}
 		}
 
 		// The next tests require a list of 10 items
 		TEST_METHOD(AToZ)
 		{
-			ifstream myFile("Test Resources/Unsorted Lists/10 Words.txt");
 			LinkedListString myList;
-			std::string myArray[10];
+			LinkedListString sortedList;
+			LinkedListString correctResult;
 
 			// Loads a list of strings from a text file
-			if (myFile.is_open())
+			ifstream unsortedFile("../../TESTS/Test Resources/Unsorted Lists/10 Words.txt");
+			if (unsortedFile.is_open())
 			{
-				for (int i = 0; i < 10; i++)
+				std::string tempString;
+				while (!unsortedFile.eof())
 				{
-					myFile >> myArray[i];
+					getline(unsortedFile, tempString);
+					myList.Add(tempString);
 				}
-				myFile.close();
+				unsortedFile.close();
 			}
 
-			for (int i = 0; i < 10; i++)
+			ifstream sortedFile("../../TESTS/Test Resources/Sorted Lists/10 Words - Sorted.txt");
+			if (sortedFile.is_open())
 			{
-				myList.Add(myArray[i]);
+				std::string tempString;
+				while (!sortedFile.eof())
+				{
+					getline(sortedFile, tempString);
+					correctResult.Add(tempString);
+				}
+				sortedFile.close();
 			}
 
+			sortedList = myList.Sort(0);
+
+			Assert::AreEqual(correctResult.Count(), sortedList.Count());
+			for (int i = 0; i < sortedList.Count(); i++)
+			{
+				Assert::AreEqual(correctResult.At(i), sortedList.At(i));
+			}
 		}
 
 		TEST_METHOD(ZToA)
 		{
-			ifstream myFile("Test Resources/Unsorted Lists/10 Words.txt");
 			LinkedListString myList;
-			std::string myArray[10];
+			LinkedListString sortedList;
+			LinkedListString correctResult;
 
 			// Loads a list of strings from a text file
-			if (myFile.is_open())
+			ifstream unsortedFile("../../TESTS/Test Resources/Unsorted Lists/10 Words.txt");
+			if (unsortedFile.is_open())
 			{
-				for (int i = 0; i < 10; i++)
+				std::string tempString;
+				while (!unsortedFile.eof())
 				{
-					myFile >> myArray[i];
+					getline(unsortedFile, tempString);
+					myList.Add(tempString);
 				}
-				myFile.close();
+				unsortedFile.close();
 			}
 
-			for (int i = 0; i < 10; i++)
+			ifstream sortedFile("../../TESTS/Test Resources/Sorted Lists/10 Words - Sorted.txt");
+			if (sortedFile.is_open())
 			{
-				myList.Add(myArray[i]);
+				std::string tempString;
+				while (!sortedFile.eof())
+				{
+					getline(sortedFile, tempString);
+					correctResult.Add(tempString);
+				}
+				sortedFile.close();
+			}
+
+			sortedList = myList.Sort(1);
+
+			Assert::AreEqual(correctResult.Count(), sortedList.Count());
+			for (int i = 0; i < sortedList.Count(); i++)
+			{
+				Assert::AreEqual(correctResult.At(correctResult.Count() - i), sortedList.At(i));
 			}
 		}
 
 		TEST_METHOD(ZeroToNine)
 		{
-			ifstream myFile("Test Resources/Unsorted Lists/10 Numbers.txt");
 			LinkedListString myList;
-			std::string myArray[10];
+			LinkedListString sortedList;
+			LinkedListString correctResult;
 
 			// Loads a list of strings from a text file
-			if (myFile.is_open())
+			ifstream unsortedFile("../../TESTS/Test Resources/Unsorted Lists/10 Numbers.txt");
+			if (unsortedFile.is_open())
 			{
-				for (int i = 0; i < 10; i++)
+				std::string tempString;
+				while (!unsortedFile.eof())
 				{
-					myFile >> myArray[i];
+					getline(unsortedFile, tempString);
+					myList.Add(tempString);
 				}
-				myFile.close();
+				unsortedFile.close();
 			}
 
-			for (int i = 0; i < 10; i++)
+			ifstream sortedFile("../../TESTS/Test Resources/Sorted Lists/10 Numbers - Sorted.txt");
+			if (sortedFile.is_open())
 			{
-				myList.Add(myArray[i]);
+				std::string tempString;
+				while (!sortedFile.eof())
+				{
+					getline(sortedFile, tempString);
+					correctResult.Add(tempString);
+				}
+				sortedFile.close();
+			}
+
+			sortedList = myList.Sort(0);
+
+			Assert::AreEqual(correctResult.Count(), sortedList.Count());
+			for (int i = 0; i < sortedList.Count(); i++)
+			{
+				Assert::AreEqual(correctResult.At(i), sortedList.At(i));
 			}
 		}
 
 		TEST_METHOD(NineToZero)
 		{
-			ifstream myFile("Test Resources/Unsorted Lists/10 Numbers.txt");
 			LinkedListString myList;
-			std::string myArray[10];
+			LinkedListString sortedList;
+			LinkedListString correctResult;
 
 			// Loads a list of strings from a text file
-			if (myFile.is_open())
+			ifstream unsortedFile("../../TESTS/Test Resources/Unsorted Lists/10 Numbers.txt");
+			if (unsortedFile.is_open())
 			{
-				for (int i = 0; i < 10; i++)
+				std::string tempString;
+				while (!unsortedFile.eof())
 				{
-					myFile >> myArray[i];
+					getline(unsortedFile, tempString);
+					myList.Add(tempString);
 				}
-				myFile.close();
+				unsortedFile.close();
 			}
 
-			for (int i = 0; i < 10; i++)
+			ifstream sortedFile("../../TESTS/Test Resources/Sorted Lists/10 Numbers - Sorted.txt");
+			if (sortedFile.is_open())
 			{
-				myList.Add(myArray[i]);
+				std::string tempString;
+				while (!sortedFile.eof())
+				{
+					getline(sortedFile, tempString);
+					correctResult.Add(tempString);
+				}
+				sortedFile.close();
+			}
+
+			sortedList = myList.Sort(1);
+
+			Assert::AreEqual(correctResult.Count(), sortedList.Count());
+			for (int i = 0; i < sortedList.Count(); i++)
+			{
+				Assert::AreEqual(correctResult.At(correctResult.Count() - i), sortedList.At(i));
 			}
 		}
 
 		TEST_METHOD(CharactersSeparatedBySpaces)
 		{
-			ifstream myFile("Test Resources/Unsorted Lists/10 Words Separated By Spaces.txt");
 			LinkedListString myList;
-			std::string myArray[10];
+			LinkedListString sortedList;
+			LinkedListString correctResult;
 
 			// Loads a list of strings from a text file
-			if (myFile.is_open())
+			ifstream unsortedFile("../../TESTS/Test Resources/Unsorted Lists/10 Words Separated By Spaces.txt");
+			if (unsortedFile.is_open())
 			{
-				for (int i = 0; i < 10; i++)
+				std::string tempString;
+				while (!unsortedFile.eof())
 				{
-					myFile >> myArray[i];
+					getline(unsortedFile, tempString);
+					myList.Add(tempString);
 				}
-				myFile.close();
+				unsortedFile.close();
 			}
 
-			for (int i = 0; i < 10; i++)
+			ifstream sortedFile("../../TESTS/Test Resources/Sorted Lists/10 Words Separated By Spaces - Sorted.txt");
+			if (sortedFile.is_open())
 			{
-				myList.Add(myArray[i]);
+				std::string tempString;
+				while (!sortedFile.eof())
+				{
+					getline(sortedFile, tempString);
+					correctResult.Add(tempString);
+				}
+				sortedFile.close();
+			}
+
+			sortedList = myList.Sort(0);
+
+			Assert::AreEqual(correctResult.Count(), sortedList.Count());
+			for (int i = 0; i < sortedList.Count(); i++)
+			{
+				Assert::AreEqual(correctResult.At(i), sortedList.At(i));
 			}
 		}
 
 		TEST_METHOD(NamesIncludeSymbols)
 		{
+			LinkedListString myList;
+			LinkedListString sortedList;
+			LinkedListString correctResult;
 
+			// Loads a list of strings from a text file
+			ifstream unsortedFile("../../TESTS/Test Resources/Unsorted Lists/10 Words Separated By Spaces.txt");
+			if (unsortedFile.is_open())
+			{
+				std::string tempString;
+				while (!unsortedFile.eof())
+				{
+					getline(unsortedFile, tempString);
+					myList.Add(tempString);
+				}
+				unsortedFile.close();
+			}
+
+			ifstream sortedFile("../../TESTS/Test Resources/Sorted Lists/10 Words Separated By Spaces - Sorted.txt");
+			if (sortedFile.is_open())
+			{
+				std::string tempString;
+				while (!sortedFile.eof())
+				{
+					getline(sortedFile, tempString);
+					correctResult.Add(tempString);
+				}
+				sortedFile.close();
+			}
+
+			sortedList = myList.Sort(0);
+
+			Assert::AreEqual(correctResult.Count(), sortedList.Count());
+			for (int i = 0; i < sortedList.Count(); i++)
+			{
+				Assert::AreEqual(correctResult.At(i), sortedList.At(i));
+			}
 		}
 
 		TEST_METHOD(OneHundredItems)
 		{
+			LinkedListString myList;
+			LinkedListString sortedList;
+			LinkedListString correctResult;
 
+			// Loads a list of strings from a text file
+			ifstream unsortedFile("../../TESTS/Test Resources/Unsorted Lists/100 Words.txt");
+			if (unsortedFile.is_open())
+			{
+				std::string tempString;
+				while (!unsortedFile.eof())
+				{
+					getline(unsortedFile, tempString);
+					myList.Add(tempString);
+				}
+				unsortedFile.close();
+			}
+
+			ifstream sortedFile("../../TESTS/Test Resources/Sorted Lists/100 Words - Sorted.txt");
+			if (sortedFile.is_open())
+			{
+				std::string tempString;
+				while (!sortedFile.eof())
+				{
+					getline(sortedFile, tempString);
+					correctResult.Add(tempString);
+				}
+				sortedFile.close();
+			}
+
+			sortedList = myList.Sort(0);
+
+			Assert::AreEqual(correctResult.Count(), sortedList.Count());
+			for (int i = 0; i < sortedList.Count(); i++)
+			{
+				Assert::AreEqual(correctResult.At(i), sortedList.At(i));
+			}
 		}
 	};
 

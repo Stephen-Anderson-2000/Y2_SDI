@@ -334,49 +334,203 @@ namespace TESTS
 	public:
 		TEST_METHOD(EmptyList)
 		{
-
+			LinkedListString myList;
+			std::string searchTerm = "test";
 		}
 
 		TEST_METHOD(OnlyItem)
 		{
+			LinkedListString myList;
+			std::string searchTerm = "test";
 
+			myList.Add(searchTerm);
 		}
 
 		// Next tests require >= 5 items in their list
 		TEST_METHOD(CompleteMatch)
 		{
+			LinkedListString myList;
+			std::string myString1 = "What";
+			std::string myString2 = "a";
+			std::string myString3 = "beautiful";
+			std::string myString4 = "day";
+			std::string myString5 = "today";
 
+			myList.Add(myString1);
+			myList.Add(myString2);
+			myList.Add(myString3);
+			myList.Add(myString4);
+			myList.Add(myString5);
+
+			std::string searchTerm = "beautiful";
 		}
 
 		TEST_METHOD(PartialMatch)
 		{
+			LinkedListString myList;
+			std::string myString1 = "What";
+			std::string myString2 = "a";
+			std::string myString3 = "beautiful";
+			std::string myString4 = "day";
+			std::string myString5 = "today";
 
+			myList.Add(myString1);
+			myList.Add(myString2);
+			myList.Add(myString3);
+			myList.Add(myString4);
+			myList.Add(myString5);
+
+			std::string searchTerm = "ut";
 		}
 
 		TEST_METHOD(MultipleMatches)
 		{
+			LinkedListString myList;
+			std::string myString1 = "What";
+			std::string myString2 = "a";
+			std::string myString3 = "lovely";
+			std::string myString4 = "lovely";
+			std::string myString5 = "day";
 
+			myList.Add(myString1);
+			myList.Add(myString2);
+			myList.Add(myString3);
+			myList.Add(myString4);
+			myList.Add(myString5);
+
+			std::string searchTerm = "lovely";
 		}
 
-		// Tests when the *input* is all capital letters
 		TEST_METHOD(AllUppercaseLetters)
 		{
+			LinkedListString myList;
+			std::string myString1 = "What";
+			std::string myString2 = "a";
+			std::string myString3 = "beautiful";
+			std::string myString4 = "day";
+			std::string myString5 = "today";
 
+			myList.Add(myString1);
+			myList.Add(myString2);
+			myList.Add(myString3);
+			myList.Add(myString4);
+			myList.Add(myString5);
+
+			std::string searchTerm = "WHAT";
 		}
 
 		TEST_METHOD(AllLowercaseLetters)
 		{
+			LinkedListString myList;
+			std::string myString1 = "What";
+			std::string myString2 = "a";
+			std::string myString3 = "beautiful";
+			std::string myString4 = "day";
+			std::string myString5 = "today";
 
+			myList.Add(myString1);
+			myList.Add(myString2);
+			myList.Add(myString3);
+			myList.Add(myString4);
+			myList.Add(myString5);
+
+			std::string searchTerm = "what";
 		}
 
 		TEST_METHOD(IncludesNumbers)
 		{
+			LinkedListString myList;
+			std::string myString1 = "What";
+			std::string myString2 = "a";
+			std::string myString3 = "beaut1ful";
+			std::string myString4 = "day";
+			std::string myString5 = "2day";
 
+			myList.Add(myString1);
+			myList.Add(myString2);
+			myList.Add(myString3);
+			myList.Add(myString4);
+			myList.Add(myString5);
+
+			std::string searchTerm = "2day";
+		}
+
+		TEST_METHOD(PartialMatchIncludesNumbers)
+		{
+			LinkedListString myList;
+			std::string myString1 = "What";
+			std::string myString2 = "a";
+			std::string myString3 = "beaut1ful";
+			std::string myString4 = "day";
+			std::string myString5 = "2day";
+
+			myList.Add(myString1);
+			myList.Add(myString2);
+			myList.Add(myString3);
+			myList.Add(myString4);
+			myList.Add(myString5);
+
+			std::string searchTerm = "1";
 		}
 
 		TEST_METHOD(IncludesSpecialCharacters)
 		{
+			LinkedListString myList;
+			std::string myString1 = "It's";
+			std::string myString2 = "a";
+			std::string myString3 = "very *nice*";
+			std::string myString4 = "day";
+			std::string myString5 = "today";
 
+			myList.Add(myString1);
+			myList.Add(myString2);
+			myList.Add(myString3);
+			myList.Add(myString4);
+			myList.Add(myString5);
+
+			std::string searchTerm = "very *nice*";
+		}
+
+		TEST_METHOD(PartialMatchIncludesSpecialCharacters)
+		{
+			LinkedListString myList;
+			std::string myString1 = "It's";
+			std::string myString2 = "a";
+			std::string myString3 = "very *nice*";
+			std::string myString4 = "day";
+			std::string myString5 = "today";
+
+			myList.Add(myString1);
+			myList.Add(myString2);
+			myList.Add(myString3);
+			myList.Add(myString4);
+			myList.Add(myString5);
+
+			std::string searchTerm = "nice";
+		}
+
+		TEST_METHOD(Search100Items)
+		{
+			ifstream myFile("Test Resources/Unsorted Lists/100 Words.txt");
+			LinkedListString myList;
+			std::string myArray[100];
+
+			// Loads a list of strings from a text file
+			if (myFile.is_open())
+			{
+				for (int i = 0; i < 100; i++)
+				{
+					myFile >> myArray[i];
+				}
+				myFile.close();
+			}
+
+			for (int i = 0; i < 100; i++)
+			{
+				myList.Add(myArray[i]);
+			}
+
+			std::string searchTerm = "passion";
 		}
 	};
 
@@ -385,38 +539,125 @@ namespace TESTS
 	public:
 		TEST_METHOD(EmptyList)
 		{
-
+			LinkedListString myList;
 		}
 
 		TEST_METHOD(OneItem)
 		{
-
+			LinkedListString myList;
+			std::string myString1 = "testing";
 		}
 
 		// The next tests require a list of 10 items
 		TEST_METHOD(AToZ)
 		{
+			ifstream myFile("Test Resources/Unsorted Lists/10 Words.txt");
+			LinkedListString myList;
+			std::string myArray[10];
+
+			// Loads a list of strings from a text file
+			if (myFile.is_open())
+			{
+				for (int i = 0; i < 10; i++)
+				{
+					myFile >> myArray[i];
+				}
+				myFile.close();
+			}
+
+			for (int i = 0; i < 10; i++)
+			{
+				myList.Add(myArray[i]);
+			}
 
 		}
 
 		TEST_METHOD(ZToA)
 		{
+			ifstream myFile("Test Resources/Unsorted Lists/10 Words.txt");
+			LinkedListString myList;
+			std::string myArray[10];
 
+			// Loads a list of strings from a text file
+			if (myFile.is_open())
+			{
+				for (int i = 0; i < 10; i++)
+				{
+					myFile >> myArray[i];
+				}
+				myFile.close();
+			}
+
+			for (int i = 0; i < 10; i++)
+			{
+				myList.Add(myArray[i]);
+			}
 		}
 
 		TEST_METHOD(ZeroToNine)
 		{
+			ifstream myFile("Test Resources/Unsorted Lists/10 Numbers.txt");
+			LinkedListString myList;
+			std::string myArray[10];
 
+			// Loads a list of strings from a text file
+			if (myFile.is_open())
+			{
+				for (int i = 0; i < 10; i++)
+				{
+					myFile >> myArray[i];
+				}
+				myFile.close();
+			}
+
+			for (int i = 0; i < 10; i++)
+			{
+				myList.Add(myArray[i]);
+			}
 		}
 
 		TEST_METHOD(NineToZero)
 		{
+			ifstream myFile("Test Resources/Unsorted Lists/10 Numbers.txt");
+			LinkedListString myList;
+			std::string myArray[10];
 
+			// Loads a list of strings from a text file
+			if (myFile.is_open())
+			{
+				for (int i = 0; i < 10; i++)
+				{
+					myFile >> myArray[i];
+				}
+				myFile.close();
+			}
+
+			for (int i = 0; i < 10; i++)
+			{
+				myList.Add(myArray[i]);
+			}
 		}
 
 		TEST_METHOD(CharactersSeparatedBySpaces)
 		{
+			ifstream myFile("Test Resources/Unsorted Lists/10 Words Separated By Spaces.txt");
+			LinkedListString myList;
+			std::string myArray[10];
 
+			// Loads a list of strings from a text file
+			if (myFile.is_open())
+			{
+				for (int i = 0; i < 10; i++)
+				{
+					myFile >> myArray[i];
+				}
+				myFile.close();
+			}
+
+			for (int i = 0; i < 10; i++)
+			{
+				myList.Add(myArray[i]);
+			}
 		}
 
 		TEST_METHOD(NamesIncludeSymbols)
